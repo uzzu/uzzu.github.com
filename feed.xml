@@ -33,10 +33,13 @@
 git clone https://github.com/Unity-Technologies/mono.git
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;
 &lt;p&gt;まずとっかかりが早いのはmscorlibですかね。分かりませんが進めます。&lt;br&gt;
-前提として、&lt;a href="https://github.com/mono/mono/tree/master/mcs/class/"&gt;mcs/class&lt;/a&gt;以下に、アセンブリとして配布されるたくさんのソースコードがあります。&lt;a href="https://github.com/mono/mono/tree/master/mcs/class/corlib"&gt;mcs/class/corlib&lt;/a&gt;ディレクトリがmscorlib.dllのソースコードに相当します。LINQはSystem.Core.dllに含まれていますから、その他の実装を参照する場合も、アセンブリ名に紐づく形でディレクトリが掘られています(System.LinqはSystem.Core.dllに含まれているので、&lt;a href="https://github.com/mono/mono/tree/master/mcs/class/System.Core"&gt;mcs/class/System.Core&lt;/a&gt;にある、といった感じ)から、分かりやすいですね。ソースコードを読む際は合わせて&lt;a href="http://referencesource.microsoft.com/"&gt;Microsoft ReferenceSource&lt;/a&gt;も一緒に読むと、楽しくて1日が終わります。mono上での実装は.NETのそれと比べて非常にシンプルなものとなっているので、たとえばSystem.Linqの述語がどういう実装になってるのか?みたいな疑問は、monoのソースコードを読んだ方がもしかしたら早いかもしれません。
-1つ言い忘れていましたが、みなさんお使いのエディタにはアセンブリブラウザが搭載されているでしょうから、そちらからdllを参照するでも良いですが、その場合アセンブリとしてコンパイルされた状態になっているので、IEnumerableやasync-awaitを使用したソースコードはCompilerGeneratedなソースコードになって出てくるので、今まで読んだことのない方は気持ちでやっていく必要が高まってしんどいかもしれません。&lt;/p&gt;
+前提として、&lt;a href="https://github.com/mono/mono/tree/master/mcs/class/"&gt;mcs/class&lt;/a&gt;以下に、アセンブリとして配布されるたくさんのソースコードがあります。&lt;a href="https://github.com/mono/mono/tree/master/mcs/class/corlib"&gt;mcs/class/corlib&lt;/a&gt;ディレクトリがmscorlib.dllのソースコードに相当します。その他の実装を参照する場合も、アセンブリ名に紐づく形でディレクトリが掘られています(例えばSystem.LinqはSystem.Core.dllに含まれているので、&lt;a href="https://github.com/mono/mono/tree/master/mcs/class/System.Core"&gt;mcs/class/System.Core&lt;/a&gt;にある、といった感じ)から、分かりやすいですね。&lt;/p&gt;
 
-&lt;p&gt;1つ、試しにソースコードを追ってみましょう。今回は、System.Globalization.CultureInfoを読んでみます。&lt;/p&gt;
+&lt;p&gt;ソースコードを読む際は合わせて&lt;a href="http://referencesource.microsoft.com/"&gt;Microsoft ReferenceSource&lt;/a&gt;も一緒に読むと、楽しくて1日が終わります。mono上での実装は.NETのそれと比べて非常にシンプルなものとなっているので、たとえばSystem.Linqの述語がどういう実装になってるのか?みたいな疑問は、monoのソースコードを読んだ方がもしかしたら早いかもしれません。&lt;/p&gt;
+
+&lt;p&gt;1つ言い忘れていましたが、みなさんお使いのエディタにはアセンブリブラウザが搭載されているでしょうから、そちらからdllを参照するでも良いですが、その場合アセンブリとしてコンパイルされた状態になっているので、IEnumerableやasync-awaitを使用したソースコードはCompilerGeneratedなソースコードになって出てくるので、今まで読んだことのない方は気持ちでやっていく必要が高まってしんどいかもしれません。&lt;/p&gt;
+
+&lt;p&gt;それでは実際にソースコードを追ってみましょう。今回は、System.Globalization.CultureInfoを読んでみます。&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://msdn.microsoft.com/ja-jp/library/system.globalization.cultureinfo%28v=vs.110%29.aspx"&gt;System.Globalization.CultureInfoってなに?って人はMSDN&lt;/a&gt;&lt;/li&gt;
@@ -51,13 +54,22 @@ git clone https://github.com/Unity-Technologies/mono.git
 &lt;pre class="highlight csharp"&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl"&gt;&lt;div class="lineno"&gt;1&lt;/div&gt;&lt;div class="lineno"&gt;2&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;span class="na"&gt;[MethodImplAttribute (MethodImplOptions.InternalCall)]&lt;/span&gt;
 &lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="k"&gt;extern&lt;/span&gt; &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="nf"&gt;construct_internal_locale_from_lcid&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;lcid&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;
-&lt;p&gt;となってますね。MethodImplOptions.InternalCallを指定していますので、CLR(共通言語ランタイム)上に実装されていることが分かります。「ぬああああん(以下略」とならず、もっといきましょう。&lt;br&gt;
-monoにおいては、MethodImplOptions.InternalCallで指定されたメソッドは、&lt;a href="https://github.com/mono/mono/blob/master/mono/metadata/icall-def.h"&gt;mono/metadata/icall-def.h&lt;/a&gt;上でマッピングされています。今回の例で言えば、マッピングは&lt;a href="https://github.com/mono/mono/blob/master/mono/metadata/icall-def.h#L289"&gt;同ヘッダにおいてこのように定義されており&lt;/a&gt;、そのメソッドの実装は&lt;a href="https://github.com/mono/mono/blob/master/mono/metadata/locales.c#L490"&gt;mono/metadata/locale.c&lt;/a&gt;に、にあります。マッピングされているメソッド名は&lt;code&gt;ves_icall_{名前空間}_{クラス名}_{メソッド名}&lt;/code&gt;という命名規則(vesはVirtualExecutionSystemの略かな?分かりませんが)で定義されてたり、そうでなかったりとまちまちです。概ね(mini本体に含まれるものを除き)&lt;a href="https://github.com/mono/mono/tree/master/mono/metadata"&gt;mono/metadata&lt;/a&gt;に含まれています。その他のメソッドを探す際も、ves_icall、あるいはicall-def.h上でのマッピングルールを見ながらgrepをかければみつかりそうですね。&lt;/p&gt;
+&lt;p&gt;となってますね。MethodImplOptions.InternalCallを指定していますので、CLR(共通言語ランタイム)上に実装されていることが分かります。「ぬああああん(以下略」とならず、もっといきましょう。monoならもっと先が読める！(コレが一番言いたかった)&lt;/p&gt;
+
+&lt;p&gt;monoにおいては、MethodImplOptions.InternalCallで指定されたメソッドは、&lt;a href="https://github.com/mono/mono/blob/master/mono/metadata/icall-def.h"&gt;mono/metadata/icall-def.h&lt;/a&gt;上でマッピングされています。今回の例で言えば、マッピングは&lt;a href="https://github.com/mono/mono/blob/master/mono/metadata/icall-def.h#L289"&gt;同ヘッダにおいてこのように定義されており&lt;/a&gt;、そのメソッドの実装は&lt;a href="https://github.com/mono/mono/blob/master/mono/metadata/locales.c#L490"&gt;mono/metadata/locale.c&lt;/a&gt;に、にあります。マッピングされているメソッド名は&lt;code&gt;ves_icall_{名前空間}_{クラス名}_{メソッド名}&lt;/code&gt;という命名規則(vesはVirtualExecutionSystemの略かな?分かりませんが)で定義されてたり、そうでなかったりとまちまちです。概ね(mini本体に含まれるものを除き)&lt;a href="https://github.com/mono/mono/tree/master/mono/metadata"&gt;mono/metadata&lt;/a&gt;に含まれています。その他のメソッドを探す際も、ves_icall、あるいはicall-def.h上でのマッピングルールを見ながらgrepをかければみつかりそうですね。&lt;/p&gt;
 
 &lt;p&gt;InternalCallしているメソッドが分かったら、あとは頑張ってCを読みます。CultureInfoについて追っていくと、最終的に&lt;a href="https://github.com/mono/mono/blob/master/mono/metadata/culture-info-table.h"&gt;mono/metadata/culture-info-table.h&lt;/a&gt;にたどり着きます。
 ものすごいたくさんの数値やバイトコードが列挙された配列がありますが、怖くはなくて、cultureIDに紐づくCultureInfoやRegionInfoに相当する値が入っている配列のアドレスが列挙されているとかそんな感じです。つまり定義済みのCultureInfoやRegionInfoにアクセスしているということです。ちゃんと読み進めると、各要素がISOCurrencySymbolだったりに紐付いている事が分かります。なるほどーためになる。&lt;/p&gt;
 
-&lt;p&gt;ここで、例えばUnity-Technologiesのmonoと、本家のmonoとでdiffを取ったりして、あーここは対応が追いついてないみたいだから、最新のmonoの実行結果からCodeDomを用いてソースコードを自動生成しておこうとか、この部分だけパッチ当ててみてそういう行為がとれるわけですね。「いやあのそれはソースコード読まなくても普通に実行すれば分かるでしょ」というのもありますが、この記事を読んだ皆さんは、mono環境におけるInternalCallの壁を超えたようなものなので、実行する以外のアプローチがとれるようになって皆さんの業務の幅が広がって私はとても嬉しく思います。&lt;/p&gt;
+&lt;p&gt;＜＜ 追記 ＞＞&lt;/p&gt;
+
+&lt;p&gt;Atsushi Enoさんから捕捉頂きました。ありがとうございますm(_ _)m
+&lt;blockquote&gt;ちなみにculture-info-table.hはmono/tools/locale-builder でUnicode CLDRから生成されているので、そっちを見るともっと人にやさしいです。&lt;/blockquote&gt;
+とのことです。実際に&lt;a href="https://github.com/mono/mono/tree/master/tools/locale-builder"&gt;locale-buiilderを読んでみると&lt;/a&gt;、C#で書かれていて、culture_info_entryやregion_info_entryのソースコードがモリモリ生成されていたりするのが分かります。とても人にやさしいですね！&lt;/p&gt;
+
+&lt;p&gt;＜＜ 追記おわり ＞＞&lt;/p&gt;
+
+&lt;p&gt;ここで、例えばUnity-Technologiesのmonoと、本家のmonoとでdiffを取ったりして、あーここは対応が追いついてないみたいだから、最新のmonoの実行結果からCodeDomを用いてソースコードを自動生成しておこうとかそういった行為がとれるわけですね。「いやあのそれはソースコード読まなくても普通に実行すれば分かるでしょ」というのもありますが、この記事を読んだ皆さんは、mono環境におけるInternalCallの壁を超えたようなものなので、実行する以外のアプローチがとれるようになって皆さんの業務の幅が広がって私はとても嬉しく思います。&lt;/p&gt;
 
 &lt;p&gt;続けて、mcs、miniの実装のコードにも触れようかという所なんですが、筆者都合により本記事はここまでです。
 引き続き、mcsやminiのソースコードを読む際には、一度&lt;a href="http://www.mono-project.com/docs/"&gt;Mono Documentation&lt;/a&gt;やmonoのリポジトリの各docsディレクトリにあるテキストに目を通してからの方が気持ち理解が早いかなと思います。以上です。&lt;/p&gt;
