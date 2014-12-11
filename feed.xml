@@ -69,6 +69,8 @@ git clone https://github.com/Unity-Technologies/mono.git
 &lt;blockquote&gt;ちなみにculture-info-table.hはmono/tools/locale-builder でUnicode CLDRから生成されているので、そっちを見るともっと人にやさしいです。&lt;/blockquote&gt;
 とのことです。実際に&lt;a href="https://github.com/mono/mono/tree/master/tools/locale-builder"&gt;locale-buiilderを読んでみると&lt;/a&gt;、C#で書かれていて、culture_info_entryやregion_info_entryのソースコードがモリモリ生成されていたりするのが分かります。とても人にやさしいですね！&lt;/p&gt;
 
+&lt;p&gt;今回コードリーディングの対象にしたCultureInfoですが、偶然にも&lt;a href="http://sta-blockhead.blogspot.jp/2010/03/datetimeformatinfofulldatetimepattern.html"&gt;staさんが詳細にまとめてくれていました。&lt;/a&gt; CultureInfoの詳細はこちらの記事を読むと良いです。ありがとうございますm(_ _)m&lt;/p&gt;
+
 &lt;p&gt;＜＜ 追記おわり ＞＞&lt;/p&gt;
 
 &lt;p&gt;ここで、例えばUnity-Technologiesのmonoと、本家のmonoとでdiffを取ったりして、あーここは対応が追いついてないみたいだから、最新のmonoの実行結果からCodeDomを用いてソースコードを自動生成しておこうとかそういった行為がとれるわけですね。「いやあのそれはソースコード読まなくても普通に実行すれば分かるでしょ」というのもありますが、この記事を読んだ皆さんは、mono環境におけるInternalCallの壁を超えたようなものなので、実行する以外のアプローチがとれるようになって皆さんの業務の幅が広がって私はとても嬉しく思います。&lt;/p&gt;
