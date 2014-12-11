@@ -18,11 +18,13 @@
     <author>
       <name>Hirokazu Uzu</name>
     </author>
-    <summary type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2014/csharp"&gt;C# Advent Calendar 2014&lt;/a&gt;の10日目のエントリです。&lt;/p&gt;
+    <summary type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2014/csharp"&gt;C# Advent Calendar 2014&lt;/a&gt;の10日目のエントリです。
+&lt;a href="http://tech.tanaka733.net/entry/must-load-user-profile-x509certificates2-ctor-with-bytearray-on-aspnet"&gt;9日目はASP.NET/IIS環境での証明書の取り扱いにおけるノウハウ話でした。&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;近年は&lt;a href="http://xamarin.com/"&gt;Xamarin&lt;/a&gt;や&lt;a href="http://japan.unity3d.com/"&gt;Unity3D&lt;/a&gt;がお盛んで、今年初旬に&lt;a href="https://mono-ue.github.io/"&gt;mono for UnrealEngine&lt;/a&gt;が発表(2014年12月現在では辛い状態ですが)されたり等、何かとmonoのお世話になることが増えてきたんじゃないでしょうか。かくいう私もお世話になっているうちの1人です。お世話になっている訳ですから、その実装に興味を持ち始める人もいるんじゃないかなと思います。そこで本記事では、とっつきやすそうなところをなんとなく追っていきます。&lt;/p&gt;
 </summary>
-    <content type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2014/csharp"&gt;C# Advent Calendar 2014&lt;/a&gt;の10日目のエントリです。&lt;/p&gt;
+    <content type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2014/csharp"&gt;C# Advent Calendar 2014&lt;/a&gt;の10日目のエントリです。
+&lt;a href="http://tech.tanaka733.net/entry/must-load-user-profile-x509certificates2-ctor-with-bytearray-on-aspnet"&gt;9日目はASP.NET/IIS環境での証明書の取り扱いにおけるノウハウ話でした。&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;近年は&lt;a href="http://xamarin.com/"&gt;Xamarin&lt;/a&gt;や&lt;a href="http://japan.unity3d.com/"&gt;Unity3D&lt;/a&gt;がお盛んで、今年初旬に&lt;a href="https://mono-ue.github.io/"&gt;mono for UnrealEngine&lt;/a&gt;が発表(2014年12月現在では辛い状態ですが)されたり等、何かとmonoのお世話になることが増えてきたんじゃないでしょうか。かくいう私もお世話になっているうちの1人です。お世話になっている訳ですから、その実装に興味を持ち始める人もいるんじゃないかなと思います。そこで本記事では、とっつきやすそうなところをなんとなく追っていきます。&lt;/p&gt;
 
@@ -73,6 +75,8 @@ git clone https://github.com/Unity-Technologies/mono.git
 
 &lt;p&gt;続けて、mcs、miniの実装のコードにも触れようかという所なんですが、筆者都合により本記事はここまでです。
 引き続き、mcsやminiのソースコードを読む際には、一度&lt;a href="http://www.mono-project.com/docs/"&gt;Mono Documentation&lt;/a&gt;やmonoのリポジトリの各docsディレクトリにあるテキストに目を通してからの方が気持ち理解が早いかなと思います。以上です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="http://atsushieno.hatenablog.com/entry/2014/12/11/000240"&gt;11日目はmcsの最新情報と今後の展望について&lt;/a&gt;です。とても気になります。&lt;/p&gt;
 </content>
   </entry>
   <entry>
