@@ -1,0 +1,258 @@
+<!doctype html>
+<!--[if lte IE 7]>
+  <meta http-equiv="refresh" content="0" url="http://browsehappy.com/" />
+  <script type="text/javascript">
+  /* <![CDATA[ */
+  window.top.location = 'http://browsehappy.com/';
+  /* ]]> */
+  </script>
+<![endif]-->
+<!--[if IE 8]><html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="gt-ie8"><!--<![endif]-->
+  
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="cleartype" content="on">
+    <meta name="author" content="">
+    <meta name="description" content="uzzu's blog">
+
+    <title>条件分岐なんとかしようと思ったら死んだ話 | Uzzu::Blog</title>
+    <link href="../../stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+<script src="../../javascripts/core.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ 'Arvo:400,700:latin', 'Vollkorn:400italic,400,700:latin' ] }
+      };
+      (function() {
+        var wf = document.createElement('script');
+        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+          '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+        wf.type = 'text/javascript';
+        wf.async = 'true';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(wf, s);
+      })(); 
+    </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="../../images/favicon.png" rel="icon" type="image/png" />
+    <link href="../../images/favicon.ico" rel="icon" type="image/ico" />
+  </head>
+  
+  <body lang="ja">
+    <div id="container">
+      <header>
+        <h1 class="site-title"><a href="/">Uzzu::Blog</a></h1>
+<div id="intro">
+  <p class="site-subtitle details">Software Design, and my life.</p>
+</div>
+<hr>
+
+        <nav class="clearfix">
+          
+            <div class="navButton button previousButton">
+              <a class="previous details" href="/blog/20141210/mono-reading.html"><i class="icon-backward left-more"></i>Earlier</a>
+            </div>
+          
+          
+            <div class="navButton button nextButton">
+              <a href="/archive.html" class="next details">Archive<i class="icon-reorder right-more"></i></a>
+            </div>
+          
+          <nav class="clearfix">
+  <span class="navLinks details">
+    <a href="//github.com/uzzu"><i class="icon-github-alt"></i>Github</a>
+    <a href="//twitter.com/uzzu"><i class="icon-twitter"></i>Twitter</a>
+    <a href="/archive.html"><i class="icon-reorder"></i>Archive</a>
+    <a href="/feed.xml"><i class="icon-rss"></i>RSS</a>
+    <a class="last" href="mailto:himeatball@gmail.com"><i class="icon-envelope-alt"></i>Contact</a>
+  </span>
+</nav>
+
+        </nav>
+      </header>
+      <article class="single">
+        <h2><a href="/blog/20141223/switch-case-cs.html">条件分岐なんとかしようと思ったら死んだ話</a></h2>
+        <span class="postDetails clearfix"><time class="date details">Dec 23 2014</time><span class="tagLinks details">Tags:   <span class="tags"><a class="tags" href="/blog/tags/csharp.html">csharp</a></span>
+  <span class="tags"><a class="tags" href="/blog/tags/mono.html">mono</a></span>
+</span></span>
+        <p>この記事は<a href="http://qiita.com/advent-calendar/2014/csharp">C# Advent Calendar 2014</a>の23日目のエントリです。
+<a href="http://moririring.hatenablog.com/entry/2014/12/22/002337">22日目はC#のIntの話でした。</a></p>
+
+<p>クライアントアプリを書いていると何かとステートフルになり、かつ状態毎の描画もころころ変わります。さらに、WPFの恩恵を受けられないC#でかつ古いmono環境化(決してゲームエンジンは指していませんね?)では、かなり悲しみを背負う事になります。なにも悲しみを背負うので、Rxが再実装されたり、データバインディング機構を再実装したりします。辛い。</p>
+
+<p>ステートフルかつ何も恩恵が得られないとなれば、無限に繁殖するifとswitch-caseですね。ifはさておき、C#のswitch-caseは非常にシンプルなんですが、シンプルが故にかゆい所に手が届かなくて辛い。
+そもそも状態と条件分岐は○○モデルにしましょうよ！的な所で、<a href="https://gist.github.com/uzzu/5412336c0532508dd17c">参照型Enum</a>を作ったりします。JavaのEnumっぽい何かですね。  </p>
+
+<p>ドメイン層のモデルにおいては、正しく責務が与えられているはずなので、この<a href="https://gist.github.com/uzzu/5412336c0532508dd17c">参照型Enum</a>というアプローチは有効なんですが、UI層でも同様に、Aggregate(ViewModel)の状態とその描画方法を見通しよく記述できるかというと、必ずしもそうでもないんじゃないかなというのが経験上の持論です。(異論は認める)</p>
+
+<p>そこで条件分岐なんとかしようやと書き始めた所で、とりあえず試しに書いてみた。
+ぶっちゃけ途中掛けで、full-AOT問題と、あとはgenerics周りの問題を解決したら、原型をとどめてないインターフェースになりそう。</p>
+
+<p><a href="https://gist.github.com/uzzu/32f9d0bc401f6e219f01">Case.cs</a></p>
+
+<p>Linqを書くときみたいに三項演算子をモリモリ書いていくのもなんだか違和感あるし、でも条件分岐の判定部分はPredicateにしたいし、とか詰め込みながらモリモリと書いていき、
+だんだん作るのが楽しくなってきて、もうちょっと便利にとか、型推論効かせて記述を楽にしようとかしてたら、結果としてたくさんCS0411を引きまくって一旦元に戻しました。</p>
+
+<p>UIロジックも関数型っぽくっていうかF#で書いたらこのご時世でももうちょっとマシなコードになりそうな気がするんだよなあと思ったところで終了です。
+下はサンプルですが、もうちょっと複雑なのもいけるのでまあテストとか読んでみてください。</p>
+<pre class="highlight csharp"><table><tbody><tr><td class="gutter gl"><div class="lineno">1</div><div class="lineno">2</div><div class="lineno">3</div><div class="lineno">4</div><div class="lineno">5</div><div class="lineno">6</div><div class="lineno">7</div><div class="lineno">8</div><div class="lineno">9</div><div class="lineno">10</div><div class="lineno">11</div><div class="lineno">12</div><div class="lineno">13</div><div class="lineno">14</div><div class="lineno">15</div><div class="lineno">16</div><div class="lineno">17</div><div class="lineno">18</div><div class="lineno">19</div><div class="lineno">20</div><div class="lineno">21</div><div class="lineno">22</div><div class="lineno">23</div><div class="lineno">24</div><div class="lineno">25</div><div class="lineno">26</div><div class="lineno">27</div><div class="lineno">28</div><div class="lineno">29</div><div class="lineno">30</div><div class="lineno">31</div><div class="lineno">32</div><div class="lineno">33</div><div class="lineno">34</div><div class="lineno">35</div><div class="lineno">36</div><div class="lineno">37</div><div class="lineno">38</div><div class="lineno">39</div><div class="lineno">40</div></td><td class="code"><span class="k">public</span> <span class="k">class</span> <span class="nc">CharacterStatusView</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="n">Case</span><span class="p">&lt;</span><span class="n">CharacterStatus</span><span class="p">&gt;.</span><span class="n">IMatcher</span> <span class="n">characterStatusRenderer</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">void</span> <span class="nf">Initialize</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">characterStatusRenderer</span> <span class="p">=</span> <span class="n">Case</span><span class="p">&lt;</span><span class="n">CharacterStatus</span><span class="p">&gt;.</span><span class="nf">Action</span><span class="p">()</span>
+            <span class="p">.</span><span class="nf">When</span><span class="p">(</span><span class="n">status</span> <span class="p">=&gt;</span> <span class="n">status</span><span class="p">.</span><span class="n">Dead</span>  <span class="p">,</span> <span class="n">RenderAsDead</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">When</span><span class="p">(</span><span class="n">status</span> <span class="p">=&gt;</span> <span class="n">status</span><span class="p">.</span><span class="n">Danger</span><span class="p">,</span> <span class="n">RenderAsDanger</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">When</span><span class="p">(</span><span class="n">status</span> <span class="p">=&gt;</span> <span class="n">status</span><span class="p">.</span><span class="n">Warning</span><span class="p">,</span> <span class="n">RenderAsWarning</span><span class="p">)</span>
+            <span class="p">.</span><span class="nf">Default</span><span class="p">(</span><span class="n">RenderAsSafety</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">OnCharacterStatusChanged</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">PropertyChangedEventArgs</span><span class="p">&lt;</span><span class="n">CharacterStatus</span><span class="p">&gt;</span> <span class="n">e</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">characterStatusRenderer</span><span class="p">.</span><span class="nf">Apply</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">NewValue</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">RenderAsDead</span><span class="p">(</span><span class="n">CharacterStatus</span> <span class="n">status</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 死んだお
+</span>    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">RenderAsDanger</span><span class="p">(</span><span class="n">CharacterStatus</span> <span class="n">status</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// ピンチだお
+</span>    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">RenderAsWarning</span><span class="p">(</span><span class="n">CharacterStatus</span> <span class="n">status</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// そろそろやばいお
+</span>    <span class="p">}</span>
+
+    <span class="k">void</span> <span class="nf">RenderAsSafety</span><span class="p">(</span><span class="n">CharacterStatus</span> <span class="n">status</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// 元気モリモリ
+</span>    <span class="p">}</span>
+
+<span class="p">}</span>
+
+</td></tr></tbody></table></pre>
+        <div class="sharing">
+  <a href="http://b.hatena.ne.jp/entry/uzzu.github.io/blog/20141223/switch-case-cs.html" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://uzzu.github.io/blog/20141223/switch-case-cs.html" data-via="uzzu" data-counturl="http://uzzu.github.io/blog/20141223/switch-case-cs.html" >Tweet</a><span class="g-plusone" data-size="medium"></span><span class="fb-like" data-send="true" data-width="450" data-show-faces="false"></span>
+</div>
+<section>
+  <h3>Comments</h3>
+  <div id="disqus_thread" aria-live="polite">
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'uzzublog'; // required: replace example with your forum shortname
+  var disqus_identifier = 'http://uzzu.github.io/blog/20141223/switch-case-cs.html';
+  var disqus_url = 'http://uzzu.github.io/blog/20141223/switch-case-cs.html';
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+<!--<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript><a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>-->
+
+      </article>
+      <footer class="footer clearfix">
+    <section class="github">
+  <h4>GitHub Repos</h4>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <a href="https://github.com/uzzu">@uzzu</a> on GitHub
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'uzzu',
+            count: 5,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+    <section class="recent-posts">
+  <h4>Recent Posts</h4>
+  <ul>
+    
+      <li class="clearfix"><a href="/blog/20141223/switch-case-cs.html">条件分岐なんとかしようと思ったら死んだ話</a></li>
+    
+      <li class="clearfix"><a href="/blog/20141210/mono-reading.html">monoのソースを読み始める話</a></li>
+    
+      <li class="clearfix"><a href="/blog/20140104/think-domain-driven.html">ドメインを巡るお話</a></li>
+    
+      <li class="clearfix"><a href="/blog/20130116/host-win7-and-guest-os-share-environment-of-dotfiles.html">流行りのdotfiles運用をゲストOSとホストOS(Windows7)で共有する</a></li>
+    
+      <li class="clearfix"><a href="/blog/20130109/stage-reference-in-flexunit4.html">FlexUnit4でStageに依存するテストを書く</a></li>
+    
+      <li class="clearfix"><a href="/blog/20120930/test.html">テスト</a></li>
+    
+  </ul>
+</section>
+
+    <section class="coderwall">
+  <h4>Coderwall Badges</h4>
+  <div id="coderwall_badges"></div>
+  <a href="http://coderwall.com/uzzu">@uzzu</a> on coderwall
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $.getJSON("http://coderwall.com/uzzu.json?callback=?", function(data){
+        for(var i = 0; i < data.data.badges.length ; i++){
+          var badge = data.data.badges[i];
+          var badge_tag = $("<img />");
+          badge_tag.attr("src",badge.badge);
+          badge_tag.css("width","20%");
+          $("#coderwall_badges").append(badge_tag);
+        }
+      });
+    });
+  </script>
+</section>
+
+</footer>
+
+    </div>
+    <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+    <script type="text/javascript">
+(function() {
+  var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+  script.src = 'https://apis.google.com/js/plusone.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+})();
+</script>
+
+  </body>
+</html>

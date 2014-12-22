@@ -5,10 +5,86 @@
   <id>http://uzzu.github.io</id>
   <link href="http://uzzu.github.io"/>
   <link href="http://uzzu.github.iofeed.xml" rel="self"/>
-  <updated>2014-12-09T15:00:00Z</updated>
+  <updated>2014-12-22T15:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>条件分岐なんとかしようと思ったら死んだ話</title>
+    <link rel="alternate" href="/blog/20141223/switch-case-cs.html"/>
+    <id>/blog/20141223/switch-case-cs.html</id>
+    <published>2014-12-22T15:00:00Z</published>
+    <updated>2014-12-22T15:00:00Z</updated>
+    <author>
+      <name>Hirokazu Uzu</name>
+    </author>
+    <summary type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2014/csharp"&gt;C# Advent Calendar 2014&lt;/a&gt;の23日目のエントリです。
+&lt;a href="http://moririring.hatenablog.com/entry/2014/12/22/002337"&gt;22日目はC#のIntの話でした。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;クライアントアプリを書いていると何かとステートフルになり、かつ状態毎の描画もころころ変わります。さらに、WPFの恩恵を受けられないC#でかつ古いmono環境化(決してゲームエンジンは指していませんね?)では、かなり悲しみを背負う事になります。なにも悲しみを背負うので、Rxが再実装されたり、データバインディング機構を再実装したりします。辛い。&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2014/csharp"&gt;C# Advent Calendar 2014&lt;/a&gt;の23日目のエントリです。
+&lt;a href="http://moririring.hatenablog.com/entry/2014/12/22/002337"&gt;22日目はC#のIntの話でした。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;クライアントアプリを書いていると何かとステートフルになり、かつ状態毎の描画もころころ変わります。さらに、WPFの恩恵を受けられないC#でかつ古いmono環境化(決してゲームエンジンは指していませんね?)では、かなり悲しみを背負う事になります。なにも悲しみを背負うので、Rxが再実装されたり、データバインディング機構を再実装したりします。辛い。&lt;/p&gt;
+
+&lt;p&gt;ステートフルかつ何も恩恵が得られないとなれば、無限に繁殖するifとswitch-caseですね。ifはさておき、C#のswitch-caseは非常にシンプルなんですが、シンプルが故にかゆい所に手が届かなくて辛い。
+そもそも状態と条件分岐は○○モデルにしましょうよ！的な所で、&lt;a href="https://gist.github.com/uzzu/5412336c0532508dd17c"&gt;参照型Enum&lt;/a&gt;を作ったりします。JavaのEnumっぽい何かですね。  &lt;/p&gt;
+
+&lt;p&gt;ドメイン層のモデルにおいては、正しく責務が与えられているはずなので、この&lt;a href="https://gist.github.com/uzzu/5412336c0532508dd17c"&gt;参照型Enum&lt;/a&gt;というアプローチは有効なんですが、UI層でも同様に、Aggregate(ViewModel)の状態とその描画方法を見通しよく記述できるかというと、必ずしもそうでもないんじゃないかなというのが経験上の持論です。(異論は認める)&lt;/p&gt;
+
+&lt;p&gt;そこで条件分岐なんとかしようやと書き始めた所で、とりあえず試しに書いてみた。
+ぶっちゃけ途中掛けで、full-AOT問題と、あとはgenerics周りの問題を解決したら、原型をとどめてないインターフェースになりそう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://gist.github.com/uzzu/32f9d0bc401f6e219f01"&gt;Case.cs&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Linqを書くときみたいに三項演算子をモリモリ書いていくのもなんだか違和感あるし、でも条件分岐の判定部分はPredicateにしたいし、とか詰め込みながらモリモリと書いていき、
+だんだん作るのが楽しくなってきて、もうちょっと便利にとか、型推論効かせて記述を楽にしようとかしてたら、結果としてたくさんCS0411を引きまくって一旦元に戻しました。&lt;/p&gt;
+
+&lt;p&gt;UIロジックも関数型っぽくっていうかF#で書いたらこのご時世でももうちょっとマシなコードになりそうな気がするんだよなあと思ったところで終了です。
+下はサンプルですが、もうちょっと複雑なのもいけるのでまあテストとか読んでみてください。&lt;/p&gt;
+&lt;pre class="highlight csharp"&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl"&gt;&lt;div class="lineno"&gt;1&lt;/div&gt;&lt;div class="lineno"&gt;2&lt;/div&gt;&lt;div class="lineno"&gt;3&lt;/div&gt;&lt;div class="lineno"&gt;4&lt;/div&gt;&lt;div class="lineno"&gt;5&lt;/div&gt;&lt;div class="lineno"&gt;6&lt;/div&gt;&lt;div class="lineno"&gt;7&lt;/div&gt;&lt;div class="lineno"&gt;8&lt;/div&gt;&lt;div class="lineno"&gt;9&lt;/div&gt;&lt;div class="lineno"&gt;10&lt;/div&gt;&lt;div class="lineno"&gt;11&lt;/div&gt;&lt;div class="lineno"&gt;12&lt;/div&gt;&lt;div class="lineno"&gt;13&lt;/div&gt;&lt;div class="lineno"&gt;14&lt;/div&gt;&lt;div class="lineno"&gt;15&lt;/div&gt;&lt;div class="lineno"&gt;16&lt;/div&gt;&lt;div class="lineno"&gt;17&lt;/div&gt;&lt;div class="lineno"&gt;18&lt;/div&gt;&lt;div class="lineno"&gt;19&lt;/div&gt;&lt;div class="lineno"&gt;20&lt;/div&gt;&lt;div class="lineno"&gt;21&lt;/div&gt;&lt;div class="lineno"&gt;22&lt;/div&gt;&lt;div class="lineno"&gt;23&lt;/div&gt;&lt;div class="lineno"&gt;24&lt;/div&gt;&lt;div class="lineno"&gt;25&lt;/div&gt;&lt;div class="lineno"&gt;26&lt;/div&gt;&lt;div class="lineno"&gt;27&lt;/div&gt;&lt;div class="lineno"&gt;28&lt;/div&gt;&lt;div class="lineno"&gt;29&lt;/div&gt;&lt;div class="lineno"&gt;30&lt;/div&gt;&lt;div class="lineno"&gt;31&lt;/div&gt;&lt;div class="lineno"&gt;32&lt;/div&gt;&lt;div class="lineno"&gt;33&lt;/div&gt;&lt;div class="lineno"&gt;34&lt;/div&gt;&lt;div class="lineno"&gt;35&lt;/div&gt;&lt;div class="lineno"&gt;36&lt;/div&gt;&lt;div class="lineno"&gt;37&lt;/div&gt;&lt;div class="lineno"&gt;38&lt;/div&gt;&lt;div class="lineno"&gt;39&lt;/div&gt;&lt;div class="lineno"&gt;40&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;&lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;CharacterStatusView&lt;/span&gt;
+&lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="k"&gt;private&lt;/span&gt; &lt;span class="n"&gt;Case&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;CharacterStatus&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;.&lt;/span&gt;&lt;span class="n"&gt;IMatcher&lt;/span&gt; &lt;span class="n"&gt;characterStatusRenderer&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+    &lt;span class="k"&gt;public&lt;/span&gt; &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;Initialize&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;characterStatusRenderer&lt;/span&gt; &lt;span class="p"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Case&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;CharacterStatus&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;.&lt;/span&gt;&lt;span class="nf"&gt;Action&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Dead&lt;/span&gt;  &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RenderAsDead&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Danger&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RenderAsDanger&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;When&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="p"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Warning&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;RenderAsWarning&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Default&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;RenderAsSafety&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;OnCharacterStatusChanged&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;object&lt;/span&gt; &lt;span class="n"&gt;sender&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;PropertyChangedEventArgs&lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;CharacterStatus&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="n"&gt;characterStatusRenderer&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Apply&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;NewValue&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;RenderAsDead&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CharacterStatus&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// 死んだお
+&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;RenderAsDanger&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CharacterStatus&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// ピンチだお
+&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;RenderAsWarning&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CharacterStatus&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// そろそろやばいお
+&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+    &lt;span class="k"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;RenderAsSafety&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;CharacterStatus&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="c1"&gt;// 元気モリモリ
+&lt;/span&gt;    &lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;</content>
+  </entry>
   <entry>
     <title>monoのソースを読み始める話</title>
     <link rel="alternate" href="/blog/20141210/mono-reading.html"/>
