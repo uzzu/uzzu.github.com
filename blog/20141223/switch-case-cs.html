@@ -18,7 +18,7 @@
     <meta name="author" content="">
     <meta name="description" content="uzzu's blog">
 
-    <title>条件分岐なんとかしようと思ったら死んだ話 | Uzzu::Blog</title>
+    <title>C#でパターンマッチング | Uzzu::Blog</title>
     <link href="../../stylesheets/screen.css" media="screen" rel="stylesheet" type="text/css" />
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 <script src="../../javascripts/core.js" type="text/javascript"></script>
@@ -76,7 +76,7 @@
         </nav>
       </header>
       <article class="single">
-        <h2><a href="/blog/20141223/switch-case-cs.html">条件分岐なんとかしようと思ったら死んだ話</a></h2>
+        <h2><a href="/blog/20141223/switch-case-cs.html">C#でパターンマッチング</a></h2>
         <span class="postDetails clearfix"><time class="date details">Dec 23 2014</time><span class="tagLinks details">Tags:   <span class="tags"><a class="tags" href="/blog/tags/csharp.html">csharp</a></span>
 </span></span>
         <p>この記事は<a href="http://qiita.com/advent-calendar/2014/csharp">C# Advent Calendar 2014</a>の23日目のエントリです。
@@ -89,14 +89,14 @@
 
 <p>ドメイン層のモデルにおいては、正しく責務が与えられているはずなので、この<a href="https://gist.github.com/uzzu/5412336c0532508dd17c">参照型Enum</a>というアプローチは有効なんですが、UI層でも同様に、Aggregate(ViewModel)の状態とその描画方法を見通しよく記述できるかというと、必ずしもそうでもないんじゃないかなというのが経験上の持論です。(異論は認める)</p>
 
-<p>そこで条件分岐なんとかしようやと、とりあえず試しに書いてみた。
+<p>そこで条件分岐なんとかしようやと、とりあえず試しにパターンマッチング実装してみた。
 ぶっちゃけ途中掛けで、full-AOT問題と、あとはgenerics周りの問題を解決したら、原型をとどめてないインターフェースになりそう。</p>
 
 <p><a href="https://gist.github.com/uzzu/32f9d0bc401f6e219f01">Case.cs</a></p>
 
 <p>＜＜＜追記＞＞＞</p>
 
-<p>型推論効く形にちょいと手直ししました。各APIの利便性を優先、した結果、型推論効かないときはコンパイルエラーになっちゃうけどまあしゃーなし。
+<p>型推論効く形にちょいと手直ししました。各APIの利便性を優先、した結果、型推論効かないときはコンパイルエラーになっちゃうけどまあそこは手前で型引数渡せば良いのでしゃーなし。
 だいぶスッキリはしたけど、full-AOTは未着手。</p>
 
 <p>＜＜＜追記おわり＞＞＞</p>
@@ -204,7 +204,7 @@
   <h4>Recent Posts</h4>
   <ul>
     
-      <li class="clearfix"><a href="/blog/20141223/switch-case-cs.html">条件分岐なんとかしようと思ったら死んだ話</a></li>
+      <li class="clearfix"><a href="/blog/20141223/switch-case-cs.html">C#でパターンマッチング</a></li>
     
       <li class="clearfix"><a href="/blog/20141210/mono-reading.html">monoのソースを読み始める話</a></li>
     
