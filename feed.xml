@@ -5,10 +5,123 @@
   <id>http://uzzu.github.io</id>
   <link href="http://uzzu.github.io"/>
   <link href="http://uzzu.github.iofeed.xml" rel="self"/>
-  <updated>2014-12-22T15:00:00Z</updated>
+  <updated>2015-12-21T15:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>ドメイン駆動設計の実践は実装だけがすべてじゃないよという話</title>
+    <link rel="alternate" href="/blog/20151222/ddd-insight.html"/>
+    <id>/blog/20151222/ddd-insight.html</id>
+    <published>2015-12-21T15:00:00Z</published>
+    <updated>2015-12-21T15:00:00Z</updated>
+    <author>
+      <name>Hirokazu Uzu</name>
+    </author>
+    <summary type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2015/dwango2"&gt;Dwango2 Advent Calendar 2015&lt;/a&gt;の22日目のエントリです。&lt;/p&gt;
+
+&lt;p&gt;Goで&lt;a href="https://github.com/google/gxui"&gt;gxui&lt;/a&gt;使って2画面ファイラー作ってワショーイしてたんですが、もうちょっと寝かしたいなと思ったので他の事書きます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/df_screenshot.png" width="480" /&gt;&lt;/p&gt;
+
+&lt;p&gt;こっちはこっちで追って公開したいですね。&lt;/p&gt;
+
+&lt;p&gt;というわけで本題です。&lt;/p&gt;
+
+&lt;blockquote class="twitter-tweet" lang="en"&gt;&lt;p lang="ja" dir="ltr"&gt;はい。Evans本3部4部ちゃんと理解してない人はやり直しです / “ドメイン駆動設計の間違った方向性” &lt;a href="http://t.co/tcgxlWVONq"&gt;http://t.co/tcgxlWVONq&lt;/a&gt;&lt;/p&gt;&amp;mdash; ソフトウェア設計おじさん (@uzzu) &lt;a href="https://twitter.com/uzzu/status/613990950231093248"&gt;June 25, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+</summary>
+    <content type="html">&lt;p&gt;この記事は&lt;a href="http://qiita.com/advent-calendar/2015/dwango2"&gt;Dwango2 Advent Calendar 2015&lt;/a&gt;の22日目のエントリです。&lt;/p&gt;
+
+&lt;p&gt;Goで&lt;a href="https://github.com/google/gxui"&gt;gxui&lt;/a&gt;使って2画面ファイラー作ってワショーイしてたんですが、もうちょっと寝かしたいなと思ったので他の事書きます。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/images/df_screenshot.png" width="480" /&gt;&lt;/p&gt;
+
+&lt;p&gt;こっちはこっちで追って公開したいですね。&lt;/p&gt;
+
+&lt;p&gt;というわけで本題です。&lt;/p&gt;
+
+&lt;blockquote class="twitter-tweet" lang="en"&gt;&lt;p lang="ja" dir="ltr"&gt;はい。Evans本3部4部ちゃんと理解してない人はやり直しです / “ドメイン駆動設計の間違った方向性” &lt;a href="http://t.co/tcgxlWVONq"&gt;http://t.co/tcgxlWVONq&lt;/a&gt;&lt;/p&gt;&amp;mdash; ソフトウェア設計おじさん (@uzzu) &lt;a href="https://twitter.com/uzzu/status/613990950231093248"&gt;June 25, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;blockquote class="twitter-tweet" lang="en"&gt;&lt;p lang="ja" dir="ltr"&gt;Evans本の1部3部4部ちゃんと理解してない人は2部読む権利ないですよ&lt;/p&gt;&amp;mdash; ソフトウェア設計おじさん (@uzzu) &lt;a href="https://twitter.com/uzzu/status/613991792258584577"&gt;June 25, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;blockquote class="twitter-tweet" lang="en"&gt;&lt;p lang="ja" dir="ltr"&gt;Evans本、2部から行くのがライトウェイトだって言ってる人まだいるのか。SBRじゃないけど、遠回りこそが最短ルートだったよ(私は)&lt;/p&gt;&amp;mdash; ソフトウェア設計おじさん (@uzzu) &lt;a href="https://twitter.com/uzzu/status/651107721173864448"&gt;October 5, 2015&lt;/a&gt;&lt;/blockquote&gt;
+
+&lt;script async src="//platform.twitter.com/widgets.js" charset="utf-8"&gt;&lt;/script&gt;
+
+&lt;p&gt;こんな事ばっか言ってる2015年でした。&lt;br&gt;
+DDD初見さんお断りするようで、こういうこと言うのも正直嫌なんですけど、
+慌てる必要はないので、ゆっくり勉強しましょう。&lt;br&gt;
+2部から始めるのは本当に危険で、2部読むくらいなら責務駆動設計を学んだ方がマシです。
+&lt;a href="http://www.amazon.co.jp/dp/4798109037"&gt;オブジェクトデザイン読みましょう。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;DDDでおさえなければいけないのは実装パターンではなく、 以下にあげるような内容です。&lt;br&gt;
+あまり時間を作れなかったので、特によく考える3つだけ書いておきます。&lt;/p&gt;
+
+&lt;h3 id="toc_0"&gt;本当にドメイン駆動設計を用いて「実装」すべきなのかを検討する事&lt;/h3&gt;
+
+&lt;p&gt;ソフトウェアは1人で構築するものではありません。&lt;br&gt;
+(時にカウボーイとして1人になることもありますが、そうなった場合にどうすべきかは考えるまでもないですね:))&lt;br&gt;
+一機能を実装する間、コーディングは貴方1人で行っているのかもしれませんが、他の機能を実装しているDeveloperがいて、それぞれにPlannerの意志があって、時には外部のContributorがいて、と関係者はたくさんいます。
+実装面は特に、メンバーのスキルセットやモチベーションを加味しなければなりません。&lt;br&gt;
+そんな中で、ゴリ押しでDDDを推進して良いのでしょうか？&lt;br&gt;
+実装として実践することは良いことですが、何もドメイン駆動で実装する事がドメイン駆動の本質ではないです。&lt;br&gt;
+普段の会話にすら、実践する場があります。&lt;br&gt;
+上司やお偉いさんの言ってる事がよくわかんないんだけど、つまりこういう文脈があって、この人は暗黙的にこういうドメインを構築していて、こういう単語や動詞を使ってるんだな
+って洞察を行いながら会話をすることも、立派なドメイン駆動です。たったこれだけで、以下のパターンが絡んでいます(洞察するともっと絡んでるかもしれません)&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ユビキタス言語&lt;/li&gt;
+&lt;li&gt;実践的モデラー(とドメインエキスパート)&lt;/li&gt;
+&lt;li&gt;コンテキスト境界&lt;/li&gt;
+&lt;li&gt;継続的な統合&lt;/li&gt;
+&lt;li&gt;コンテキストマップ&lt;/li&gt;
+&lt;li&gt;共有カーネル&lt;/li&gt;
+&lt;li&gt;顧客/供給者の開発チーム&lt;/li&gt;
+&lt;li&gt;順応者&lt;/li&gt;
+&lt;li&gt;腐敗防止層&lt;/li&gt;
+&lt;li&gt;別々の道&lt;/li&gt;
+&lt;li&gt;公開ホストサービス&lt;/li&gt;
+&lt;li&gt;公開された言語&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;加えて、開発にはもちろん期日があります。&lt;br&gt;
+その際、&lt;a href="http://martinfowler.com/bliki/MonolithFirst.html"&gt;Monolith-First&lt;/a&gt;から始めるものの、将来的なリファクタリング戦略に支障がでないよう
+責務レイヤーをしっかり構築しておくというのも1つの手です。
+YAGNI言いますけども、それぐらいの未来は構築してもいいと思います。その代わり責任とってよね。&lt;/p&gt;
+
+&lt;h3 id="toc_1"&gt;ドメイン駆動設計でソフトウェアを構築するのであれば、ドメインとは何かを定義する事&lt;/h3&gt;
+
+&lt;p&gt;ドメインを定義しなければ、異なる文脈を持った余計なシナリオが介入したりして、やがてそれらの違った文脈を整える神(God)が宿るでしょう。
+ドメインビジョン声明文を書いていますか？&lt;/p&gt;
+
+&lt;h3 id="toc_2"&gt;コンテキストを常に念頭に置き、ドメインに対する深い洞察力を身につけること&lt;/h3&gt;
+
+&lt;p&gt;Repositoryパターンは永続化という側面から見ると一見責務は1つですが、より洞察を行うと、ReadとWriteの成分があるので、SRPに反しています。
+DomainEventを中心としたアーキテクチャではRepositoryは分解されるべきなのではないか、と思うことがしばしばあります。&lt;/p&gt;
+
+&lt;p&gt;プログラミング言語仕様のnamespaceにも着目してみます。
+ドメインが成熟し、文脈が構築されていく中で、これらの機能を用いた表現も検討すべきです。&lt;br&gt;
+よくDDDのサンプル実装ではDomainとかInfrastructureとかnamespaceを掘ってますが、本当に必要でしょうか？&lt;br&gt;
+もちろん、この構築方法にもサンプルを示すというコンテキストがあって、そうしているのだと思います。&lt;br&gt;
+「空間」であるはずが、空間をまたいで水平方向の空間に依存しているようにみえて、個人的にはちょっと先行きが不安になります。&lt;br&gt;
+仮に正しく空間として取り扱った場合、ドメインモデルが1ディレクトリに溢れて辛い事になります。C#ならnamespaceではなくディレクトリ掘り、それをモジュールの単位と定めるのが良いでしょう。&lt;br&gt;
+packageやmoduleでは、またアプローチが違ってきます。&lt;/p&gt;
+
+&lt;p&gt;このように、言語仕様や、設計パターンそのもの洞察し、より深いドメインモデルの構築を行う事もしばしばあります。&lt;/p&gt;
+
+&lt;h2 id="toc_3"&gt;まとめ&lt;/h2&gt;
+
+&lt;p&gt;ドメイン駆動設計理解してないからって死ぬわけじゃないから、焦らず勉強しよう。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>C#でパターンマッチング</title>
     <link rel="alternate" href="/blog/20141223/switch-case-cs.html"/>
@@ -370,32 +483,6 @@ VisualEnvironmentBuilderに対してDisplayObjectContainerを設定すること�
 
 &lt;p&gt;&lt;a href="https://github.com/uzzu/flexunithelper"&gt;flexunithelper&lt;/a&gt;というライブラリを作りました。
 これを使うと、上記の問題を少ない記述量でよしなに解決してくれます。=&amp;gt;&lt;a href="https://github.com/uzzu/flexunithelper/blob/master/flexunithelper/src/test/flex/org/uzzu/flexunithelper/UtilitiesTest.as"&gt;Example&lt;/a&gt;&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>テスト</title>
-    <link rel="alternate" href="/blog/20120930/test.html"/>
-    <id>/blog/20120930/test.html</id>
-    <published>2012-09-30T12:46:00Z</published>
-    <updated>2012-09-30T12:46:00Z</updated>
-    <author>
-      <name>Hirokazu Uzu</name>
-    </author>
-    <summary type="html">&lt;p&gt;麻婆豆腐&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ほむ&lt;/li&gt;
-&lt;li&gt;ほむほむ&lt;/li&gt;
-&lt;li&gt;ほむほむほむ&lt;/li&gt;
-&lt;/ul&gt;
-</summary>
-    <content type="html">&lt;p&gt;麻婆豆腐&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;ほむ&lt;/li&gt;
-&lt;li&gt;ほむほむ&lt;/li&gt;
-&lt;li&gt;ほむほむほむ&lt;/li&gt;
-&lt;/ul&gt;
 </content>
   </entry>
 </feed>
