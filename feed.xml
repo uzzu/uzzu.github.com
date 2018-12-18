@@ -5,10 +5,200 @@
   <id>http://uzzu.github.io</id>
   <link href="http://uzzu.github.io"/>
   <link href="http://uzzu.github.iofeed.xml" rel="self"/>
-  <updated>2015-12-21T15:00:00Z</updated>
+  <updated>2018-12-18T15:00:00Z</updated>
   <author>
     <name>Blog Author</name>
   </author>
+  <entry>
+    <title>Distilling VIPER pattern</title>
+    <link rel="alternate" href="/blog/20181219/distilling-viper-architecture.html"/>
+    <id>/blog/20181219/distilling-viper-architecture.html</id>
+    <published>2018-12-18T15:00:00Z</published>
+    <updated>2018-12-18T15:00:00Z</updated>
+    <author>
+      <name>Hirokazu Uzu</name>
+    </author>
+    <summary type="html">&lt;p&gt;この記事は&lt;a href="https://qiita.com/advent-calendar/2018/ddd"&gt;ドメイン駆動設計 #1 Advent Calendar 2018&lt;/a&gt; 19日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;何かとDDDの話はサーバサイドエンジニアの話として取り上げられます。
+それもそのはず、サービスの根幹となるビジネスドメインのロジックはサーバサイド上組まれる事が多い事にあると思います。
+ではクライアントサイドは関係ないのかというとそんな事はなくて、Layered Architectureのように部分的にDDDの戦術的なエッセンスを導入する事はさることながら、サーバAPIがGraphQL、RESTful API、CQRS+ESなアーキテクチャであれば同様にそれらに適した設計を検討する必要があります。ましてや、ゲーム開発ではより多角的に全く別のアプローチを取る事があります。
+つまり、開発するクライアントそのものの要件、規模、周辺環境(サーバサイド周辺技術等)の進化に合わせて、現在適用している設計パターンそのものを蒸留し、戦略的に進化させ続ける必要があります。問題領域(ドメイン)はどこにでもあるし、それは技術的なフレームワークにも当てはまります。Evans本16章、17章あたりの話です。&lt;/p&gt;
+
+&lt;p&gt;一方で、構築するサービス全体を俯瞰して捉えた場合、クライアントはサーバサイドから見てDTOを橋渡し役として境界が分かれた状況にあります。
+現実的な話をすれば、蒸留という行為自体独立して必要に応じてやればいい、やっていくだけという話なのですが、それで結論づけてしまうと元も子もないのと、必要なタイミングで懐刀がないというのはよろしくないですし、クライアントアプリケーションをよりより素早く、より漸進的な設計で形にするヒントが隠されているかもしれません。&lt;/p&gt;
+
+&lt;p&gt;まだ検証段階なのですが(本当はAdvent Calendarに間に合わせたかったけど無理があった)、クライアント設計パターンの1つである所のVIPERを蒸留することでいくつか見えてきた事があるので、書き残しておきます。&lt;/p&gt;
+
+&lt;p&gt;DDD関連用語: 蒸留、宣言的設計、進化する秩序、戦略的設計&lt;/p&gt;
+</summary>
+    <content type="html">&lt;p&gt;この記事は&lt;a href="https://qiita.com/advent-calendar/2018/ddd"&gt;ドメイン駆動設計 #1 Advent Calendar 2018&lt;/a&gt; 19日目の記事です。&lt;/p&gt;
+
+&lt;p&gt;何かとDDDの話はサーバサイドエンジニアの話として取り上げられます。
+それもそのはず、サービスの根幹となるビジネスドメインのロジックはサーバサイド上組まれる事が多い事にあると思います。
+ではクライアントサイドは関係ないのかというとそんな事はなくて、Layered Architectureのように部分的にDDDの戦術的なエッセンスを導入する事はさることながら、サーバAPIがGraphQL、RESTful API、CQRS+ESなアーキテクチャであれば同様にそれらに適した設計を検討する必要があります。ましてや、ゲーム開発ではより多角的に全く別のアプローチを取る事があります。
+つまり、開発するクライアントそのものの要件、規模、周辺環境(サーバサイド周辺技術等)の進化に合わせて、現在適用している設計パターンそのものを蒸留し、戦略的に進化させ続ける必要があります。問題領域(ドメイン)はどこにでもあるし、それは技術的なフレームワークにも当てはまります。Evans本16章、17章あたりの話です。&lt;/p&gt;
+
+&lt;p&gt;一方で、構築するサービス全体を俯瞰して捉えた場合、クライアントはサーバサイドから見てDTOを橋渡し役として境界が分かれた状況にあります。
+現実的な話をすれば、蒸留という行為自体独立して必要に応じてやればいい、やっていくだけという話なのですが、それで結論づけてしまうと元も子もないのと、必要なタイミングで懐刀がないというのはよろしくないですし、クライアントアプリケーションをよりより素早く、より漸進的な設計で形にするヒントが隠されているかもしれません。&lt;/p&gt;
+
+&lt;p&gt;まだ検証段階なのですが(本当はAdvent Calendarに間に合わせたかったけど無理があった)、クライアント設計パターンの1つである所のVIPERを蒸留することでいくつか見えてきた事があるので、書き残しておきます。&lt;/p&gt;
+
+&lt;p&gt;DDD関連用語: 蒸留、宣言的設計、進化する秩序、戦略的設計&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;この話を始める前に、クライアントアプリケーション設計パターンに触れる必要があります。
+MVP(+Passive View or Supervising Controller)、MVVM、MVI、Flux、VIPERといった近年よく見られるスマートフォンアプリ開発で採用される設計パターンはいずれもメリット/デメリットがあり、規模や開発チームの習熟度、作成するアプリケーションのビジネスの方向性に合わせて適用される必要があり、これが絶対というものはありません。共通して言えることは、特定のclassないしfunctionに責務を与え、ソースコードに秩序をもたらしている、ということです。&lt;/p&gt;
+
+&lt;p&gt;今回はVIPERをベースに書きます。
+余談ですが、個人的には、VIPERパターンを採用する事が多いです。理由としては、実装が面倒と思われてしまう箇所があるものの、素朴であり、VIPERパターンを実現するフレームワーク実装のソースコードは0byte(つまり不要)、現代のGUIアプリケーション開発の現状を踏まえた上で最低限の責務分離がされている事、クライアント上で必要な要件がinterfaceとして可視化されている事、且つ未来に向けての秩序の進化をしやすい、といった所です。蒸留とミニマリズムはどんな優れた設計にも欠かせないものですが、戦略的設計にとってはミニマリズムはより一層重要です(Evans本第17章より)。&lt;/p&gt;
+
+&lt;p&gt;VIPERパターンではMVP + Passive ViewにおいてP(Presenter)で曖昧に責務を持っていたApplication LogicをI(Interactor)に、そして画面遷移にまつわる責務をR(Routing)に持たせ、Presenterをglue layerに特化し、かつこれら一連の責務をContract interfaceとして定義します。
+Presenterは時としてViewの代わりにViewModelを持つ事がありますが、いずれにしてもUIの用語は入りません。
+Routingについては本記事では省略します。&lt;/p&gt;
+
+&lt;p&gt;VIPERパターンの弱点として、処理フローを担保していないというものがあります。
+その為、Presenterの実装についてはやはり開発者を慣れるまで悩ませる事になります。Application LogicやUI logicをPresenterに記述してしまったり。
+単一方向の処理フローに着目したFluxやMVIが流行る理由も分かるなあという気持ちです。&lt;/p&gt;
+
+&lt;p&gt;そんなVIPERパターンですが、大規模なアプリケーションにおいてVIPERを軸にコーディングガイドラインを設け、コードレビューやチーム内での議論を通して真摯に向き合った結果、Presenter methodの実装は100%テンプレコードになっています。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl"&gt;&lt;div class="lineno"&gt;1&lt;/div&gt;&lt;div class="lineno"&gt;2&lt;/div&gt;&lt;div class="lineno"&gt;3&lt;/div&gt;&lt;div class="lineno"&gt;4&lt;/div&gt;&lt;div class="lineno"&gt;5&lt;/div&gt;&lt;div class="lineno"&gt;6&lt;/div&gt;&lt;div class="lineno"&gt;7&lt;/div&gt;&lt;div class="lineno"&gt;8&lt;/div&gt;&lt;div class="lineno"&gt;9&lt;/div&gt;&lt;div class="lineno"&gt;10&lt;/div&gt;&lt;div class="lineno"&gt;11&lt;/div&gt;&lt;div class="lineno"&gt;12&lt;/div&gt;&lt;div class="lineno"&gt;13&lt;/div&gt;&lt;div class="lineno"&gt;14&lt;/div&gt;&lt;div class="lineno"&gt;15&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;
+// Rxの場合
+interactor.doSomething()
+    .subscribeOn(/**/)
+    .observeOn(/**/)
+    .subscribe(view::render, view::render)
+    .addTo(disposables)
+
+// Kotlin Coroutinesの場合
+launch {
+    runCatching { withContext(/**/) { interactor.doSomething() }
+        .onSuccess(view::render)
+        .onFailure(view::render)
+}
+
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;
+&lt;p&gt;Interactorは引数を元に結果を返すだけになり、Viewは与えられた引数、あるいは(上記コードをViewModelを利用する形に置換した上で)ViewModelの変更を購読し描画するだけになります。&lt;/p&gt;
+
+&lt;p&gt;これは大きな成果で、Presenter(glue layer)の実装は機械的に生成できる事を意味しています。
+では、何を軸にPresenterを機械的に生成したら良いのでしょうか。&lt;/p&gt;
+
+&lt;p&gt;ここで着目したのはSide-Effect-Free FunctionやCQSの考え方です。
+問い合わせと変更を分離して副作用の心配を取り除くのが同パターンの趣旨ではありますが、
+これを逆に考えて、CommandとQueryからクライアント設計の契約(Contract)を導きだす事ができないかというのを考えました。&lt;/p&gt;
+
+&lt;p&gt;例えば(一部省略しつつも)以下のようなCommandとQueryの定義を書いたとします。&lt;/p&gt;
+&lt;pre class="highlight text"&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl"&gt;&lt;div class="lineno"&gt;1&lt;/div&gt;&lt;div class="lineno"&gt;2&lt;/div&gt;&lt;div class="lineno"&gt;3&lt;/div&gt;&lt;div class="lineno"&gt;4&lt;/div&gt;&lt;div class="lineno"&gt;5&lt;/div&gt;&lt;div class="lineno"&gt;6&lt;/div&gt;&lt;div class="lineno"&gt;7&lt;/div&gt;&lt;div class="lineno"&gt;8&lt;/div&gt;&lt;div class="lineno"&gt;9&lt;/div&gt;&lt;div class="lineno"&gt;10&lt;/div&gt;&lt;div class="lineno"&gt;11&lt;/div&gt;&lt;div class="lineno"&gt;12&lt;/div&gt;&lt;div class="lineno"&gt;13&lt;/div&gt;&lt;div class="lineno"&gt;14&lt;/div&gt;&lt;div class="lineno"&gt;15&lt;/div&gt;&lt;div class="lineno"&gt;16&lt;/div&gt;&lt;div class="lineno"&gt;17&lt;/div&gt;&lt;div class="lineno"&gt;18&lt;/div&gt;&lt;div class="lineno"&gt;19&lt;/div&gt;&lt;div class="lineno"&gt;20&lt;/div&gt;&lt;div class="lineno"&gt;21&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;
+interface ProductsDefinition {
+    data class Product(
+        val productId: ProductId,
+        val title: ProductTitle,
+        val price: Price,
+        val description: Description
+    )
+
+    sealed class PurchaseProductEvent(
+        private val productId: ProductId
+    ) {
+        data class Purchased(productId: ProductId) : PurchaseProductEvent(productId)
+        data class Unavailable(productId: ProductId) : PurchaseProductEvent(productId)
+    }
+
+    class AllProducts(): Query&amp;lt;List&amp;lt;Product&amp;gt;&amp;gt;
+    class ProductsByKeyword(keyword: Keyword): Query&amp;lt;List&amp;lt;Product&amp;gt;&amp;gt;
+    class Purchase(productId: ProductId): Command&amp;lt;PurchaseProductEvent&amp;gt;
+}
+
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;
+&lt;p&gt;上記コードを読む際に気をつけて欲しいのは、PurchaseProductEventはUI domainのDomainEventである点です。
+UI DomainのDomainEventとBusiness DomainのDomainEventは一致しません。
+いっそStateと呼んだ方が最近の言葉遣いにはあってるかもなーと思いつつこのままにしておきます。&lt;/p&gt;
+
+&lt;p&gt;上記のDefinitinon interfaceから、以下のコードを生成できます。(命名はやりすぎ感が否めませんが…)&lt;/p&gt;
+&lt;pre class="highlight text"&gt;&lt;table&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td class="gutter gl"&gt;&lt;div class="lineno"&gt;1&lt;/div&gt;&lt;div class="lineno"&gt;2&lt;/div&gt;&lt;div class="lineno"&gt;3&lt;/div&gt;&lt;div class="lineno"&gt;4&lt;/div&gt;&lt;div class="lineno"&gt;5&lt;/div&gt;&lt;div class="lineno"&gt;6&lt;/div&gt;&lt;div class="lineno"&gt;7&lt;/div&gt;&lt;div class="lineno"&gt;8&lt;/div&gt;&lt;div class="lineno"&gt;9&lt;/div&gt;&lt;div class="lineno"&gt;10&lt;/div&gt;&lt;div class="lineno"&gt;11&lt;/div&gt;&lt;div class="lineno"&gt;12&lt;/div&gt;&lt;div class="lineno"&gt;13&lt;/div&gt;&lt;div class="lineno"&gt;14&lt;/div&gt;&lt;div class="lineno"&gt;15&lt;/div&gt;&lt;div class="lineno"&gt;16&lt;/div&gt;&lt;div class="lineno"&gt;17&lt;/div&gt;&lt;div class="lineno"&gt;18&lt;/div&gt;&lt;div class="lineno"&gt;19&lt;/div&gt;&lt;div class="lineno"&gt;20&lt;/div&gt;&lt;div class="lineno"&gt;21&lt;/div&gt;&lt;div class="lineno"&gt;22&lt;/div&gt;&lt;div class="lineno"&gt;23&lt;/div&gt;&lt;div class="lineno"&gt;24&lt;/div&gt;&lt;div class="lineno"&gt;25&lt;/div&gt;&lt;div class="lineno"&gt;26&lt;/div&gt;&lt;div class="lineno"&gt;27&lt;/div&gt;&lt;div class="lineno"&gt;28&lt;/div&gt;&lt;div class="lineno"&gt;29&lt;/div&gt;&lt;div class="lineno"&gt;30&lt;/div&gt;&lt;div class="lineno"&gt;31&lt;/div&gt;&lt;div class="lineno"&gt;32&lt;/div&gt;&lt;div class="lineno"&gt;33&lt;/div&gt;&lt;div class="lineno"&gt;34&lt;/div&gt;&lt;div class="lineno"&gt;35&lt;/div&gt;&lt;div class="lineno"&gt;36&lt;/div&gt;&lt;div class="lineno"&gt;37&lt;/div&gt;&lt;div class="lineno"&gt;38&lt;/div&gt;&lt;div class="lineno"&gt;39&lt;/div&gt;&lt;div class="lineno"&gt;40&lt;/div&gt;&lt;div class="lineno"&gt;41&lt;/div&gt;&lt;div class="lineno"&gt;42&lt;/div&gt;&lt;div class="lineno"&gt;43&lt;/div&gt;&lt;div class="lineno"&gt;44&lt;/div&gt;&lt;div class="lineno"&gt;45&lt;/div&gt;&lt;div class="lineno"&gt;46&lt;/div&gt;&lt;div class="lineno"&gt;47&lt;/div&gt;&lt;div class="lineno"&gt;48&lt;/div&gt;&lt;div class="lineno"&gt;49&lt;/div&gt;&lt;div class="lineno"&gt;50&lt;/div&gt;&lt;div class="lineno"&gt;51&lt;/div&gt;&lt;div class="lineno"&gt;52&lt;/div&gt;&lt;div class="lineno"&gt;53&lt;/div&gt;&lt;div class="lineno"&gt;54&lt;/div&gt;&lt;div class="lineno"&gt;55&lt;/div&gt;&lt;div class="lineno"&gt;56&lt;/div&gt;&lt;div class="lineno"&gt;57&lt;/div&gt;&lt;div class="lineno"&gt;58&lt;/div&gt;&lt;div class="lineno"&gt;59&lt;/div&gt;&lt;div class="lineno"&gt;60&lt;/div&gt;&lt;div class="lineno"&gt;61&lt;/div&gt;&lt;div class="lineno"&gt;62&lt;/div&gt;&lt;div class="lineno"&gt;63&lt;/div&gt;&lt;div class="lineno"&gt;64&lt;/div&gt;&lt;/td&gt;&lt;td class="code"&gt;
+interface ProductsContract {
+    interface View {
+        fun render(products: List&amp;lt;Product&amp;gt;)
+        fun render(event: PurchaseProductEvent)
+        fun render(e: Throwable)
+    }
+
+    interface QueryHandler {
+        suspend fun whenever(query: AllProducts): List&amp;lt;Product&amp;gt;
+        suspend fun whenever(query: ProductsByKeyword): List&amp;lt;Product&amp;gt;
+    }
+
+    interface CommandHandler {
+        suspend fun whenever(command: Purchase): PurchaseProductEvent
+    }
+
+    interface Interactor: QueryHandler, CommandHandler
+
+    interface Presenter {
+        fun given(query: AllProducts)
+        fun given(query: ProductsByKeyword)
+        fun given(command: Purchase)
+    }
+
+    interface Routing
+}
+
+class PurchasePresenter(
+    ui: CoroutineDispatcher,
+    private io: CoroutineDispatcher,
+    view: View,
+    queryHandler: QueryHandler,
+    commandHandler: CommandHandler,
+    routing: Routing
+): PurchaseContract.Presenter, CoroutineContext {
+    private val job: Job = Job()
+    override val coroutineContext: CoroutineContext = job + ui
+
+    override fun given(query: AllProducts) {
+        launch {
+            runCatching { withContext(io) { queryHandler.whenever(query) } }
+                .onSuccess(view::render)
+                .onFailure(view::render)
+        }
+    }
+
+    override fun given(query: ProductsByKeyword) {
+        launch {
+            runCatching { withContext(io) { queryHandler.whenever(query) } }
+                .onSuccess(view::render)
+                .onFailure(view::render)
+        }
+    }
+
+    override fun given(command: Purchase) {
+        launch {
+            runCatching { withContext(io) { commandHandler.whenever(command) } }
+                .onSuccess(view::render)
+                .onFailure(view::render)
+        }
+    }
+}
+
+&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;
+&lt;p&gt;アプリ開発者は生成されたContractとDefinitionを元にInteractor、Viewを実装します。&lt;/p&gt;
+
+&lt;p&gt;さらに、ここでInteractorに着目します。
+Interactorは上記コードにおいてQueryHandler、CommandHandlerを実装していますが、これらを分離する事を考えてみます。
+CQRS+ESアーキテクチャにおけるAPI Response(DTO)は、クライアントにとってView Aggregateとなる事が期待されます。
+同じく、GraphQLやその他RPCにおける問い合わせ(Query)の結果も、View Aggregateをサーバサイドとクライアントサイドとで合わせて秩序をもたらす事を期待されています。
+これを前提とした場合、これらの技術スタックを選定したクライアントのQueryHandlerの実装クラスは、IDLやAPI Clientを元に自動生成ができるのではないでしょうか。なぜなら、もうサーバサイドでView Aggregateを作ってくれているからです。
+仮にキャッシュを挟むにしても、View Aggregateが正しく作られている状況であれば、クライアントはそれをそのまま使う以外の道はないので、さほど難しい事にはならないはずです。&lt;/p&gt;
+
+&lt;p&gt;ここまで理想的に運ぶと、クライアントも同様に本来の役割である所のUI開発と、CommandHandlerの実装に集中できます。&lt;/p&gt;
+
+&lt;p&gt;実際そんなにうまくいくはずは無く、特にQueryHandler実装クラスの自動生成の話については、Firebaseに並ぶBaaS APIとの併用も考えられるので、現実問題厳しいと考えてます。そこで引き続き人間が実装するとなると、QueryHandlerとCommandHandlerを分離するメリットも薄く、返って難解な設計に受け取られてしまうため、結果として分離しない選択肢を取る事も致し方ないと思います。&lt;/p&gt;
+
+&lt;p&gt;ただ、今回紹介したView Aggregate、Event(State)、Query、CommandからクライアントアプリのContract interfaceとクライアント実装の一部を生成をする、という選択肢がとてもしっくり来ているので、もう少し深掘りたい所です。これを実現するソリューションを趣味で開発中で、Advent Calendarに間に合わせたかったのですが、間に合いませんでした。残念…。&lt;/p&gt;
+
+&lt;p&gt;今回はVIPERを題材に検討しましたが、他の設計パターンやアーキテクチャにおいてもそのものを蒸留し洗練された設計パターンが生まれる事を期待しています。すべてを語り切れてない上に多くの誤解を生みそうな記事になってしまいましたが、以上です。&lt;/p&gt;
+</content>
+  </entry>
   <entry>
     <title>ドメイン駆動設計の実践は実装だけがすべてじゃないよという話</title>
     <link rel="alternate" href="/blog/20151222/ddd-insight.html"/>
@@ -397,92 +587,6 @@ mklinkコマンドが管理者権限で実行する必要があるので&lt;br&g
 &lt;h2 id="toc_0"&gt;結論&lt;/h2&gt;
 
 &lt;p&gt;そろそろ本当にMacBook+iOSに移行したいので、AppleさんにはWWDC2013で誠意を見せていただきたい所存&lt;/p&gt;
-</content>
-  </entry>
-  <entry>
-    <title>FlexUnit4でStageに依存するテストを書く</title>
-    <link rel="alternate" href="/blog/20130109/stage-reference-in-flexunit4.html"/>
-    <id>/blog/20130109/stage-reference-in-flexunit4.html</id>
-    <published>2013-01-09T04:03:00Z</published>
-    <updated>2013-01-09T04:03:00Z</updated>
-    <author>
-      <name>Hirokazu Uzu</name>
-    </author>
-    <summary type="html">&lt;p&gt;FlexUnit4を利用する上でflash.display.Stageに依存する処理のテストを書きたいんだけど、&lt;br&gt;
-TestクラスからどうやってStageオブジェクトを参照したりStageからのイベントを送出したら良いか分からない!&lt;br&gt;
-a)力技な方法と、b)fluintの機能を利用する方法があります。後者をおすすめします。&lt;/p&gt;
-</summary>
-    <content type="html">&lt;p&gt;FlexUnit4を利用する上でflash.display.Stageに依存する処理のテストを書きたいんだけど、&lt;br&gt;
-TestクラスからどうやってStageオブジェクトを参照したりStageからのイベントを送出したら良いか分からない!&lt;br&gt;
-a)力技な方法と、b)fluintの機能を利用する方法があります。後者をおすすめします。
-&lt;/p&gt;
-
-&lt;h3 id="toc_0"&gt;a)力技な方法&lt;/h3&gt;
-
-&lt;p&gt;entry-pointとなるTestRunnerクラスのコンストラクタかonCreationCompleteあたりで&lt;br&gt;
-flash.display.DisplayObjectContainerを継承するクラス(Sprite, MovieClip, UIComponent, etc&amp;hellip;)のオブジェクトを生成し、&lt;br&gt;
-addChildしてやるなどしたあと、&lt;br&gt;
-そのオブジェクトを任意のクラスのプロパティとして保持します。&lt;br&gt;
-おおよそこんな感じです。
-&lt;script src="https://gist.github.com/4491370.js?file=ATestRunner.mxml"&gt;&lt;/script&gt;
-&lt;script src="https://gist.github.com/4491370.js?file=ATestContext.as"&gt;&lt;/script&gt;
-ってやっとけばTestクラスでは
-&lt;script src="https://gist.github.com/4491370.js?file=ATest.as"&gt;&lt;/script&gt;
-とできます。力技ですね。&lt;/p&gt;
-
-&lt;h3 id="toc_1"&gt;b)Fluintの機能を利用する&lt;/h3&gt;
-
-&lt;p&gt;fluintに含まれるorg.fluint.uiImpersonationパッケージの諸々のクラスを利用します。&lt;br&gt;
-実装を追うとおおよそ上とやっている事は変わらないのですが、&lt;br&gt;
-あらゆる環境でのテストコードの保守を考えると&lt;br&gt;
-こちらを利用しておくのがbetterです。&lt;/p&gt;
-
-&lt;p&gt;a) の方法と途中まで(適当なDisplayObjectContainerをaddChildするところまで)は同じです。
-&lt;script src="https://gist.github.com/4491795.js?file=BTestRunner.mxml"&gt;&lt;/script&gt;
-VisualEnvironmentBuilderに対してDisplayObjectContainerを設定することで、&lt;br&gt;
-以降テストクラスからは、org.fluint.uiImpersonation.UIImpersonatorクラスの各メソッドを介して&lt;br&gt;
-アクセスすることができます。  &lt;/p&gt;
-
-&lt;p&gt;実際のテストコード中での利用方法はこんな感じです。
-&lt;script src="https://gist.github.com/4491795.js?file=BTest.as"&gt;&lt;/script&gt;
-利用する際に、注意点が2点あります。&lt;/p&gt;
-
-&lt;h3 id="toc_2"&gt;DisplayObjectContainerクラスの提供するインターフェースがすべて提供される訳ではない&lt;/h3&gt;
-
-&lt;p&gt;UIImpersonatorのインターフェースはで定義されているメソッドは以下のメソッドだけです。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;addChild()&lt;/li&gt;
-&lt;li&gt;addChildAt()&lt;/li&gt;
-&lt;li&gt;removeChild()&lt;/li&gt;
-&lt;li&gt;removeChildAt()&lt;/li&gt;
-&lt;li&gt;removeAllChildren()&lt;/li&gt;
-&lt;li&gt;getChildAt()&lt;/li&gt;
-&lt;li&gt;getChildByName()&lt;/li&gt;
-&lt;li&gt;getChildIndex()&lt;/li&gt;
-&lt;li&gt;setChildIndex()&lt;/li&gt;
-&lt;li&gt;numChildren&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;詳しくは、&lt;a href="http://docs.flexunit.org/index.php?title=UIImpersonator"&gt;http://docs.flexunit.org/index.php?title=UIImpersonator&lt;/a&gt;を参考にしてください。&lt;br&gt;
-回避方法はあるんですがまあエレガントではないのでここでは紹介しません。&lt;br&gt;
-ソースコードを読んでください。&lt;/p&gt;
-
-&lt;h3 id="toc_3"&gt;UIImpersonatorクラスのメソッドによって操作されるオブジェクトは、実行環境によって変化する&lt;/h3&gt;
-
-&lt;p&gt;事前に設定されたDisplayObjectContainerではありません。&lt;br&gt;
-それを親表示オブジェクトとするDisplayObjectContainerが実際に操作されます。&lt;br&gt;
-そのDisplayObjectContainerは、実行環境によって変化します。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;flex環境外では、flash.display.Sprite&lt;/li&gt;
-&lt;li&gt;flex環境では、mx.core.Container -&gt; spark.components.Groupの優先順位で確定&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id="toc_4"&gt;FlexMojosでは&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href="https://github.com/uzzu/flexunithelper"&gt;flexunithelper&lt;/a&gt;というライブラリを作りました。
-これを使うと、上記の問題を少ない記述量でよしなに解決してくれます。=&amp;gt;&lt;a href="https://github.com/uzzu/flexunithelper/blob/master/flexunithelper/src/test/flex/org/uzzu/flexunithelper/UtilitiesTest.as"&gt;Example&lt;/a&gt;&lt;/p&gt;
 </content>
   </entry>
 </feed>
