@@ -73,7 +73,7 @@ interactor.doSomething()
 
 // Kotlin Coroutinesの場合
 launch {
-    runCatching { withContext(/**/) { interactor.doSomething() }
+    runCatching { withContext(/**/) { interactor.doSomething() } }
         .onSuccess(view::render)
         .onFailure(view::render)
 }
