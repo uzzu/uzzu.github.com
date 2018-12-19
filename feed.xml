@@ -181,7 +181,7 @@ class PurchasePresenter(
 }
 
 &lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/pre&gt;
-&lt;p&gt;アプリ開発者は生成されたContractとDefinitionを元にInteractor、Viewを実装します。&lt;/p&gt;
+&lt;p&gt;アプリ開発者はDefinitionと、生成されたContractを元にInteractor、Viewを実装します。&lt;/p&gt;
 
 &lt;p&gt;さらに、ここでInteractorに着目します。
 Interactorは上記コードにおいてQueryHandler、CommandHandlerを実装していますが、これらを分離する事を考えてみます。
