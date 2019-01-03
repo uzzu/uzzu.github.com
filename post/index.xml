@@ -7,8 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 19 Dec 2018 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 03 Jan 2019 12:33:01 +0900</lastBuildDate>
     <atom:link href="/post.html" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>年末年始あれこれ2018/2019</title>
+      <link>https://uzzu.github.io/post/20190103.html</link>
+      <pubDate>Thu, 03 Jan 2019 12:33:01 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/20190103.html</guid>
+      <description>なんとなくここ数年SNSはプライベートを切り離して、Twitterではほどほどにまともな事を書く生活を送っていたけど、Twitterでほどほどにまともな事を書いても効果が薄いなという当たり前の結論に至った。昔から言ってるんだがーな事が視界に入って届いてないとかで一人で消耗しているとかそういう話。
+これはもったいないし、変にストレス溜めるのもよくないなというところで、古くなったブログシステムをHugoに置き換えつつ、今年からはなるべくブログに残す事にしようかなと思った。middleman 3系を使い続けてたとは…。なまじ使えてしまってたので惰性で遣ってたけど、Rubyも2.0使ってたりで完全にレガシーであった。
+雑談はあれは象でやっているので、じゃあTwitterはなんなんだみたいな気持ち。まあ年末には自分でも分かってくるんじゃないかな。
+あとはSNS共有ボタンは不要だなと思ったので無くした。何かあったらTwitterでmention飛ばすか、disqusはつけてあるんでコメントもらえば。はてブは見ない。
+そういえばはてブも捨ててPocketに移行した。はてブは長年使ってたわけだけど、自分の用途を思うとはてブである必要はないなというのもあるし、近年の音楽性の不一致もあるし、新しいサービスを使ってみたい気持ちもあるし、まあいい機会だよなというところで移行。まだ使い慣れてないけどいいや。はてブもまったく使わないわけではなくたまには使うと思う。
+まだブログもスマフォから書けるようにしていないので、さっさと書けるようにしなきゃいけない。暫くはメモを貯めてまとめて記事にするのだと思う。古の手作業感があってこれはこれで良い…。
+後はdotfiles整理したら、作ろうと思ってるライブラリやらツールやらなんやらを作るかなー。</description>
+    </item>
     
     <item>
       <title>Distilling VIPER pattern</title>
