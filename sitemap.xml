@@ -3,11 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://uzzu.github.io/post/20190103-test.html</loc>
-    <lastmod>2019-01-03T21:32:36+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://uzzu.github.io/post/20190103.html</loc>
     <lastmod>2019-01-03T12:33:01+09:00</lastmod>
   </url>
@@ -94,7 +89,7 @@
   
   <url>
     <loc>https://uzzu.github.io/post.html</loc>
-    <lastmod>2019-01-03T21:32:36+09:00</lastmod>
+    <lastmod>2019-01-03T12:33:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -112,7 +107,7 @@
   
   <url>
     <loc>https://uzzu.github.io/</loc>
-    <lastmod>2019-01-03T21:32:36+09:00</lastmod>
+    <lastmod>2019-01-03T12:33:01+09:00</lastmod>
     <priority>0</priority>
   </url>
   
