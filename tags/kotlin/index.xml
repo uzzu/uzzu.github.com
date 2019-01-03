@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kotlin on Uzzu::Blog</title>
+    <link>https://uzzu.github.io/tags/kotlin.html</link>
+    <description>Recent content in Kotlin on Uzzu::Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 04 Jan 2019 00:00:00 +0900</lastBuildDate>
+    <atom:link href="/tags/kotlin.html" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Kotlin Multi Platform Project Boilerplateを作った&#34;</title>
+      <link>https://uzzu.github.io/post/kotlin-mpp-boilerplate.html</link>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/kotlin-mpp-boilerplate.html</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/uzzu/kotlin-mpp-boilerplate&#34;&gt;https://github.com/uzzu/kotlin-mpp-boilerplate&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;スマフォからの投稿テストも兼ねて、kotlin-mpp-boilerplateを作ったので解説。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

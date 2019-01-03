@@ -7,8 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 03 Jan 2019 12:33:01 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 04 Jan 2019 00:00:00 +0900</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Kotlin Multi Platform Project Boilerplateを作った&#34;</title>
+      <link>https://uzzu.github.io/post/kotlin-mpp-boilerplate.html</link>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/kotlin-mpp-boilerplate.html</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/uzzu/kotlin-mpp-boilerplate&#34;&gt;https://github.com/uzzu/kotlin-mpp-boilerplate&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;スマフォからの投稿テストも兼ねて、kotlin-mpp-boilerplateを作ったので解説。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>年末年始あれこれ2018/2019</title>
