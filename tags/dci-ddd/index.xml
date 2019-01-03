@@ -8,9 +8,7 @@
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Sat, 04 Jan 2014 08:53:00 +0900</lastBuildDate>
-    
-	<atom:link href="https://uzzu.github.io/tags/dci-ddd/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="/tags/dci-ddd.html" rel="self" type="application/rss+xml" />
     
     <item>
       <title>ドメインを巡るお話</title>

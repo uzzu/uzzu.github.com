@@ -8,9 +8,7 @@
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Wed, 09 Jan 2013 13:03:00 +0900</lastBuildDate>
-    
-	<atom:link href="https://uzzu.github.io/tags/as3-flexunit4/index.xml" rel="self" type="application/rss+xml" />
-    
+    <atom:link href="/tags/as3-flexunit4.html" rel="self" type="application/rss+xml" />
     
     <item>
       <title>FlexUnit4でStageに依存するテストを書く</title>
