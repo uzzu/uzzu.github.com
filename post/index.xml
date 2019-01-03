@@ -7,8 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 03 Jan 2019 12:33:01 +0900</lastBuildDate>
-    <atom:link href="/post.html" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 03 Jan 2019 21:32:36 +0900</lastBuildDate>
+    
+	<atom:link href="https://uzzu.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Test</title>
+      <link>https://uzzu.github.io/post/20190103-test.html</link>
+      <pubDate>Thu, 03 Jan 2019 21:32:36 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/20190103-test.html</guid>
+      <description>はいはいtesttest</description>
+    </item>
     
     <item>
       <title>年末年始あれこれ2018/2019</title>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Uzzu::Blog</title>
+    <link>https://uzzu.github.io/tags.html</link>
+    <description>Recent content in Tags on Uzzu::Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 09 Jan 2013 13:03:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://uzzu.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>As3 Flexunit4</title>
+      <link>https://uzzu.github.io/tags/as3-flexunit4.html</link>
+      <pubDate>Wed, 09 Jan 2013 13:03:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/tags/as3-flexunit4.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Csharp</title>
+      <link>https://uzzu.github.io/tags/csharp.html</link>
+      <pubDate>Tue, 23 Dec 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/tags/csharp.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Csharp Mono</title>
+      <link>https://uzzu.github.io/tags/csharp-mono.html</link>
+      <pubDate>Wed, 10 Dec 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/tags/csharp-mono.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dci Ddd</title>
+      <link>https://uzzu.github.io/tags/dci-ddd.html</link>
+      <pubDate>Sat, 04 Jan 2014 08:53:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/tags/dci-ddd.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ddd</title>
+      <link>https://uzzu.github.io/tags/ddd.html</link>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/tags/ddd.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Test</title>
+      <link>https://uzzu.github.io/tags/test.html</link>
+      <pubDate>Sun, 30 Sep 2012 21:46:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/tags/test.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Virtualbox Windows7 Batchfile</title>
+      <link>https://uzzu.github.io/tags/virtualbox-windows7-batchfile.html</link>
+      <pubDate>Wed, 16 Jan 2013 16:41:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/tags/virtualbox-windows7-batchfile.html</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

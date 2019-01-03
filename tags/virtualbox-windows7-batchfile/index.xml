@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Virtualbox Windows7 Batchfile on Uzzu::Blog</title>
+    <link>https://uzzu.github.io/tags/virtualbox-windows7-batchfile.html</link>
+    <description>Recent content in Virtualbox Windows7 Batchfile on Uzzu::Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 16 Jan 2013 16:41:00 +0900</lastBuildDate>
+    
+	<atom:link href="https://uzzu.github.io/tags/virtualbox-windows7-batchfile/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>流行りのdotfiles運用をゲストOSとホストOS(Windows7)で共有する</title>
+      <link>https://uzzu.github.io/post/host-win7-and-guest-os-share-environment-of-dotfiles.html</link>
+      <pubDate>Wed, 16 Jan 2013 16:41:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/host-win7-and-guest-os-share-environment-of-dotfiles.html</guid>
+      <description>&lt;p&gt;ようやく流行りのdotfiles運用に乗っけました。 dotfiles運用は本当に快適で、幸福に満ち溢れています。
+Windowsって本当にかわいいですよね。痒いところに手が届かないところがすごい好きです。現状、日常のほとんどの作業はゲストOSであるところのUbuntu上で行っているので、ホストOSであるWindows7をほとんど触っていないのですが、とはいえ、どうしてもWindows上で作業した方が早いケースがあったり、 Windows上にしかインストールできないソフトウェアがあることがまああるわけで、そういういざという時に最低限の編集が可能が環境がWindows上に存在しない、もしくは差異があるというのはいささか不便であります。&lt;br /&gt;
+で、この問題をどうしようかなと調べてたわけですが…&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
