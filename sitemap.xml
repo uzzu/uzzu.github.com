@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://uzzu.github.io/about.html</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/distilling-viper-architecture.html</loc>
+    <lastmod>2018-12-19T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/ddd-insight.html</loc>
+    <lastmod>2015-12-22T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/switch-case-cs.html</loc>
+    <lastmod>2014-12-23T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/mono-reading.html</loc>
+    <lastmod>2014-12-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/think-domain-driven.html</loc>
+    <lastmod>2014-01-04T08:53:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/host-win7-and-guest-os-share-environment-of-dotfiles.html</loc>
+    <lastmod>2013-01-16T16:41:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/stage-reference-in-flexunit4.html</loc>
+    <lastmod>2013-01-09T13:03:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post/test.html</loc>
+    <lastmod>2012-09-30T21:46:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags/as3-flexunit4.html</loc>
+    <lastmod>2013-01-09T13:03:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/categories.html</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags/csharp.html</loc>
+    <lastmod>2014-12-23T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags/csharp-mono.html</loc>
+    <lastmod>2014-12-10T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags/dci-ddd.html</loc>
+    <lastmod>2014-01-04T08:53:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags/ddd.html</loc>
+    <lastmod>2018-12-19T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/post.html</loc>
+    <lastmod>2018-12-19T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags.html</loc>
+    <lastmod>2013-01-09T13:03:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags/test.html</loc>
+    <lastmod>2012-09-30T21:46:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/</loc>
+    <lastmod>2019-01-01T00:00:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.github.io/tags/virtualbox-windows7-batchfile.html</loc>
+    <lastmod>2013-01-16T16:41:00+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

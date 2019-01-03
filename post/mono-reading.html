@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet"> 
+
+        <title>monoのソースを読み始める話</title>
+
+        <link rel="stylesheet" href="/css/stylesheet.css">
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <span id="author-name">
+            <h6><a href="/about.html">Hirokazu Uzu</a></h6>
+          </span>
+        </section>
+
+
+<div class="blog-post">
+  <h1>monoのソースを読み始める話</h1>
+  <div class="blog-post-subheader">
+    <time>10 Dec 2014</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="http://qiita.com/advent-calendar/2014/csharp">C# Advent Calendar 2014</a>の10日目のエントリです。
+<a href="http://tech.tanaka733.net/entry/must-load-user-profile-x509certificates2-ctor-with-bytearray-on-aspnet">9日目はASP.NET/IIS環境での証明書の取り扱いにおけるノウハウ話でした。</a></p>
+
+<p>近年は<a href="http://xamarin.com/">Xamarin</a>や<a href="http://japan.unity3d.com/">Unity3D</a>がお盛んで、今年初旬に<a href="https://mono-ue.github.io/">mono for UnrealEngine</a>が発表(2014年12月現在では辛い状態ですが)されたり等、何かとmonoのお世話になることが増えてきたんじゃないでしょうか。かくいう私もお世話になっているうちの1人です。お世話になっている訳ですから、その実装に興味を持ち始める人もいるんじゃないかなと思います。そこで本記事では、とっつきやすそうなところをなんとなく追っていきます。</p>
+
+<p>まずは、<a href="https://github.com/mono/mono">mono/mono @ github.com</a>からmonoをcloneします。Unity3Dな方は<a href="https://github.com/Unity-Technologies/mono">Unity-Technologies/mono @ github.com</a>からどうぞ。</p>
+
+<pre><code>git clone https://github.com/mono/mono.git
+
+# Unity3Dな方は以下
+git clone https://github.com/Unity-Technologies/mono.git
+</code></pre>
+
+<p>まずとっかかりが早いのはmscorlibですかね。分かりませんが進めます。<br />
+前提として、<a href="https://github.com/mono/mono/tree/master/mcs/class/">mcs/class</a>以下に、アセンブリとして配布されるたくさんのソースコードがあります。<a href="https://github.com/mono/mono/tree/master/mcs/class/corlib">mcs/class/corlib</a>ディレクトリがmscorlib.dllのソースコードに相当します。その他の実装を参照する場合も、アセンブリ名に紐づく形でディレクトリが掘られています(例えばSystem.LinqはSystem.Core.dllに含まれているので、<a href="https://github.com/mono/mono/tree/master/mcs/class/System.Core">mcs/class/System.Core</a>にある、といった感じ)から、分かりやすいですね。</p>
+
+<p>ソースコードを読む際は合わせて<a href="http://referencesource.microsoft.com/">Microsoft ReferenceSource</a>も一緒に読むと、楽しくて1日が終わります。mono上での実装は.NETのそれと比べて非常にシンプルなものとなっているので、たとえばSystem.Linqの述語がどういう実装になってるのか?みたいな疑問は、monoのソースコードを読んだ方がもしかしたら早いかもしれません。</p>
+
+<p>1つ言い忘れていましたが、みなさんお使いのエディタにはアセンブリブラウザが搭載されているでしょうから、そちらからdllを参照するでも良いですが、その場合アセンブリとしてコンパイルされた状態になっているので、IEnumerableやasync-awaitを使用したソースコードはCompilerGeneratedなソースコードになって出てくるので、今まで読んだことのない方は気持ちでやっていく必要が高まってしんどいかもしれません。</p>
+
+<p>それでは実際にソースコードを追ってみましょう。今回は、System.Globalization.CultureInfoを読んでみます。</p>
+
+<ul>
+<li><a href="http://msdn.microsoft.com/ja-jp/library/system.globalization.cultureinfo%28v=vs.110%29.aspx">System.Globalization.CultureInfoってなに?って人はMSDN</a></li>
+<li><a href="https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Globalization/CultureInfo.cs">ソースコード</a></li>
+</ul>
+
+<p>ふむふむと読み進めていくと、所々で</p>
+
+<pre><code class="language-cs">if (!constructed) Construct ();
+</code></pre>
+
+<p>というように、プロパティが実際に参照されるまでは値を取得しないように遅延評価が行われている事が分かります。Constructの実装は<a href="https://github.com/mono/mono/blob/master/mcs/class/corlib/System.Globalization/CultureInfo.cs#L597">ここ</a>ですね。更に追っていくと、construct_internal_locale_from_lcid (cultureID);を実行しています。
+このメソッドをみると</p>
+
+<pre><code class="language-cs">[MethodImplAttribute (MethodImplOptions.InternalCall)]
+private extern bool construct_internal_locale_from_lcid (int lcid);
+</code></pre>
+
+<p>となってますね。MethodImplOptions.InternalCallを指定していますので、CLR(共通言語ランタイム)上に実装されていることが分かります。「ぬああああん(以下略」とならず、もっといきましょう。monoならもっと先が読める！(コレが一番言いたかった)</p>
+
+<p>monoにおいては、MethodImplOptions.InternalCallで指定されたメソッドは、<a href="https://github.com/mono/mono/blob/master/mono/metadata/icall-def.h">mono/metadata/icall-def.h</a>上でマッピングされています。今回の例で言えば、マッピングは<a href="https://github.com/mono/mono/blob/master/mono/metadata/icall-def.h#L289">同ヘッダにおいてこのように定義されており</a>、そのメソッドの実装は<a href="https://github.com/mono/mono/blob/master/mono/metadata/locales.c#L490">mono/metadata/locale.c</a>に、にあります。マッピングされているメソッド名は<code>ves_icall_{名前空間}_{クラス名}_{メソッド名}</code>という命名規則(vesはVirtualExecutionSystemの略かな?分かりませんが)で定義されてたり、そうでなかったりとまちまちです。概ね(mini本体に含まれるものを除き)<a href="https://github.com/mono/mono/tree/master/mono/metadata">mono/metadata</a>に含まれています。その他のメソッドを探す際も、ves_icall、あるいはicall-def.h上でのマッピングルールを見ながらgrepをかければみつかりそうですね。</p>
+
+<p>InternalCallしているメソッドが分かったら、あとは頑張ってCを読みます。CultureInfoについて追っていくと、最終的に<a href="https://github.com/mono/mono/blob/master/mono/metadata/culture-info-table.h">mono/metadata/culture-info-table.h</a>にたどり着きます。
+ものすごいたくさんの数値やバイトコードが列挙された配列がありますが、怖くはなくて、cultureIDに紐づくCultureInfoやRegionInfoに相当する値が入っている配列のアドレスが列挙されているとかそんな感じです。つまり定義済みのCultureInfoやRegionInfoにアクセスしているということです。ちゃんと読み進めると、各要素がISOCurrencySymbolだったりに紐付いている事が分かります。なるほどーためになる。</p>
+
+<p>＜＜ 追記 ＞＞</p>
+
+<p>Atsushi Enoさんから捕捉頂きました。ありがとうございますm(_ _)m
+<blockquote>ちなみにculture-info-table.hはmono/tools/locale-builder でUnicode CLDRから生成されているので、そっちを見るともっと人にやさしいです。</blockquote>
+とのことです。実際に<a href="https://github.com/mono/mono/tree/master/tools/locale-builder">locale-buiilderを読んでみると</a>、C#で書かれていて、culture_info_entryやregion_info_entryのソースコードがモリモリ生成されていたりするのが分かります。とても人にやさしいですね！</p>
+
+<p>今回コードリーディングの対象にしたCultureInfoですが、偶然にも<a href="http://sta-blockhead.blogspot.jp/2010/03/datetimeformatinfofulldatetimepattern.html">staさんが詳細にまとめてくれていました。</a> CultureInfoの詳細はこちらの記事を読むと良いです。ありがとうございますm(_ _)m</p>
+
+<p>＜＜ 追記おわり ＞＞</p>
+
+<p>ここで、例えばUnity-Technologiesのmonoと、本家のmonoとでdiffを取ったりして、あーここは対応が追いついてないみたいだから、最新のmonoの実行結果からCodeDomを用いてソースコードを自動生成しておこうとかそういった行為がとれるわけですね。「いやあのそれはソースコード読まなくても普通に実行すれば分かるでしょ」というのもありますが、この記事を読んだ皆さんは、mono環境におけるInternalCallの壁を超えたようなものなので、実行する以外のアプローチがとれるようになって皆さんの業務の幅が広がって私はとても嬉しく思います。</p>
+
+<p>続けて、mcs、miniの実装のコードにも触れようかという所なんですが、筆者都合により本記事はここまでです。
+引き続き、mcsやminiのソースコードを読む際には、一度<a href="http://www.mono-project.com/docs/">Mono Documentation</a>やmonoのリポジトリの各docsディレクトリにあるテキストに目を通してからの方が気持ち理解が早いかなと思います。以上です。</p>
+
+<p><a href="http://atsushieno.hatenablog.com/entry/2014/12/11/000240">11日目はmcsの最新情報と今後の展望について</a>です。とても気になります。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <small>
+          &copy; 2019 Hirokazu Uzu.
+          Powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.
+        </small>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
+
