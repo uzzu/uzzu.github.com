@@ -9,7 +9,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet"> 
 
-        <title>Kotlin Multi Platform Project Boilerplateを作った&#34;</title>
+        <title>Kotlin Multi Platform Project Boilerplateを作った</title>
 
         <link rel="stylesheet" href="/css/stylesheet.css">
     </head>
@@ -44,7 +44,7 @@
 
 
 <div class="blog-post">
-  <h1>Kotlin Multi Platform Project Boilerplateを作った&#34;</h1>
+  <h1>Kotlin Multi Platform Project Boilerplateを作った</h1>
   <div class="blog-post-subheader">
     <time>04 Jan 2019</time>
   </div>
@@ -70,15 +70,15 @@
 
 <p>Kotlin/Native pluginが <code>GRADLE_METADATA</code> 非対応の為、settings.gradle.kts上ではコメントアウトしてます。Kotlin/Native使わない場合はsubproject削除の際こちらのコメントアウトを外しましょう。</p>
 
-<p>root project上のbuildscript blockをなくしたかったけど、これはそもそものGradle Pluginの作りが古いようだ？まあそもそもpluginManagementがそもそもexperimentalだししょうがない。</p>
+<p>root project上のbuildscript blockをなくしたかったけど、これはそもそものGradle Pluginの作りが古いようだ？まあそもそもpluginManagementがexperimentalだししょうがない。</p>
 
 <p>Unit Testにはkotlin.test、kotlinx.coroutines.test、Junit5、Mockk、assertkを積んでいます。assertkはKotlin/Native対応中なので、compileTestを無効にしています。JS環境ではJUnit TestはMochaに、(無効にしてるけど)iOSではテストアプリをxcrunでシミュレータ実行します。</p>
 
-<p>残念ながらまだandroidx.testが動かんのですが、普通にJUnit5テスト書ければ一旦まあいいでしょう。multidex周りのあれでまあ気が向いたらやるだけだけど、自分には不要なんでやる気はそんなにない(example projectは別途作るわけだし)</p>
+<p>残念ながらまだandroidx.testが動かんのですが、普通にJUnit5テスト書ければ一旦まあいいでしょう。multidex周りのあれでまあ気が向いたらやるだけだけど、自分には不要なんでやる気はそんなにない(example projectでのandroidTestは別途作るわけだし)</p>
 
 <p>取り急ぎこれで自分は快適にやれそうな雰囲気はある。色々やり始めるとダメかもしれないけど。</p>
 
-<p>なんか他書き忘れがあったら追記するけど、スマフォ入力疲れた。お口に合えばご自由にコピってどうぞ。</p>
+<p>なんか他書き忘れがあったら追記するけど、スマフォ入力疲れた。ご自由にコピってどうぞ。</p>
   </div>
 </div>
 <div id="disqus_thread"></div>
