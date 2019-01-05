@@ -11,7 +11,7 @@
     <atom:link href="/post.html" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>kotlinx.serialization.json利用時kotlinx-serialization pluginを使用しない</title>
+      <title>kotlinx.serialization/JSON利用時にkotlinx-serialization pluginを使用しない</title>
       <link>https://uzzu.github.io/post/kotlin-json-serialization-mini.html</link>
       <pubDate>Sat, 05 Jan 2019 00:00:00 +0900</pubDate>
       
