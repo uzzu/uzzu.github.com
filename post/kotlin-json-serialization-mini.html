@@ -55,7 +55,7 @@
 
 <p>0.9.1 以前の場合、 <code>kotlinx-serialization-runtime-common</code> には <a href="https://github.com/Kotlin/kotlinx.serialization/blob/master/runtime/common/src/main/kotlin/kotlinx/serialization/json/JsonBuilder.kt">JSON builder</a>と<a href="https://github.com/Kotlin/kotlinx.serialization/blob/master/runtime/common/src/main/kotlin/kotlinx/serialization/json/JsonTreeParser.kt">JsonTreeParser#parse</a>が含まれています。JsonArrayな文字列を <code>JsonTreeParser#parse</code> する事ができない制約があうものの、これらを使ってある程度JsonObject/JsonArrayと同等の事ができます。runtimeだけ使う場合はannotation processorも未使用なので、 <code>kotlinx-serialization</code> Gradle Pluginの追加は不要で、runtimeの依存関係だけ解決すれば良いです。</p>
 
-<p>0.10.0-eap1からは <code>JsonTreeParser#parse</code> は非推奨になっており、代わりに <code>Json#parse</code> を使用します。こちらではJsonArrayな文字列が取り扱えない問題も解決しています。尚、eapではKotlin version 1.3.20-eap-xxを使用しているので、 <code>kotlin-stdlib</code> の依存解決をお忘れなきよう。</p>
+<p>0.10.0-eap-1からは <code>JsonTreeParser#parse</code> は非推奨になっており、代わりに <code>Json#parse</code> を使用します。こちらではJsonArrayな文字列が取り扱えない問題も解決しています。尚、eapではKotlin version 1.3.20-eap-xxを使用しているので、 <code>kotlin-stdlib</code> の依存解決をお忘れなきよう。</p>
 
 <p>最初この存在を知らずJSONパーサを書き始めてしまって、ふと我に返りソースを読み始めたらありました。そりゃそうだよね。BSON、Protobufも使わないときは使わないので、さらにminimumなruntimeにしたくなったら独立したライブラリを作るかもしれない。</p>
 
