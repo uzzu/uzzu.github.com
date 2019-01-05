@@ -11,11 +11,11 @@
     <atom:link href="/" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>kotlinx.serializationでJSON利用時にGradle Pluginを使用しない</title>
-      <link>https://uzzu.github.io/post/kotlin-json-serialization-without-gradle-plugin.html</link>
+      <title>kotlinx.serializationでJSON利用時にkotlin-serialization pluginを使用しない</title>
+      <link>https://uzzu.github.io/post/kotlin-json-serialization-mini.html</link>
       <pubDate>Sat, 05 Jan 2019 00:00:00 +0900</pubDate>
       
-      <guid>https://uzzu.github.io/post/kotlin-json-serialization-without-gradle-plugin.html</guid>
+      <guid>https://uzzu.github.io/post/kotlin-json-serialization-mini.html</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/Kotlin/kotlinx.serialization&#34;&gt;kotlinx.serialization&lt;/a&gt;は書いて字の通りserialize/deserializeライブラリで、Multiplatformサポートと、フォーマットとしてJSON、CBOR、Protobufをサポートしています。バージョンが0系ということでinterfaceに変更が入る可能性はあるけど、まあ使わなければなんとやら。&lt;/p&gt;</description>
     </item>
     
