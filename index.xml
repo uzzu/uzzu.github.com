@@ -7,8 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 05 Jan 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0900</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Kotlin MPPでのcoroutines test</title>
+      <link>https://uzzu.github.io/post/mpp-coroutines-test-common.html</link>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/mpp-coroutines-test-common.html</guid>
+      <description>&lt;p&gt;そのうちリリースされると思うけど、まだっぽいのでメモ。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>kotlinx.serialization/JSON利用時にkotlinx-serialization pluginを使用しない</title>
