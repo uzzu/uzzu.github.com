@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet"> 
+
+        <title>集計したいクライアントログとは</title>
+
+        <link rel="stylesheet" href="/css/stylesheet.css">
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/post/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <span id="author-name">
+            <h6>Software Design, and my life.</h6>
+          </span>
+        </section>
+
+
+<div class="blog-post">
+  <h1>集計したいクライアントログとは</h1>
+  <div class="blog-post-subheader">
+    <time>13 Jan 2019</time>
+  </div>
+  <div class="blog-post-content">
+    <p>なんなんだ、を考える。
+あらゆるクライアントログを一般化する。結論はない。まだまだ考え中。</p>
+
+<h3 id="初期">初期</h3>
+
+<ul>
+<li>特定画面を開いた</li>
+<li>特定画面の読込が(一定の基準を元に)完了した</li>
+</ul>
+
+<h3 id="中期">中期</h3>
+
+<ul>
+<li>UIEvent
+
+<ul>
+<li>何かUIを操作した</li>
+</ul></li>
+<li>UIEventを元に実行されたタスクが(成功|失敗)した</li>
+<li>画面読込後一定時間が経過した</li>
+</ul>
+
+<h3 id="後期">後期</h3>
+
+<ul>
+<li>特定画面から離れた</li>
+<li>アプリケーションが終了した</li>
+</ul>
+
+<h3 id="ライフサイクル問わず">ライフサイクル問わず</h3>
+
+<ul>
+<li>3rd party製ライブラリ等外的要因のEvent</li>
+<li>Background実行されるタスクののEvent
+
+<ul>
+<li>開始、終了etc</li>
+<li>常時接続なストリームからのEvent</li>
+</ul></li>
+</ul>
+
+<h2 id="viewにクライアントログ仕込まない場合に何処に仕込むか">Viewにクライアントログ仕込まない場合に何処に仕込むか</h2>
+
+<p>一番のモチベーション。
+ログを仕込む実装が、Viewコードを汚染してはならない。
+Viewは純粋にViewの実装のみに集中できなければならない。</p>
+
+<p>では何処に仕込むか。</p>
+
+<ul>
+<li>UI Eventを起点とするCommandのpre-process</li>
+<li>画面読込を起点とするQueryResultのpost-process
+
+<ul>
+<li>ただし中身が必要かは場合による</li>
+</ul></li>
+<li>Commandの結果となるEventのpost-process</li>
+</ul>
+
+<h2 id="他">他</h2>
+
+<p>Sessionの概念は必要。ログ世界におけるSessionとは起点と終点があり、何かしらのEventを起点または終点とし、終点までのイベントを関連付ける。</p>
+
+<h2 id="どう一般化する">どう一般化する？</h2>
+
+<p>ライブラリでの提供は言語機能としてmethod hookが必須となる。refectionによる実現は流石にコストが高い。やりたくない。となるとフレームワークに組み込む必要がある。</p>
+
+<p>フレームワークに組み込むとした場合。ルールを書けばあとはViewに一切ログを仕込むコード書かずPresenterがなんとかしてくれる感じにできそうな気はする。
+multi-modules化がだるい。Eventに基づくログ収集のルールを記述するには、本来moduleの中に閉じていたEventをmodule外に出す必要がある。<a href="https://uzzu.github.io/post/distilling-viper-architecture.html">先日のブログ</a> にて記載したDefinitionsを軸に考えた場合、Eventを外に出せばDTOの一部のデータをmodule外に出す必要がでてくる。これは分かりにくい。Definitionsだけをまとめたmoduleを作るべきか。これもなかなかむずい。moduleの中に閉じていたDefinitionsを丸々外に出す場合のアプリケーション設計全体の学習コスト、理解可読性は正直あまり期待できない。</p>
+
+<p>ではannotation processingはどうか。annotation processingでログ抽出ポイントを定める。ルールを記述する。ルールを記述するとなるとやはりフレームワーク同様にEventをmodule外に出す必要が出てきてしまう…？</p>
+
+<p>本当にmodule外に出さなければいけないのか？それらの画面は関連づいているのだから、1つのmoduleに収めるのが本来は適切であると言える。ただ、moduleを細かく切り出すという行為がビジネス的価値を生み出す世界になっている。Androidのdynamic features等。それを考慮した場合、やはりmodule外に出さなければならない。この先はフレームワークの項に書いた事が追随してくる。</p>
+
+<p>ここまで考えると、やはりログコードをViewの中にベタに仕込むように書くのが正解なのか、という気になってくる。やりたい事に対して規模があまりにでかい。コードは汚いがベタに書くのは正解なのか。まだまだ考える必要がある。この先考える事としては、Definitionsにmodule名を記載してContract出力moduleをコントロールする、lint ruleを吐き出す(他moduleで使用しないようにする)等がある。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <small>
+          <p>&copy; 2019 Hirokazu Uzu.</p>
+          <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+          <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+        </small>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
+
