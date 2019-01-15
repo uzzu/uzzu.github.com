@@ -7,8 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 10 Jan 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Jan 2019 00:00:00 +0900</lastBuildDate>
     <atom:link href="/tags/kotlin.html" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Coroutinesの多重呼び出しの防止</title>
+      <link>https://uzzu.github.io/post/hot-coroutines.html</link>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/hot-coroutines.html</guid>
+      <description>&lt;p&gt;Rxの世界ではHot Observableをよく使っていたけど、Coroutinesでも使いたい。
+直近自分には2つの需要があるかなというところ。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;多重に &lt;code&gt;launch&lt;/code&gt; しない (GUIの連打防止をGUIの実装上でやるのが面倒)&lt;/li&gt;
+&lt;li&gt;多重に suspend functionを呼び出したくはないが、結果だけは欲しい&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;というわけで作ってみました。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Kotlin MPPでのcoroutines test</title>
