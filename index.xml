@@ -76,6 +76,15 @@
     </item>
     
     <item>
+      <title>GroovyBuilderの使い所</title>
+      <link>https://uzzu.github.io/post/gradle-groovy-builder.html</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/gradle-groovy-builder.html</guid>
+      <description>&lt;p&gt;Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Distilling VIPER pattern</title>
       <link>https://uzzu.github.io/post/distilling-viper-architecture.html</link>
       <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
@@ -183,28 +192,6 @@ a)力技な方法と、b)fluintの機能を利用する方法があります。�
       <guid>https://uzzu.github.io/post/test.html</guid>
       <description>麻婆豆腐
  ほむ ほむほむ ほむほむほむ  </description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://uzzu.github.io/about.html</link>
-      <pubDate>Sat, 25 Mar 1989 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.github.io/about.html</guid>
-      <description>&lt;p&gt;Hirokazu Uzu&lt;/p&gt;
-
-&lt;p&gt;Software Designer for Mobile Application. Hands-on Domain Driven Modeler.&lt;/p&gt;
-
-&lt;p&gt;ソフトウェア設計大好き。仕事はクライアントサイドが中心。近年はモバイルアプリ。&lt;/p&gt;
-
-&lt;p&gt;ドメイン駆動設計関連技術(主に戦略面)に関心があるが、サーバサイドはあまり好きではない。&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Twitter: &lt;a href=&#34;https://twitter.com/uzzu&#34;&gt;@uzzu&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Github: &lt;a href=&#34;https://github.com/uzzu&#34;&gt;@uzzu&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;SpeakerDeck: &lt;a href=&#34;https://speakerdeck.com/uzzu&#34;&gt;@uzzu&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;他サービスでも大体uzzu, uzzucoといった名前で活動している。&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     
   </channel>

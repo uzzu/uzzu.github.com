@@ -76,6 +76,15 @@
     </item>
     
     <item>
+      <title>GroovyBuilderの使い所</title>
+      <link>https://uzzu.github.io/post/gradle-groovy-builder.html</link>
+      <pubDate>Tue, 01 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/gradle-groovy-builder.html</guid>
+      <description>&lt;p&gt;Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Distilling VIPER pattern</title>
       <link>https://uzzu.github.io/post/distilling-viper-architecture.html</link>
       <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
