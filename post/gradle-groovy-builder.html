@@ -46,18 +46,18 @@
 <div class="blog-post">
   <h1>GroovyBuilderの使い所</h1>
   <div class="blog-post-subheader">
-    <time>01 Jan 2019</time>
+    <time>29 Jan 2019</time>
   </div>
   <div class="blog-post-content">
     <p>Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。</p>
 
 <p>Gradle Kotlin DSLで汎用的なビルドスクリプトを書く際はbuildSrcに書く事が多いと思いますが、Gradle Kotlin DSLが自動生成するDSLは使用できず、且つ素の状態で非標準なpluginのAPIを完全に型安全に使用する事はできません。</p>
 
-<p>その際、pluginの依存関係をbuildSrc上で一貫して解決する、或いはbuildSrcは素の状態でやっていく2つの選択肢が考えられます。buildSrcは何でもできてしまうので、一定ルールを設けながらやっていけばどちらでも良いですが、素の状態に近い方が学習コストは低いのでいまいまは後者を考えます。後者の場合に役に立つのがGroovyBuilderです。</p>
+<p>その際、pluginの依存関係をbuildSrc上で一貫して解決する、或いはbuildSrcは素の状態でやっていく2つの選択肢が考えられます(中途半端な状態での管理はしんどいので)。buildSrcは何でもできてしまうので、一定ルールを設けながらやっていけばどちらでも良いですが、素の状態に近い方が学習コストは低いのでいまいまは後者を考えます。後者の場合に役に立つのがGroovyBuilderです。</p>
 
 <p><a href="https://docs.gradle.org/current/userguide/kotlin_dsl.html#the_kotlin_dsl_groovy_builder">https://docs.gradle.org/current/userguide/kotlin_dsl.html#the_kotlin_dsl_groovy_builder</a></p>
 
-<p>サンプルコードは↑にあるので省略しますが、これを利用すると、Groovy DSLの挙動のままにビルドスクリプト上のコンポーネントにアクセスできます。Gradleのコンポーネントの大半は <code>Named</code> 及び <code>NamedDomainObjectContainer</code>  によるidentitiyの付与とコンテナ管理の強制よって秩序が保たれている為、reflectionの如く大半のコンポーネントにアクセスする事ができます。正直あんまり使いたくないと思いつつも、標準Gradle Kotlik DSLでサポートが追いついていないなどの問題で使う事があります。</p>
+<p>サンプルコードは↑にあるので省略しますが、これを利用すると、Groovy DSLの挙動のままにビルドスクリプト上のコンポーネントにアクセスできます。Gradleのコンポーネントの大半は <code>Named</code> 及び <code>NamedDomainObjectContainer</code>  によるidentitiyの付与とコンテナ管理の強制よって秩序が保たれている為、reflectionの如く大半のコンポーネントにアクセスする事ができます。なんでもできてしまうので正直あんまり使いたくないと思いつつも、Gradle Kotlin DSLでサポートが追いついていないなどの問題で使う事があります。</p>
 
 <p>使用例として、Kotlin MultiPlatform Project(以下MPP)のライブラリ配布におけるsourceJarの生成を考えます。MPPにおいてはプラットフォーム実装側のmodule(subproject etc&hellip;)のsourceJarにcommon moduleのソースと外部配信しないinternalなmoduleのソースを含める必要がありますが、各module毎にそのビルドスクリプトを書くのは冗長です。これを、buildSrcに持っていきつつ汎用化します。</p>
 
