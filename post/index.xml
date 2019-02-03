@@ -7,8 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 16 Jan 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0900</lastBuildDate>
     <atom:link href="/post.html" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>マルチエフェクターに移行した</title>
+      <link>https://uzzu.github.io/post/multi-effector.html</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/multi-effector.html</guid>
+      <description>&lt;p&gt;今まではコンパクトエフェクター使ってたけど、だいたい売ってマルチエフェクターに移行した。初めてのマルチで四苦八苦してる。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>GroovyBuilderの使い所</title>
+      <link>https://uzzu.github.io/post/gradle-groovy-builder.html</link>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/gradle-groovy-builder.html</guid>
+      <description>&lt;p&gt;Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Coroutinesの多重呼び出しの防止</title>
@@ -73,15 +91,6 @@
       
       <guid>https://uzzu.github.io/post/20190103.html</guid>
       <description>&lt;p&gt;なんとなくここ数年SNSはちょっと距離を置いて、Twitterではほどほどにまともな事を書く生活を送っていたけど、Twitterでほどほどにまともな事を書いても効果が薄いなという当たり前の結論に至った。昔から言ってるんだがーな事が視界に入って届いてないとかで一人で消耗しているとかそういう話。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>GroovyBuilderの使い所</title>
-      <link>https://uzzu.github.io/post/gradle-groovy-builder.html</link>
-      <pubDate>Tue, 01 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.github.io/post/gradle-groovy-builder.html</guid>
-      <description>&lt;p&gt;Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -182,16 +191,6 @@ Windowsって本当にかわいいですよね。痒いところに手が届か�
       <description>&lt;p&gt;FlexUnit4を利用する上でflash.display.Stageに依存する処理のテストを書きたいんだけど、&lt;br /&gt;
 TestクラスからどうやってStageオブジェクトを参照したりStageからのイベントを送出したら良いか分からない!&lt;br /&gt;
 a)力技な方法と、b)fluintの機能を利用する方法があります。後者をおすすめします。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>テスト</title>
-      <link>https://uzzu.github.io/post/test.html</link>
-      <pubDate>Sun, 30 Sep 2012 21:46:00 +0900</pubDate>
-      
-      <guid>https://uzzu.github.io/post/test.html</guid>
-      <description>麻婆豆腐
- ほむ ほむほむ ほむほむほむ  </description>
     </item>
     
   </channel>
