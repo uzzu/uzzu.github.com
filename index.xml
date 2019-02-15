@@ -7,8 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 16 Feb 2019 00:00:00 +0900</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>GradleのPluginManagementの仕組み</title>
+      <link>https://uzzu.github.io/post/new-gradle-plugin-api-management.html</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.github.io/post/new-gradle-plugin-api-management.html</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management&#34;&gt;https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;2.1ぐらいからincubatingな New Gradle Plugin APIのPluginManagementのResolutionStrategyをそろそろ理解する。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>マルチエフェクターに移行した</title>
@@ -180,17 +191,6 @@
       <description>&lt;p&gt;ようやく流行りのdotfiles運用に乗っけました。 dotfiles運用は本当に快適で、幸福に満ち溢れています。
 Windowsって本当にかわいいですよね。痒いところに手が届かないところがすごい好きです。現状、日常のほとんどの作業はゲストOSであるところのUbuntu上で行っているので、ホストOSであるWindows7をほとんど触っていないのですが、とはいえ、どうしてもWindows上で作業した方が早いケースがあったり、 Windows上にしかインストールできないソフトウェアがあることがまああるわけで、そういういざという時に最低限の編集が可能が環境がWindows上に存在しない、もしくは差異があるというのはいささか不便であります。&lt;br /&gt;
 で、この問題をどうしようかなと調べてたわけですが…&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>FlexUnit4でStageに依存するテストを書く</title>
-      <link>https://uzzu.github.io/post/stage-reference-in-flexunit4.html</link>
-      <pubDate>Wed, 09 Jan 2013 13:03:00 +0900</pubDate>
-      
-      <guid>https://uzzu.github.io/post/stage-reference-in-flexunit4.html</guid>
-      <description>&lt;p&gt;FlexUnit4を利用する上でflash.display.Stageに依存する処理のテストを書きたいんだけど、&lt;br /&gt;
-TestクラスからどうやってStageオブジェクトを参照したりStageからのイベントを送出したら良いか分からない!&lt;br /&gt;
-a)力技な方法と、b)fluintの機能を利用する方法があります。後者をおすすめします。&lt;/p&gt;</description>
     </item>
     
   </channel>
