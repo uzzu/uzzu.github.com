@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Zatsu on Uzzu::Blog</title>
-    <link>https://uzzu.github.io/tags/zatsu.html</link>
+    <link>https://uzzu.co/tags/zatsu.html</link>
     <description>Recent content in Zatsu on Uzzu::Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,19 +12,19 @@
     
     <item>
       <title>マルチエフェクターに移行した</title>
-      <link>https://uzzu.github.io/post/multi-effector.html</link>
+      <link>https://uzzu.co/post/multi-effector.html</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
       
-      <guid>https://uzzu.github.io/post/multi-effector.html</guid>
+      <guid>https://uzzu.co/post/multi-effector.html</guid>
       <description>&lt;p&gt;今まではコンパクトエフェクター使ってたけど、だいたい売ってマルチエフェクターに移行した。初めてのマルチで四苦八苦してる。&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>集計したいクライアントログとは</title>
-      <link>https://uzzu.github.io/post/distilling-client-log.html</link>
+      <link>https://uzzu.co/post/distilling-client-log.html</link>
       <pubDate>Sun, 13 Jan 2019 00:00:00 +0900</pubDate>
       
-      <guid>https://uzzu.github.io/post/distilling-client-log.html</guid>
+      <guid>https://uzzu.co/post/distilling-client-log.html</guid>
       <description>&lt;p&gt;なんなんだ、を考える。
 あらゆるクライアントログを一般化する。結論はない。まだまだ考え中。&lt;/p&gt;</description>
     </item>

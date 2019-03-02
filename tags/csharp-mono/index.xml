@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Csharp Mono on Uzzu::Blog</title>
-    <link>https://uzzu.github.io/tags/csharp-mono.html</link>
+    <link>https://uzzu.co/tags/csharp-mono.html</link>
     <description>Recent content in Csharp Mono on Uzzu::Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>monoのソースを読み始める話</title>
-      <link>https://uzzu.github.io/post/mono-reading.html</link>
+      <link>https://uzzu.co/post/mono-reading.html</link>
       <pubDate>Wed, 10 Dec 2014 00:00:00 +0900</pubDate>
       
-      <guid>https://uzzu.github.io/post/mono-reading.html</guid>
+      <guid>https://uzzu.co/post/mono-reading.html</guid>
       <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2014/csharp&#34;&gt;C# Advent Calendar 2014&lt;/a&gt;の10日目のエントリです。
 &lt;a href=&#34;http://tech.tanaka733.net/entry/must-load-user-profile-x509certificates2-ctor-with-bytearray-on-aspnet&#34;&gt;9日目はASP.NET/IIS環境での証明書の取り扱いにおけるノウハウ話でした。&lt;/a&gt;&lt;/p&gt;
 

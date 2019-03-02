@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Test on Uzzu::Blog</title>
-    <link>https://uzzu.github.io/tags/test.html</link>
+    <link>https://uzzu.co/tags/test.html</link>
     <description>Recent content in Test on Uzzu::Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>テスト</title>
-      <link>https://uzzu.github.io/post/test.html</link>
+      <link>https://uzzu.co/post/test.html</link>
       <pubDate>Sun, 30 Sep 2012 21:46:00 +0900</pubDate>
       
-      <guid>https://uzzu.github.io/post/test.html</guid>
+      <guid>https://uzzu.co/post/test.html</guid>
       <description>麻婆豆腐
  ほむ ほむほむ ほむほむほむ  </description>
     </item>

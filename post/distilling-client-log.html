@@ -117,7 +117,7 @@ Viewは純粋にViewの実装のみに集中できなければならない。</p
 <p>ライブラリでの提供は言語機能としてmethod hookが必須となる。refectionによる実現は流石にコストが高い。やりたくない。となるとフレームワークに組み込む必要がある。</p>
 
 <p>フレームワークに組み込むとした場合。ルールを書けばあとはViewに一切ログを仕込むコード書かずPresenterがなんとかしてくれる感じにできそうな気はする。
-multi-modules化がだるい。Eventに基づくログ収集のルールを記述するには、本来moduleの中に閉じていたEventをmodule外に出す必要がある。<a href="https://uzzu.github.io/post/distilling-viper-architecture.html">先日のブログ</a> にて記載したDefinitionsを軸に考えた場合、Eventを外に出せばDTOの一部のデータをmodule外に出す必要がでてくる。これは分かりにくい。Definitionsだけをまとめたmoduleを作るべきか。これもなかなかむずい。moduleの中に閉じていたDefinitionsを丸々外に出す場合のアプリケーション設計全体の学習コスト、理解可読性は正直あまり期待できない。</p>
+multi-modules化がだるい。Eventに基づくログ収集のルールを記述するには、本来moduleの中に閉じていたEventをmodule外に出す必要がある。<a href="/post/distilling-viper-architecture.html">先日のブログ</a> にて記載したDefinitionsを軸に考えた場合、Eventを外に出せばDTOの一部のデータをmodule外に出す必要がでてくる。これは分かりにくい。Definitionsだけをまとめたmoduleを作るべきか。これもなかなかむずい。moduleの中に閉じていたDefinitionsを丸々外に出す場合のアプリケーション設計全体の学習コスト、理解可読性は正直あまり期待できない。</p>
 
 <p>ではannotation processingはどうか。annotation processingでログ抽出ポイントを定める。ルールを記述する。ルールを記述するとなるとやはりフレームワーク同様にEventをmodule外に出す必要が出てきてしまう…？</p>
 

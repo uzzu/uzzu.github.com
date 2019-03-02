@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gradle Kotlin on Uzzu::Blog</title>
-    <link>https://uzzu.github.io/tags/gradle-kotlin.html</link>
+    <link>https://uzzu.co/tags/gradle-kotlin.html</link>
     <description>Recent content in Gradle Kotlin on Uzzu::Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>GroovyBuilderの使い所</title>
-      <link>https://uzzu.github.io/post/gradle-groovy-builder.html</link>
+      <link>https://uzzu.co/post/gradle-groovy-builder.html</link>
       <pubDate>Tue, 29 Jan 2019 00:00:00 +0900</pubDate>
       
-      <guid>https://uzzu.github.io/post/gradle-groovy-builder.html</guid>
+      <guid>https://uzzu.co/post/gradle-groovy-builder.html</guid>
       <description>&lt;p&gt;Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。&lt;/p&gt;</description>
     </item>
     
