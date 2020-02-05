@@ -11,7 +11,7 @@
     <atom:link href="/post.html" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Gradle Module MetaData便利</title>
+      <title>Gradle Module Metadata便利</title>
       <link>https://uzzu.co/post/gradle-module-metadata.html</link>
       <pubDate>Wed, 05 Feb 2020 00:00:00 +1830</pubDate>
       
@@ -46,7 +46,6 @@
         //
     }
 }
-
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; の依存関係を解決してくれます。&lt;/p&gt;

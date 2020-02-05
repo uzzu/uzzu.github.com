@@ -9,7 +9,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet"> 
 
-        <title>Gradle Module MetaData便利</title>
+        <title>Gradle Module Metadata便利</title>
 
         <link rel="stylesheet" href="/css/stylesheet.css">
     </head>
@@ -44,7 +44,7 @@
 
 
 <div class="blog-post">
-  <h1>Gradle Module MetaData便利</h1>
+  <h1>Gradle Module Metadata便利</h1>
   <div class="blog-post-subheader">
     <time>05 Feb 2020</time>
   </div>
@@ -79,7 +79,6 @@
         //
     }
 }
-
 </code></pre>
 
 <p>というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの <code>kotlinx-coroutines-core</code> の依存関係を解決してくれます。</p>
@@ -98,7 +97,7 @@
 
 <p>というわけです。</p>
 
-<p>module metadataの中身がどうなっているかは <code>~/.gradle/caches/modules-2/files-2.1/</code> に生のartifact群があるので、そこにある<code>.module</code> な拡張子のJSONファイルがあるので確認しましょう。利用する際も、commonMainだけに依存を書いてうまく解決しない際ここを確認すると、Gradle Module Metadataに対応しているか、あるいは利用しようとしているbuild targetに対応しているが分かります。</p>
+<p>module metadataの中身がどうなっているかは <code>~/.gradle/caches/modules-2/files-2.1/</code> に生のartifact群があるので、対象artifactの<code>.module</code> な拡張子のJSONファイルを確認しましょう。module metadataによる依存解決機能を利用する際も、commonMainだけに依存を書いて特定のbuild targetの依存ライブラリが解決できない場合、同ディレクトリ中の対象artifactを確認すると、Gradle Module Metadataに対応しているか、あるいは利用しようとしているbuild targetに対応しているが確認できます。</p>
 
 <p>Kotlin Multiplatform Libraryにおいてはplugin側が既に対応しているので、後はGradleのバージョンを上げるかfeature previewを有効にすると出力してくれます。module metadataを含むmaven publication nameは <code>kotlinMultiplatform</code> なので、これをハンドルしてartifact idを変更する事もできます。<a href="https://github.com/Kotlin/kotlinx.coroutines/blob/c5a42da5318bc468c63ddea270b326d47cb34f09/gradle/publish-bintray.gradle#L78">kotlinx-coroutines-core-nativeもgradle metadata artifactのidをリネームしてたんですね</a></p>
 
