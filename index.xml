@@ -7,8 +7,52 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 16 Feb 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +1830</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Gradle Module MetaData便利</title>
+      <link>https://uzzu.co/post/gradle-module-metadata.html</link>
+      <pubDate>Wed, 05 Feb 2020 00:00:00 +1830</pubDate>
+      
+      <guid>https://uzzu.co/post/gradle-module-metadata.html</guid>
+      <description>&lt;p&gt;Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。&lt;/p&gt;
+
+&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Why do libraries like Google Guava struggle with POM metadata and what does Gradle Module Metadata offer them?&lt;br&gt;&lt;br&gt;Find out in this new blog post about Gradle 6 dependency management: &lt;a href=&#34;https://t.co/VLdUWK6wSE&#34;&gt;https://t.co/VLdUWK6wSE&lt;/a&gt; &lt;a href=&#34;https://t.co/nsTwLQCx8h&#34;&gt;pic.twitter.com/nsTwLQCx8h&lt;/a&gt;&lt;/p&gt;&amp;mdash; Gradle (@gradle) &lt;a href=&#34;https://twitter.com/gradle/status/1220255795394248704?ref_src=twsrc%5Etfw&#34;&gt;January 23, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://junit.org/junit5/docs/current/release-notes/index.html#release-notes-5.6.0-overall-improvements&#34;&gt;JUnit5.6もサポートしましたね。&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Kotlin MPPで複数のNativeTarget(iosX64, linux64, etc&amp;hellip;)を対象としたライブラリなりアプリケーションを作成する中で &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; や
+ &lt;code&gt;kotlinx-serialization-runtime&lt;/code&gt; の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gradle&#34;&gt;kotlin {
+    //
+    // 略
+    //
+    sourceSets {
+        //
+        // 略
+        //
+        nativeMain {
+            dependsOn commonMain
+            dependencies {
+                implementation &#39;org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3-native-mt&#39;
+            }
+        }
+        iosX64Main.dependsOn nativeMain
+        linux64Main.dependsOn nativeMain
+        //
+        // 略
+        //
+    }
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; の依存関係を解決してくれます。&lt;/p&gt;
+
+&lt;p&gt;これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>GradleのPluginManagementの仕組み</title>
@@ -180,17 +224,6 @@
       <guid>https://uzzu.co/post/think-domain-driven.html</guid>
       <description>&lt;p&gt;昨年末にだらだらDCIに関する自分の考えを整理したくて身内で話していて、&lt;br /&gt;
 結論としては「DDDとDCIどちらもメンタルモデルに近づけるために機能してる点は変わらない。その先DDDあるいはDCIをフレームワークにするか、あるいは一部に取り入れるのか、そこは取組むドメインによって取捨選択だよね」というところに落ち着いたのだけれど、勿体無い内容な気がするので改めてブログに書くことにする。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>流行りのdotfiles運用をゲストOSとホストOS(Windows7)で共有する</title>
-      <link>https://uzzu.co/post/host-win7-and-guest-os-share-environment-of-dotfiles.html</link>
-      <pubDate>Wed, 16 Jan 2013 16:41:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/host-win7-and-guest-os-share-environment-of-dotfiles.html</guid>
-      <description>&lt;p&gt;ようやく流行りのdotfiles運用に乗っけました。 dotfiles運用は本当に快適で、幸福に満ち溢れています。
-Windowsって本当にかわいいですよね。痒いところに手が届かないところがすごい好きです。現状、日常のほとんどの作業はゲストOSであるところのUbuntu上で行っているので、ホストOSであるWindows7をほとんど触っていないのですが、とはいえ、どうしてもWindows上で作業した方が早いケースがあったり、 Windows上にしかインストールできないソフトウェアがあることがまああるわけで、そういういざという時に最低限の編集が可能が環境がWindows上に存在しない、もしくは差異があるというのはいささか不便であります。&lt;br /&gt;
-で、この問題をどうしようかなと調べてたわけですが…&lt;/p&gt;</description>
     </item>
     
   </channel>

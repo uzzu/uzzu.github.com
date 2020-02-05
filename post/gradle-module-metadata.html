@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet"> 
+
+        <title>Gradle Module MetaData便利</title>
+
+        <link rel="stylesheet" href="/css/stylesheet.css">
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/post/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <span id="author-name">
+            <h6>Software Design, and my life.</h6>
+          </span>
+        </section>
+
+
+<div class="blog-post">
+  <h1>Gradle Module MetaData便利</h1>
+  <div class="blog-post-subheader">
+    <time>05 Feb 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。</p>
+
+<p><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Why do libraries like Google Guava struggle with POM metadata and what does Gradle Module Metadata offer them?<br><br>Find out in this new blog post about Gradle 6 dependency management: <a href="https://t.co/VLdUWK6wSE">https://t.co/VLdUWK6wSE</a> <a href="https://t.co/nsTwLQCx8h">pic.twitter.com/nsTwLQCx8h</a></p>&mdash; Gradle (@gradle) <a href="https://twitter.com/gradle/status/1220255795394248704?ref_src=twsrc%5Etfw">January 23, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+
+<p><a href="https://junit.org/junit5/docs/current/release-notes/index.html#release-notes-5.6.0-overall-improvements">JUnit5.6もサポートしましたね。</a></p>
+
+<p>Kotlin MPPで複数のNativeTarget(iosX64, linux64, etc&hellip;)を対象としたライブラリなりアプリケーションを作成する中で <code>kotlinx-coroutines-core</code> や
+ <code>kotlinx-serialization-runtime</code> の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず</p>
+
+<pre><code class="language-gradle">kotlin {
+    //
+    // 略
+    //
+    sourceSets {
+        //
+        // 略
+        //
+        nativeMain {
+            dependsOn commonMain
+            dependencies {
+                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3-native-mt'
+            }
+        }
+        iosX64Main.dependsOn nativeMain
+        linux64Main.dependsOn nativeMain
+        //
+        // 略
+        //
+    }
+}
+
+</code></pre>
+
+<p>というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの <code>kotlinx-coroutines-core</code> の依存関係を解決してくれます。</p>
+
+<p>これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。</p>
+
+<p><a href="https://blog.gradle.org/gradle-metadata-1.0">https://blog.gradle.org/gradle-metadata-1.0</a></p>
+
+<p>↑を読めば答えが全て載ってますが、ざっと3行でまとめると</p>
+
+<ul>
+<li>ライブラリ開発者側でmodule metadataを含むartifactをpublishする</li>
+<li>ライブラリ利用者は対象のGradle versionを利用して(6.0未満ではsettings.gradleにて <code>enableFeaturePreview(&quot;GRADLE_METADATA&quot;)</code> する)、dependencies(DependencyHandlerScope)内で build targetのartifact idを直接指定するのではなく、module metadataを含むartifactのidを代わりに指定する</li>
+<li>Gradleが現在のbuild targetに合わせてよしなに依存関係をしてくれる</li>
+</ul>
+
+<p>というわけです。</p>
+
+<p>module metadataの中身がどうなっているかは <code>~/.gradle/caches/modules-2/files-2.1/</code> に生のartifact群があるので、そこにある<code>.module</code> な拡張子のJSONファイルがあるので確認しましょう。利用する際も、commonMainだけに依存を書いてうまく解決しない際ここを確認すると、Gradle Module Metadataに対応しているか、あるいは利用しようとしているbuild targetに対応しているが分かります。</p>
+
+<p>Kotlin Multiplatform Libraryにおいてはplugin側が既に対応しているので、後はGradleのバージョンを上げるかfeature previewを有効にすると出力してくれます。module metadataを含むmaven publication nameは <code>kotlinMultiplatform</code> なので、これをハンドルしてartifact idを変更する事もできます。<a href="https://github.com/Kotlin/kotlinx.coroutines/blob/c5a42da5318bc468c63ddea270b326d47cb34f09/gradle/publish-bintray.gradle#L78">kotlinx-coroutines-core-nativeもgradle metadata artifactのidをリネームしてたんですね</a></p>
+
+<p>もちろん全部が全部乗っかれるわけではない(AndroidだけどJUnit5したい等)のでその辺は適宜いい感じにやりましょう。
+MPPライブラリ開発者の方はignoreせずmodule metadata artifactもpublishしましょう。</p>
+
+<p>とにかく、Gradle scriptから冗長な依存関係の記述が消えて気持ちよくなった。これは良いものですね。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <small>
+          <p>&copy; 2020 Hirokazu Uzu.</p>
+          <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+          <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+        </small>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
+
