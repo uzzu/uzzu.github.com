@@ -1,5 +1,5 @@
 body {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Ubuntu Mono', monospace;
     margin: auto;
     max-width: 50em;
 }
@@ -78,6 +78,7 @@ pre {
   background-color: #efefef
 }
 
-footer  {
+footer {
   text-align: center;
+  font-size: 0.8rem;
 }
