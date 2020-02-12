@@ -7,13 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +1830</lastBuildDate>
+    <lastBuildDate>Tue, 11 Feb 2020 18:30:00 +0900</lastBuildDate>
     <atom:link href="/post.html" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>JDKをシュッと切り替える</title>
+      <link>https://uzzu.co/post/java-env.html</link>
+      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/post/java-env.html</guid>
+      <description>最近よくJavaの実行環境を切り替えるので、以下の雑shell scriptで凌いでいます。
+ $ javaenv /Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home $ javaenv 11 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home $ javaenv 1.8 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home  </description>
+    </item>
     
     <item>
       <title>Gradle Module Metadata便利</title>
       <link>https://uzzu.co/post/gradle-module-metadata.html</link>
-      <pubDate>Wed, 05 Feb 2020 00:00:00 +1830</pubDate>
+      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
       
       <guid>https://uzzu.co/post/gradle-module-metadata.html</guid>
       <description>&lt;p&gt;Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。&lt;/p&gt;
@@ -213,16 +223,6 @@
 &lt;a href=&#34;http://tech.tanaka733.net/entry/must-load-user-profile-x509certificates2-ctor-with-bytearray-on-aspnet&#34;&gt;9日目はASP.NET/IIS環境での証明書の取り扱いにおけるノウハウ話でした。&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;近年は&lt;a href=&#34;http://xamarin.com/&#34;&gt;Xamarin&lt;/a&gt;や&lt;a href=&#34;http://japan.unity3d.com/&#34;&gt;Unity3D&lt;/a&gt;がお盛んで、今年初旬に&lt;a href=&#34;https://mono-ue.github.io/&#34;&gt;mono for UnrealEngine&lt;/a&gt;が発表(2014年12月現在では辛い状態ですが)されたり等、何かとmonoのお世話になることが増えてきたんじゃないでしょうか。かくいう私もお世話になっているうちの1人です。お世話になっている訳ですから、その実装に興味を持ち始める人もいるんじゃないかなと思います。そこで本記事では、とっつきやすそうなところをなんとなく追っていきます。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>ドメインを巡るお話</title>
-      <link>https://uzzu.co/post/think-domain-driven.html</link>
-      <pubDate>Sat, 04 Jan 2014 08:53:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/think-domain-driven.html</guid>
-      <description>&lt;p&gt;昨年末にだらだらDCIに関する自分の考えを整理したくて身内で話していて、&lt;br /&gt;
-結論としては「DDDとDCIどちらもメンタルモデルに近づけるために機能してる点は変わらない。その先DDDあるいはDCIをフレームワークにするか、あるいは一部に取り入れるのか、そこは取組むドメインによって取捨選択だよね」というところに落ち着いたのだけれど、勿体無い内容な気がするので改めてブログに書くことにする。&lt;/p&gt;</description>
     </item>
     
   </channel>

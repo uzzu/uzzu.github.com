@@ -9,7 +9,7 @@
 
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet"> 
 
-        <title>Zatsu</title>
+        <title>JDKをシュッと切り替える</title>
 
         <link rel="stylesheet" href="/css/stylesheet.css">
     </head>
@@ -43,33 +43,48 @@
         </section>
 
 
-<section>
-  <ul class="posts_listing">
+<div class="blog-post">
+  <h1>JDKをシュッと切り替える</h1>
+  <div class="blog-post-subheader">
+    <time>11 Feb 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>最近よくJavaの実行環境を切り替えるので、以下の雑shell scriptで凌いでいます。</p>
+
+<script type="application/javascript" src="//gist.github.com/uzzu/c9311e7b450ff539f501ed6af5fa3359.js"></script>
+
+<pre><code>$ javaenv
+/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home
+
+$ javaenv 11
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home
+
+$ javaenv 1.8
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home
+</code></pre>
+
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
     
-    <li>
-      <div class="row">
-        <div class="d-none d-sm-block col-sm-3 date-time-title">
-          <time>03 Feb 2019</time>
-        </div>
-        <div class="col-sm date-time-title post">
-          <a href="/post/multi-effector.html">マルチエフェクターに移行した</a>
-        </div>
-      </div>
-    </li>
     
-    <li>
-      <div class="row">
-        <div class="d-none d-sm-block col-sm-3 date-time-title">
-          <time>13 Jan 2019</time>
-        </div>
-        <div class="col-sm date-time-title post">
-          <a href="/post/distilling-client-log.html">集計したいクライアントログとは</a>
-        </div>
-      </div>
-    </li>
     
-  </ul>
-</section>
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
       <footer>
         <hr>
