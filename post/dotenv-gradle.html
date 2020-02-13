@@ -91,9 +91,12 @@ env.HOGE_API_KEY.orNull()                   // 存在しない場合はnull
 
 <p>という訳で、Dotenv Gradleを利用する事でGradle build script上で簡単に環境変数を取り扱えるようになりました。</p>
 
-<p>この先、
-- <code>.env.template</code> を予め用意しておく
-- <code>.env</code> が存在しなければ、 <code>.env.template</code> の変数定義をもとに外部の設定データ管理ストレージから値を参照して <code>.env</code> を作成する</p>
+<p>この先:</p>
+
+<ul>
+<li><code>.env.template</code> を予め用意しておく</li>
+<li><code>.env</code> が存在しなければ、 <code>.env.template</code> の変数定義をもとに外部の設定データ管理ストレージから値を参照して <code>.env</code> を作成する</li>
+</ul>
 
 <p>といった事が出来るようになると、今まで通り秘匿値がVCS管理化にない状態を維持しつつ、ビルドに必要な環境変数は <code>.env.template</code> で網羅されており、Gradle build script上ではGradle Kotlin DSLを利用していれば入力補完も効いて便利、という状況になって良さそうですね。<a href="https://developer.android.com/studio/preview/features?hl=en#kts-compat">Android Studio 4.0からGradle Kotlin DSLがサポートされます。</a></p>
 
