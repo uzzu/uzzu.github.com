@@ -7,8 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 11 Feb 2020 18:30:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 13 Feb 2020 13:00:00 +0900</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Dotenv GradleでGradle build scriptにdotenvを導入する</title>
+      <link>https://uzzu.co/post/dotenv-gradle.html</link>
+      <pubDate>Thu, 13 Feb 2020 13:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/post/dotenv-gradle.html</guid>
+      <description>&lt;p&gt;一般的に、Gradle ScriptやGradle Plugin上で外部からの設定値を取り扱う際は Gradle PropertiesやCommand-line flags、System Propertiesの仕組みを利用します。それらから参照される &lt;code&gt;gradle.properties&lt;/code&gt; ファイルは、言いなりのままに(誰の?)設定を追加し続けると、秘匿値と秘匿する必要のない値が混在してしまい、加えて近年Gradle Plugin側からビルドに必要なパラメータとしてGradle Propertiesに設定する事を要求されるシーンが増えてきた為、結果的に &lt;code&gt;gradle.propeties&lt;/code&gt; を編集する機会が増えてきて、開くたびに視界に入る秘匿値に溜息をついてきました。秘匿値は分離して管理したい。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>JDKをシュッと切り替える</title>
@@ -211,18 +220,6 @@
 
 &lt;p&gt;ステートフルかつ何も恩恵が得られないとなれば、無限に繁殖するifとswitch-caseですね。ifはさておき、C#のswitch-caseは非常にシンプルなんですが、シンプルが故にかゆい所に手が届かなくて辛い。
 そもそも状態と条件分岐は○○モデルにしましょうよ！的な所で、&lt;a href=&#34;https://gist.github.com/uzzu/5412336c0532508dd17c&#34;&gt;参照型Enum&lt;/a&gt;を作ったりします。JavaのEnumっぽい何かですね。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>monoのソースを読み始める話</title>
-      <link>https://uzzu.co/post/mono-reading.html</link>
-      <pubDate>Wed, 10 Dec 2014 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/mono-reading.html</guid>
-      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2014/csharp&#34;&gt;C# Advent Calendar 2014&lt;/a&gt;の10日目のエントリです。
-&lt;a href=&#34;http://tech.tanaka733.net/entry/must-load-user-profile-x509certificates2-ctor-with-bytearray-on-aspnet&#34;&gt;9日目はASP.NET/IIS環境での証明書の取り扱いにおけるノウハウ話でした。&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;近年は&lt;a href=&#34;http://xamarin.com/&#34;&gt;Xamarin&lt;/a&gt;や&lt;a href=&#34;http://japan.unity3d.com/&#34;&gt;Unity3D&lt;/a&gt;がお盛んで、今年初旬に&lt;a href=&#34;https://mono-ue.github.io/&#34;&gt;mono for UnrealEngine&lt;/a&gt;が発表(2014年12月現在では辛い状態ですが)されたり等、何かとmonoのお世話になることが増えてきたんじゃないでしょうか。かくいう私もお世話になっているうちの1人です。お世話になっている訳ですから、その実装に興味を持ち始める人もいるんじゃないかなと思います。そこで本記事では、とっつきやすそうなところをなんとなく追っていきます。&lt;/p&gt;</description>
     </item>
     
   </channel>
