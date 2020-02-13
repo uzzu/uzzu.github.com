@@ -7,13 +7,13 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 05 Feb 2020 00:00:00 +1830</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 18:30:00 +0900</lastBuildDate>
     <atom:link href="/tags/kotlin.html" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Gradle Module Metadata便利</title>
       <link>https://uzzu.co/post/gradle-module-metadata.html</link>
-      <pubDate>Wed, 05 Feb 2020 00:00:00 +1830</pubDate>
+      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
       
       <guid>https://uzzu.co/post/gradle-module-metadata.html</guid>
       <description>&lt;p&gt;Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。&lt;/p&gt;
