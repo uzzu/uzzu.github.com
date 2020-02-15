@@ -17,7 +17,7 @@ body {
     text-decoration: underline;
 }
 
-#page-description {
+#page-title h6 {
     color: black;
     font-weight: normal;
     font-size: 0.8rem;
