@@ -13,18 +13,18 @@ body {
     font-size: 2.7rem;
 }
 
-.post a {
-    color: black;
-}
-
-#author-name h6 a {
-  color: black;
-  font-weight: normal;
-  font-size: small;
-}
-
 #page-title a:hover, .post a:hover {
     text-decoration: underline;
+}
+
+#page-description {
+    color: black;
+    font-weight: normal;
+    font-size: 0.8rem;
+}
+
+.post a {
+    color: black;
 }
 
 .date-time-title {
