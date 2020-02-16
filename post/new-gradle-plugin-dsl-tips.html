@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>New Gradle plugin DSLを使用するとビルドエラーになる場合のTIPS</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/post/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>New Gradle plugin DSLを使用するとビルドエラーになる場合のTIPS</h1>
+  <div class="blog-post-subheader">
+    <time>16 Feb 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>Gradle Pluginを導入する際、buildscript dependenciesかnew gradle plugin dslに統一したいですよね。
+前者は簡単なので、後者の方向けの記事です。</p>
+
+<p>例えばですが、ktlint-gradle pluginを導入する際、root projectにて</p>
+
+<pre><code class="language-kotlin">plugins {
+    id(&quot;org.jlleitschuh.gradle.ktlint&quot;) version &quot;9.2.0&quot;
+}
+
+subprojects {
+    apply(plugin = &quot;org.jlleitschuh.gradle.ktlint&quot;)
+    ktlint {
+        verbose.set(true)
+        android.set(true)
+        outputToConsole.set(true)
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        }
+        ignoreFailures.set(true)
+    }
+}
+</code></pre>
+
+<p>とし、subprojectにて</p>
+
+<pre><code class="language-kotlin">plugins {
+    kotlin(&quot;jvm&quot;) version &quot;1.3.61&quot;
+}
+</code></pre>
+
+<p>とすると、ビルドに失敗します。
+これは、Gradle Plugin自体が別のGradle Pluginに依存しており、かつ先にapplyされてしまった場合、
+別のPluginへの依存の解決方法によっては <code>NoClassDefFound</code> となってしまうためです。
+では、ktlint-gradleの依存解決方法を見てみましょう。</p>
+
+<p><a href="https://github.com/JLLeitschuh/ktlint-gradle/blob/44d7254a33aecb42590ec864078a331a91bb7a34/plugin/build.gradle.kts#L38">https://github.com/JLLeitschuh/ktlint-gradle/blob/44d7254a33aecb42590ec864078a331a91bb7a34/plugin/build.gradle.kts#L38</a></p>
+
+<p><code>compileOnly</code> となっていますね。つまり、ktlint-gradleはKotlin Gradle Pluginへの依存をコンパイル時のみ解決し、artifactの依存関係には含めないので、上記のgradle scriptの記述ではKotlin Gradle Pluginに含まれているクラスを解決できない、というわけです。</p>
+
+<p>このような場合、root projectにおいて</p>
+
+<pre><code class="language-kotlin">plugins {
+    kotlin(&quot;jvm&quot;) version &quot;1.3.61&quot; apply false
+    id(&quot;org.jlleitschuh.gradle.ktlint&quot;) version &quot;9.2.0&quot;
+}
+
+subprojects {
+    apply(plugin = &quot;org.jlleitschuh.gradle.ktlint&quot;)
+    ktlint {
+        verbose.set(true)
+        android.set(true)
+        outputToConsole.set(true)
+        reporters {
+            reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+        }
+        ignoreFailures.set(true)
+    }
+}
+</code></pre>
+
+<p>とし、subprojectにて</p>
+
+<pre><code class="language-kotlin">plugins {
+    kotlin(&quot;jvm&quot;)
+}
+</code></pre>
+
+<p>とすると、無事にビルドが通ります。</p>
+
+<ul>
+<li>Pluginをroot projectで解決する
+
+<ul>
+<li>root projectには必要ないので <code>apply false</code> する</li>
+</ul></li>
+<li>subprojectでは同Pluginのversionを指定しない
+
+<ul>
+<li>rootprojectにて指定済の為。指定するとビルドエラーになる。</li>
+<li>pluginManagement DSLによる解決もありだが、個人的には好みではない。</li>
+</ul></li>
+</ul>
+
+<p>このやり方が実質buildscript dependenciesの置き換えになるんでしょうか？
+本記事の例はKotlin Gradle Pluginでしたが、Android Gradle PluginやGoogle Services Gradle Pluginを利用していると本記事の修正前の症状に陥りがちで、
+やむを得ずbuildscript dependenciesを使用する事がありました。解決できるといいですね。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+  </body>
+</html>
+
