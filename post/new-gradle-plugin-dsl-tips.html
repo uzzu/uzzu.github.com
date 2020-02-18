@@ -131,6 +131,10 @@ subprojects {
 <p>このやり方が実質buildscript dependenciesの置き換えになるんでしょうか？
 本記事の例はKotlin Gradle Pluginでしたが、Android Gradle PluginやGoogle Services Gradle Pluginを利用していると本記事の修正前の症状に陥りがちで、
 やむを得ずbuildscript dependenciesを使用する事がありました。解決できるといいですね。</p>
+
+<p>(追記) Android Gradle PluginとGoogle Services Pluginは相変わらずだめそうでした。
+二重でバージョン指定すればエラーになるし、subprojectでバージョンを指定しなければpluginManagement scopeではmodule format errorになるし
+Gradle 6.0からbuildSrcのオブジェクトをsettings.gradleから参照できなくなったので、現状詰みです。</p>
   </div>
 </div>
 <div id="disqus_thread"></div>
