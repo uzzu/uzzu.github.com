@@ -7,8 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 29 Jan 2019 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/gradle-kotlin.html" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>BintrayにGradle module metadataもアップロードする</title>
+      <link>https://uzzu.co/post/bintray-gradle-module-metadata.html</link>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/post/bintray-gradle-module-metadata.html</guid>
+      <description>gradle-bintray-plugin は現在、 Gradle module metadata のアップロードに対応していません。
+https://github.com/bintray/gradle-bintray-plugin/issues/229
+この issue 上で workaround がいくつか議論されていますが、私は maven-publish を利用する事にしました。 BintrayUploadTask に依存していると、 Kotlin Multiplatform Library 開発において後から build target を追加する際、追加したはずの build target の artifact をアップロードしてくれない、という別の問題も抱えていたためです。
+公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに maven-publish を利用するようにしました。 
+これで後から build target を追加した際も ./gradlew publish で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も metadata(common) artifact のみを dependencies に記述するだけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</description>
+    </item>
     
     <item>
       <title>GroovyBuilderの使い所</title>

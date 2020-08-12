@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Gradle Kotlin</title>
+        <title>BintrayにGradle module metadataもアップロードする</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
@@ -39,33 +39,44 @@
         </section>
 
 
-<section>
-  <ul class="posts_listing">
+<div class="blog-post">
+  <h1>BintrayにGradle module metadataもアップロードする</h1>
+  <div class="blog-post-subheader">
+    <time>12 Aug 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>gradle-bintray-plugin は現在、 Gradle module metadata のアップロードに対応していません。</p>
+
+<p><a href="https://github.com/bintray/gradle-bintray-plugin/issues/229">https://github.com/bintray/gradle-bintray-plugin/issues/229</a></p>
+
+<p>この issue 上で workaround がいくつか議論されていますが、私は maven-publish を利用する事にしました。 BintrayUploadTask に依存していると、 Kotlin Multiplatform Library 開発において後から build target を追加する際、追加したはずの build target の artifact をアップロードしてくれない、という別の問題も抱えていたためです。</p>
+
+<p>公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに <a href="https://github.com/uzzu/kortex/commit/89222eb11b0011e85ca0ca08e408be7ee0b2aacd">maven-publish を利用するようにしました。 </a></p>
+
+<p>これで後から build target を追加した際も <code>./gradlew publish</code> で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も metadata(common) artifact のみを dependencies に記述するだけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</p>
+
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
     
-    <li>
-      <div class="row">
-        <div class="d-none d-sm-block col-sm-3 date-time-title">
-          <time>12 Aug 2020</time>
-        </div>
-        <div class="col-sm date-time-title post">
-          <a href="/post/bintray-gradle-module-metadata.html">BintrayにGradle module metadataもアップロードする</a>
-        </div>
-      </div>
-    </li>
     
-    <li>
-      <div class="row">
-        <div class="d-none d-sm-block col-sm-3 date-time-title">
-          <time>29 Jan 2019</time>
-        </div>
-        <div class="col-sm date-time-title post">
-          <a href="/post/gradle-groovy-builder.html">GroovyBuilderの使い所</a>
-        </div>
-      </div>
-    </li>
     
-  </ul>
-</section>
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
       <footer>
         <hr>

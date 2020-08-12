@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://uzzu.co/post/bintray-gradle-module-metadata.html</loc>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/new-gradle-plugin-dsl-tips.html</loc>
     <lastmod>2020-02-16T15:00:00+09:00</lastmod>
   </url>
@@ -155,7 +160,7 @@
   
   <url>
     <loc>https://uzzu.co/tags/gradle-kotlin.html</loc>
-    <lastmod>2019-01-29T00:00:00+09:00</lastmod>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -179,7 +184,7 @@
   
   <url>
     <loc>https://uzzu.co/post.html</loc>
-    <lastmod>2020-02-16T15:00:00+09:00</lastmod>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -197,7 +202,7 @@
   
   <url>
     <loc>https://uzzu.co/</loc>
-    <lastmod>2020-02-16T15:00:00+09:00</lastmod>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
     <priority>0</priority>
   </url>
   

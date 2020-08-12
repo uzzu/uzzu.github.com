@@ -7,8 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 16 Feb 2020 15:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>BintrayにGradle module metadataもアップロードする</title>
+      <link>https://uzzu.co/post/bintray-gradle-module-metadata.html</link>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/post/bintray-gradle-module-metadata.html</guid>
+      <description>gradle-bintray-plugin は現在、 Gradle module metadata のアップロードに対応していません。
+https://github.com/bintray/gradle-bintray-plugin/issues/229
+この issue 上で workaround がいくつか議論されていますが、私は maven-publish を利用する事にしました。 BintrayUploadTask に依存していると、 Kotlin Multiplatform Library 開発において後から build target を追加する際、追加したはずの build target の artifact をアップロードしてくれない、という別の問題も抱えていたためです。
+公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに maven-publish を利用するようにしました。 
+これで後から build target を追加した際も ./gradlew publish で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も metadata(common) artifact のみを dependencies に記述するだけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</description>
+    </item>
     
     <item>
       <title>New Gradle plugin DSLを使用するとビルドエラーになる場合のTIPS</title>
@@ -195,26 +208,6 @@
 &lt;p&gt;まだ検証段階なのですが(本当はAdvent Calendarに間に合わせたかったけど無理があった)、クライアント設計パターンの1つである所のVIPERを蒸留することでいくつか見えてきた事があるので、書き残しておきます。&lt;/p&gt;
 
 &lt;p&gt;DDD関連用語: 蒸留、宣言的設計、進化する秩序、戦略的設計&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>ドメイン駆動設計の実践は実装だけがすべてじゃないよという話</title>
-      <link>https://uzzu.co/post/ddd-insight.html</link>
-      <pubDate>Tue, 22 Dec 2015 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/ddd-insight.html</guid>
-      <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2015/dwango2&#34;&gt;第2のドワンゴ Advent Calendar 2015&lt;/a&gt;の22日目のエントリです。&lt;/p&gt;
-
-&lt;p&gt;Goで&lt;a href=&#34;https://github.com/google/gxui&#34;&gt;gxui&lt;/a&gt;使って2画面ファイラー作ってワショーイしてたんですが、もうちょっと寝かしたいなと思ったので他の事書きます。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://uzzu.co/images/df_screenshot.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;こっちはこっちで追って公開したいですね。&lt;/p&gt;
-
-&lt;p&gt;というわけで本題です。&lt;/p&gt;
-
-&lt;p&gt;&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;はい。Evans本3部4部ちゃんと理解してない人はやり直しです / “ドメイン駆動設計の間違った方向性” &lt;a href=&#34;http://t.co/tcgxlWVONq&#34;&gt;http://t.co/tcgxlWVONq&lt;/a&gt;&lt;/p&gt;&amp;mdash; ソフトウェア設計おじさん (@uzzu) &lt;a href=&#34;https://twitter.com/uzzu/status/613990950231093248&#34;&gt;June 25, 2015&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
