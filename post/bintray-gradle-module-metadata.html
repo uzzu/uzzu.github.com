@@ -53,7 +53,7 @@
 
 <p>公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに <a href="https://github.com/uzzu/kortex/commit/89222eb11b0011e85ca0ca08e408be7ee0b2aacd">maven-publish を利用するようにしました。 </a></p>
 
-<p>これで後から build target を追加した際も <code>./gradlew publish</code> で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も metadata(common) artifact のみを dependencies に記述するだけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</p>
+<p>これで後から build target を追加した際も <code>./gradlew publish</code> で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も kotlinMultiplatform artifact のみを dependencies に記述するだけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</p>
 
   </div>
 </div>
