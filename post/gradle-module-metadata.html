@@ -4,7 +4,49 @@
         <title>Gradle Module Metadata便利</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        { template "_internal/opengraph.html" . }}
+        <meta property="og:title" content="Gradle Module Metadata便利" />
+<meta property="og:description" content="Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。
+
+Why do libraries like Google Guava struggle with POM metadata and what does Gradle Module Metadata offer them?Find out in this new blog post about Gradle 6 dependency management: https://t.co/VLdUWK6wSE pic.twitter.com/nsTwLQCx8h&mdash; Gradle (@gradle) January 23, 2020 
+
+JUnit5.6もサポートしましたね。
+
+Kotlin MPPで複数のNativeTarget(iosX64, linux64, etc&hellip;)を対象としたライブラリなりアプリケーションを作成する中で kotlinx-coroutines-core や
+ kotlinx-serialization-runtime の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず
+
+kotlin {
+    //
+    // 略
+    //
+    sourceSets {
+        //
+        // 略
+        //
+        nativeMain {
+            dependsOn commonMain
+            dependencies {
+                implementation &#39;org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3-native-mt&#39;
+            }
+        }
+        iosX64Main.dependsOn nativeMain
+        linux64Main.dependsOn nativeMain
+        //
+        // 略
+        //
+    }
+}
+
+
+というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの kotlinx-coroutines-core の依存関係を解決してくれます。
+
+これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/gradle-module-metadata.html" />
+
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
+<meta property="article:published_time" content="2020-02-05T18:30:00&#43;09:00"/>
+<meta property="article:modified_time" content="2020-02-05T18:30:00&#43;09:00"/>
+
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="@uzzu"/>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">

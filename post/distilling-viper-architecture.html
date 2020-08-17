@@ -4,7 +4,27 @@
         <title>Distilling VIPER pattern</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        { template "_internal/opengraph.html" . }}
+        <meta property="og:title" content="Distilling VIPER pattern" />
+<meta property="og:description" content="この記事はドメイン駆動設計 #1 Advent Calendar 2018 19日目の記事です。
+
+何かとDDDの話はサーバサイドエンジニアの話として取り上げられます。
+それもそのはず、サービスの根幹となるビジネスドメインのロジックはサーバサイド上組まれる事が多い事にあると思います。
+ではクライアントサイドは関係ないのかというとそんな事はなくて、Layered Architectureのように部分的にDDDの戦術的なエッセンスを導入する事はさることながら、サーバAPIがGraphQL、RESTful API、CQRS&#43;ESなアーキテクチャであれば同様にそれらに適した設計を検討する必要があります。ましてや、ゲーム開発ではより多角的に全く別のアプローチを取る事があります。
+つまり、開発するクライアントそのものの要件、規模、周辺環境(サーバサイド周辺技術等)の進化に合わせて、現在適用している設計パターンそのものを蒸留し、戦略的に進化させ続ける必要があります。問題領域(ドメイン)はどこにでもあるし、それは技術的なフレームワークにも当てはまります。Evans本16章、17章あたりの話です。
+
+一方で、構築するサービス全体を俯瞰して捉えた場合、クライアントはサーバサイドから見てDTOを橋渡し役として境界が分かれた状況にあります。
+現実的な話をすれば、蒸留という行為自体独立して必要に応じてやればいい、やっていくだけという話なのですが、それで結論づけてしまうと元も子もないのと、必要なタイミングで懐刀がないというのはよろしくないですし、クライアントアプリケーションをよりより素早く、より漸進的な設計で形にするヒントが隠されているかもしれません。
+
+まだ検証段階なのですが(本当はAdvent Calendarに間に合わせたかったけど無理があった)、クライアント設計パターンの1つである所のVIPERを蒸留することでいくつか見えてきた事があるので、書き残しておきます。
+
+DDD関連用語: 蒸留、宣言的設計、進化する秩序、戦略的設計" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/distilling-viper-architecture.html" />
+
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
+<meta property="article:published_time" content="2018-12-19T00:00:00&#43;09:00"/>
+<meta property="article:modified_time" content="2018-12-19T00:00:00&#43;09:00"/>
+
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="@uzzu"/>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">

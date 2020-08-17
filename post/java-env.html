@@ -4,7 +4,16 @@
         <title>JDKをシュッと切り替える</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        { template "_internal/opengraph.html" . }}
+        <meta property="og:title" content="JDKをシュッと切り替える" />
+<meta property="og:description" content="最近よくJavaの実行環境を切り替えるので、以下の雑shell scriptで凌いでいます。
+ $ javaenv /Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home $ javaenv 11 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home $ javaenv 1.8 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/java-env.html" />
+
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
+<meta property="article:published_time" content="2020-02-11T18:30:00&#43;09:00"/>
+<meta property="article:modified_time" content="2020-02-11T18:30:00&#43;09:00"/>
+
         <meta name="twitter:card" content="summary"/>
         <meta name="twitter:site" content="@uzzu"/>
         <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
