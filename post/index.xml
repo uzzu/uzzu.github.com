@@ -1,62 +1,62 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/post.html</link>
-    <description>Recent content in Posts on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/post.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/post.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>BintrayにGradle module metadataもアップロードする</title>
       <link>https://uzzu.co/post/bintray-gradle-module-metadata.html</link>
-      <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/bintray-gradle-module-metadata.html</guid>
       <description>gradle-bintray-plugin は現在、 Gradle module metadata のアップロードに対応していません。
 https://github.com/bintray/gradle-bintray-plugin/issues/229
 この issue 上で workaround がいくつか議論されていますが、私は maven-publish を利用する事にしました。 BintrayUploadTask に依存していると、 Kotlin Multiplatform Library 開発において後から build target を追加する際、追加したはずの build target の artifact をアップロードしてくれない、という別の問題も抱えていたためです。
 公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに maven-publish を利用するようにしました。 
 これで後から build target を追加した際も ./gradlew publish で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も kotlinMultiplatform artifact のみを dependencies に記述する( Kotlin Multiplatform Project の場合は commonMain の dependencies に記述する )だけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</description>
+      <guid isPermaLink="true">https://uzzu.co/post/bintray-gradle-module-metadata.html</guid>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-812-12T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>New Gradle plugin DSLを使用するとビルドエラーになる場合のTIPS</title>
       <link>https://uzzu.co/post/new-gradle-plugin-dsl-tips.html</link>
-      <pubDate>Sun, 16 Feb 2020 15:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/new-gradle-plugin-dsl-tips.html</guid>
       <description>&lt;p&gt;Gradle Pluginを導入する際、buildscript dependenciesかnew gradle plugin dslに統一したいですよね。
 前者は簡単なので、後者の方向けの記事です。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/new-gradle-plugin-dsl-tips.html</guid>
+      <pubDate>Sun, 16 Feb 2020 15:00:00 +0900</pubDate>
+      <atom:updated>2020-216-16T15:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Dotenv GradleでGradle build scriptにdotenvを導入する</title>
       <link>https://uzzu.co/post/dotenv-gradle.html</link>
-      <pubDate>Thu, 13 Feb 2020 13:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/dotenv-gradle.html</guid>
       <description>&lt;p&gt;一般的に、Gradle ScriptやGradle Plugin上で外部からの設定値を取り扱う際は Gradle PropertiesやCommand-line flags、System Propertiesの仕組みを利用します。それらから参照される &lt;code&gt;gradle.properties&lt;/code&gt; ファイルは、言いなりのままに(誰の?)設定を追加し続けると、秘匿値と秘匿する必要のない値が混在してしまい、加えて近年Gradle Plugin側からビルドに必要なパラメータとしてGradle Propertiesに設定する事を要求されるシーンが増えてきた為、結果的に &lt;code&gt;gradle.propeties&lt;/code&gt; を編集する機会が増えてきて、開くたびに視界に入る秘匿値に溜息をついてきました。秘匿値は分離して管理したい。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/dotenv-gradle.html</guid>
+      <pubDate>Thu, 13 Feb 2020 13:00:00 +0900</pubDate>
+      <atom:updated>2020-213-13T13:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>JDKをシュッと切り替える</title>
       <link>https://uzzu.co/post/java-env.html</link>
-      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/java-env.html</guid>
       <description>最近よくJavaの実行環境を切り替えるので、以下の雑shell scriptで凌いでいます。
  $ javaenv /Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home $ javaenv 11 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home $ javaenv 1.8 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home </description>
+      <guid isPermaLink="true">https://uzzu.co/post/java-env.html</guid>
+      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
+      <atom:updated>2020-211-11T18:30:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Gradle Module Metadata便利</title>
       <link>https://uzzu.co/post/gradle-module-metadata.html</link>
-      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/gradle-module-metadata.html</guid>
       <description>&lt;p&gt;Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;a href=&#34;https://junit.org/junit5/docs/current/release-notes/index.html#release-notes-5.6.0-overall-improvements&#34;&gt;JUnit5.6もサポートしましたね。&lt;/a&gt;&lt;/p&gt;
@@ -85,42 +85,42 @@ https://github.com/bintray/gradle-bintray-plugin/issues/229
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; の依存関係を解決してくれます。&lt;/p&gt;
 &lt;p&gt;これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/gradle-module-metadata.html</guid>
+      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
+      <atom:updated>2020-25-05T18:30:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>GradleのPluginManagementの仕組み</title>
       <link>https://uzzu.co/post/new-gradle-plugin-api-management.html</link>
-      <pubDate>Sat, 16 Feb 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/new-gradle-plugin-api-management.html</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management&#34;&gt;https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;2.1ぐらいからincubatingな New Gradle Plugin APIのPluginManagementのResolutionStrategyをそろそろ理解する。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/new-gradle-plugin-api-management.html</guid>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-216-16T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>マルチエフェクターに移行した</title>
       <link>https://uzzu.co/post/multi-effector.html</link>
-      <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/multi-effector.html</guid>
       <description>&lt;p&gt;今まではコンパクトエフェクター使ってたけど、だいたい売ってマルチエフェクターに移行した。初めてのマルチで四苦八苦してる。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/multi-effector.html</guid>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-23-03T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>GroovyBuilderの使い所</title>
       <link>https://uzzu.co/post/gradle-groovy-builder.html</link>
-      <pubDate>Tue, 29 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/gradle-groovy-builder.html</guid>
       <description>&lt;p&gt;Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/gradle-groovy-builder.html</guid>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-129-29T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Coroutinesの多重呼び出しの防止</title>
       <link>https://uzzu.co/post/hot-coroutines.html</link>
-      <pubDate>Wed, 16 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/hot-coroutines.html</guid>
       <description>&lt;p&gt;Rxの世界ではHot Observableをよく使っていたけど、Coroutinesでも使いたい。
 直近自分には2つの需要があるかなというところ。&lt;/p&gt;
 &lt;ul&gt;
@@ -128,61 +128,61 @@ https://github.com/bintray/gradle-bintray-plugin/issues/229
 &lt;li&gt;多重に suspend functionを呼び出したくはないが、結果だけは欲しい&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;というわけで作ってみました。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/hot-coroutines.html</guid>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-116-16T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>集計したいクライアントログとは</title>
       <link>https://uzzu.co/post/distilling-client-log.html</link>
-      <pubDate>Sun, 13 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/distilling-client-log.html</guid>
       <description>&lt;p&gt;なんなんだ、を考える。
 あらゆるクライアントログを一般化する。結論はない。まだまだ考え中。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/distilling-client-log.html</guid>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-113-13T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Kotlin MPPでのcoroutines test</title>
       <link>https://uzzu.co/post/mpp-coroutines-test-common.html</link>
-      <pubDate>Thu, 10 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/mpp-coroutines-test-common.html</guid>
       <description>&lt;p&gt;そのうちリリースされると思うけど、まだっぽいのでメモ。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/mpp-coroutines-test-common.html</guid>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-110-10T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>kotlinx.serialization/JSON利用時にkotlinx-serialization pluginを使用しない</title>
       <link>https://uzzu.co/post/kotlin-json-serialization-mini.html</link>
-      <pubDate>Sat, 05 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/kotlin-json-serialization-mini.html</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/Kotlin/kotlinx.serialization&#34;&gt;kotlinx.serialization&lt;/a&gt;は書いて字の通りserialize/deserializeライブラリで、Multiplatformサポートと、フォーマットとしてJSON、CBOR、Protobufをサポートしています。バージョンが0系ということでinterfaceに変更が入る可能性はあるけど、まあ使わなければなんとやら。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/kotlin-json-serialization-mini.html</guid>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-15-05T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Kotlin Multi Platform Project Boilerplateを作った</title>
       <link>https://uzzu.co/post/kotlin-mpp-boilerplate.html</link>
-      <pubDate>Fri, 04 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/kotlin-mpp-boilerplate.html</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/uzzu/kotlin-mpp-boilerplate&#34;&gt;https://github.com/uzzu/kotlin-mpp-boilerplate&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;スマフォからの投稿テストも兼ねて、kotlin-mpp-boilerplateを作ったので解説。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/kotlin-mpp-boilerplate.html</guid>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-14-04T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>年末年始あれこれ2018/2019</title>
       <link>https://uzzu.co/post/20190103.html</link>
-      <pubDate>Thu, 03 Jan 2019 12:33:01 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/20190103.html</guid>
       <description>&lt;p&gt;なんとなくここ数年SNSはちょっと距離を置いて、Twitterではほどほどにまともな事を書く生活を送っていたけど、Twitterでほどほどにまともな事を書いても効果が薄いなという当たり前の結論に至った。昔から言ってるんだがーな事が視界に入って届いてないとかで一人で消耗しているとかそういう話。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/20190103.html</guid>
+      <pubDate>Thu, 03 Jan 2019 12:33:01 +0900</pubDate>
+      <atom:updated>2019-13-03T12:33:0100&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Distilling VIPER pattern</title>
       <link>https://uzzu.co/post/distilling-viper-architecture.html</link>
-      <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/distilling-viper-architecture.html</guid>
       <description>&lt;p&gt;この記事は&lt;a href=&#34;https://qiita.com/advent-calendar/2018/ddd&#34;&gt;ドメイン駆動設計 #1 Advent Calendar 2018&lt;/a&gt; 19日目の記事です。&lt;/p&gt;
 &lt;p&gt;何かとDDDの話はサーバサイドエンジニアの話として取り上げられます。
 それもそのはず、サービスの根幹となるビジネスドメインのロジックはサーバサイド上組まれる事が多い事にあると思います。
@@ -192,7 +192,10 @@ https://github.com/bintray/gradle-bintray-plugin/issues/229
 現実的な話をすれば、蒸留という行為自体独立して必要に応じてやればいい、やっていくだけという話なのですが、それで結論づけてしまうと元も子もないのと、必要なタイミングで懐刀がないというのはよろしくないですし、クライアントアプリケーションをよりより素早く、より漸進的な設計で形にするヒントが隠されているかもしれません。&lt;/p&gt;
 &lt;p&gt;まだ検証段階なのですが(本当はAdvent Calendarに間に合わせたかったけど無理があった)、クライアント設計パターンの1つである所のVIPERを蒸留することでいくつか見えてきた事があるので、書き残しておきます。&lt;/p&gt;
 &lt;p&gt;DDD関連用語: 蒸留、宣言的設計、進化する秩序、戦略的設計&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/distilling-viper-architecture.html</guid>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
+      <atom:updated>2018-1219-19T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

@@ -1,23 +1,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>java on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/java.html</link>
-    <description>Recent content in java on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/java.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Tue, 11 Feb 2020 18:30:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/java.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>JDKをシュッと切り替える</title>
       <link>https://uzzu.co/post/java-env.html</link>
-      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/java-env.html</guid>
       <description>最近よくJavaの実行環境を切り替えるので、以下の雑shell scriptで凌いでいます。
  $ javaenv /Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home $ javaenv 11 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home $ javaenv 1.8 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home </description>
+      <guid isPermaLink="true">https://uzzu.co/post/java-env.html</guid>
+      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
+      <atom:updated>2020-211-11T18:30:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

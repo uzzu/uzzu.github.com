@@ -1,35 +1,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>gradle, kotlin on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/gradle-kotlin.html</link>
-    <description>Recent content in gradle, kotlin on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/gradle-kotlin.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/gradle-kotlin.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>BintrayにGradle module metadataもアップロードする</title>
       <link>https://uzzu.co/post/bintray-gradle-module-metadata.html</link>
-      <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/bintray-gradle-module-metadata.html</guid>
       <description>gradle-bintray-plugin は現在、 Gradle module metadata のアップロードに対応していません。
 https://github.com/bintray/gradle-bintray-plugin/issues/229
 この issue 上で workaround がいくつか議論されていますが、私は maven-publish を利用する事にしました。 BintrayUploadTask に依存していると、 Kotlin Multiplatform Library 開発において後から build target を追加する際、追加したはずの build target の artifact をアップロードしてくれない、という別の問題も抱えていたためです。
 公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに maven-publish を利用するようにしました。 
 これで後から build target を追加した際も ./gradlew publish で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も kotlinMultiplatform artifact のみを dependencies に記述する( Kotlin Multiplatform Project の場合は commonMain の dependencies に記述する )だけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</description>
+      <guid isPermaLink="true">https://uzzu.co/post/bintray-gradle-module-metadata.html</guid>
+      <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-812-12T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>GroovyBuilderの使い所</title>
       <link>https://uzzu.co/post/gradle-groovy-builder.html</link>
-      <pubDate>Tue, 29 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/gradle-groovy-builder.html</guid>
       <description>&lt;p&gt;Gradle Kotlin DSLで何かと役に立つGroovyBuilderの話です。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/gradle-groovy-builder.html</guid>
+      <pubDate>Tue, 29 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-129-29T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

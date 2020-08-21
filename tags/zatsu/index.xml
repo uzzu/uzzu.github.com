@@ -1,32 +1,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>zatsu on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/zatsu.html</link>
-    <description>Recent content in zatsu on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/zatsu.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/zatsu.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>マルチエフェクターに移行した</title>
       <link>https://uzzu.co/post/multi-effector.html</link>
-      <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/multi-effector.html</guid>
       <description>&lt;p&gt;今まではコンパクトエフェクター使ってたけど、だいたい売ってマルチエフェクターに移行した。初めてのマルチで四苦八苦してる。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/multi-effector.html</guid>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-23-03T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>集計したいクライアントログとは</title>
       <link>https://uzzu.co/post/distilling-client-log.html</link>
-      <pubDate>Sun, 13 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/distilling-client-log.html</guid>
       <description>&lt;p&gt;なんなんだ、を考える。
 あらゆるクライアントログを一般化する。結論はない。まだまだ考え中。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/distilling-client-log.html</guid>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-113-13T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

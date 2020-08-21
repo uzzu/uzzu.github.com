@@ -1,23 +1,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>dci, ddd on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/dci-ddd.html</link>
-    <description>Recent content in dci, ddd on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/dci-ddd.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Sat, 04 Jan 2014 08:53:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/dci-ddd.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>ドメインを巡るお話</title>
       <link>https://uzzu.co/post/think-domain-driven.html</link>
-      <pubDate>Sat, 04 Jan 2014 08:53:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/think-domain-driven.html</guid>
       <description>&lt;p&gt;昨年末にだらだらDCIに関する自分の考えを整理したくて身内で話していて、&lt;br&gt;
 結論としては「DDDとDCIどちらもメンタルモデルに近づけるために機能してる点は変わらない。その先DDDあるいはDCIをフレームワークにするか、あるいは一部に取り入れるのか、そこは取組むドメインによって取捨選択だよね」というところに落ち着いたのだけれど、勿体無い内容な気がするので改めてブログに書くことにする。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/think-domain-driven.html</guid>
+      <pubDate>Sat, 04 Jan 2014 08:53:00 +0900</pubDate>
+      <atom:updated>2014-14-04T08:53:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

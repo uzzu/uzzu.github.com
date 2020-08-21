@@ -1,24 +1,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>as3, flexunit4 on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/as3-flexunit4.html</link>
-    <description>Recent content in as3, flexunit4 on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/as3-flexunit4.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Wed, 09 Jan 2013 13:03:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/as3-flexunit4.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>FlexUnit4でStageに依存するテストを書く</title>
       <link>https://uzzu.co/post/stage-reference-in-flexunit4.html</link>
-      <pubDate>Wed, 09 Jan 2013 13:03:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/stage-reference-in-flexunit4.html</guid>
       <description>&lt;p&gt;FlexUnit4を利用する上でflash.display.Stageに依存する処理のテストを書きたいんだけど、&lt;br&gt;
 TestクラスからどうやってStageオブジェクトを参照したりStageからのイベントを送出したら良いか分からない!&lt;br&gt;
 a)力技な方法と、b)fluintの機能を利用する方法があります。後者をおすすめします。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/stage-reference-in-flexunit4.html</guid>
+      <pubDate>Wed, 09 Jan 2013 13:03:00 +0900</pubDate>
+      <atom:updated>2013-19-09T13:03:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kotlin on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/kotlin.html</link>
-    <description>Recent content in kotlin on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/kotlin.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Wed, 05 Feb 2020 18:30:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/kotlin.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>Gradle Module Metadata便利</title>
       <link>https://uzzu.co/post/gradle-module-metadata.html</link>
-      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/gradle-module-metadata.html</guid>
       <description>&lt;p&gt;Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;&lt;a href=&#34;https://junit.org/junit5/docs/current/release-notes/index.html#release-notes-5.6.0-overall-improvements&#34;&gt;JUnit5.6もサポートしましたね。&lt;/a&gt;&lt;/p&gt;
@@ -43,14 +43,14 @@
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; の依存関係を解決してくれます。&lt;/p&gt;
 &lt;p&gt;これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/gradle-module-metadata.html</guid>
+      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
+      <atom:updated>2020-25-05T18:30:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Coroutinesの多重呼び出しの防止</title>
       <link>https://uzzu.co/post/hot-coroutines.html</link>
-      <pubDate>Wed, 16 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/hot-coroutines.html</guid>
       <description>&lt;p&gt;Rxの世界ではHot Observableをよく使っていたけど、Coroutinesでも使いたい。
 直近自分には2つの需要があるかなというところ。&lt;/p&gt;
 &lt;ul&gt;
@@ -58,35 +58,38 @@
 &lt;li&gt;多重に suspend functionを呼び出したくはないが、結果だけは欲しい&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;というわけで作ってみました。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/hot-coroutines.html</guid>
+      <pubDate>Wed, 16 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-116-16T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Kotlin MPPでのcoroutines test</title>
       <link>https://uzzu.co/post/mpp-coroutines-test-common.html</link>
-      <pubDate>Thu, 10 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/mpp-coroutines-test-common.html</guid>
       <description>&lt;p&gt;そのうちリリースされると思うけど、まだっぽいのでメモ。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/mpp-coroutines-test-common.html</guid>
+      <pubDate>Thu, 10 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-110-10T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>kotlinx.serialization/JSON利用時にkotlinx-serialization pluginを使用しない</title>
       <link>https://uzzu.co/post/kotlin-json-serialization-mini.html</link>
-      <pubDate>Sat, 05 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/kotlin-json-serialization-mini.html</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/Kotlin/kotlinx.serialization&#34;&gt;kotlinx.serialization&lt;/a&gt;は書いて字の通りserialize/deserializeライブラリで、Multiplatformサポートと、フォーマットとしてJSON、CBOR、Protobufをサポートしています。バージョンが0系ということでinterfaceに変更が入る可能性はあるけど、まあ使わなければなんとやら。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/kotlin-json-serialization-mini.html</guid>
+      <pubDate>Sat, 05 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-15-05T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>Kotlin Multi Platform Project Boilerplateを作った</title>
       <link>https://uzzu.co/post/kotlin-mpp-boilerplate.html</link>
-      <pubDate>Fri, 04 Jan 2019 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/kotlin-mpp-boilerplate.html</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://github.com/uzzu/kotlin-mpp-boilerplate&#34;&gt;https://github.com/uzzu/kotlin-mpp-boilerplate&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;スマフォからの投稿テストも兼ねて、kotlin-mpp-boilerplateを作ったので解説。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/kotlin-mpp-boilerplate.html</guid>
+      <pubDate>Fri, 04 Jan 2019 00:00:00 +0900</pubDate>
+      <atom:updated>2019-14-04T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

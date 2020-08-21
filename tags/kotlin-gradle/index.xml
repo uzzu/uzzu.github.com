@@ -1,22 +1,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kotlin, gradle on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/kotlin-gradle.html</link>
-    <description>Recent content in kotlin, gradle on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/kotlin-gradle.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Thu, 13 Feb 2020 13:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/kotlin-gradle.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>Dotenv GradleでGradle build scriptにdotenvを導入する</title>
       <link>https://uzzu.co/post/dotenv-gradle.html</link>
-      <pubDate>Thu, 13 Feb 2020 13:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/dotenv-gradle.html</guid>
       <description>&lt;p&gt;一般的に、Gradle ScriptやGradle Plugin上で外部からの設定値を取り扱う際は Gradle PropertiesやCommand-line flags、System Propertiesの仕組みを利用します。それらから参照される &lt;code&gt;gradle.properties&lt;/code&gt; ファイルは、言いなりのままに(誰の?)設定を追加し続けると、秘匿値と秘匿する必要のない値が混在してしまい、加えて近年Gradle Plugin側からビルドに必要なパラメータとしてGradle Propertiesに設定する事を要求されるシーンが増えてきた為、結果的に &lt;code&gt;gradle.propeties&lt;/code&gt; を編集する機会が増えてきて、開くたびに視界に入る秘匿値に溜息をついてきました。秘匿値は分離して管理したい。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/dotenv-gradle.html</guid>
+      <pubDate>Thu, 13 Feb 2020 13:00:00 +0900</pubDate>
+      <atom:updated>2020-213-13T13:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

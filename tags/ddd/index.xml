@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ddd on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/ddd.html</link>
-    <description>Recent content in ddd on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/ddd.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Wed, 19 Dec 2018 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/ddd.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>Distilling VIPER pattern</title>
       <link>https://uzzu.co/post/distilling-viper-architecture.html</link>
-      <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/distilling-viper-architecture.html</guid>
       <description>&lt;p&gt;この記事は&lt;a href=&#34;https://qiita.com/advent-calendar/2018/ddd&#34;&gt;ドメイン駆動設計 #1 Advent Calendar 2018&lt;/a&gt; 19日目の記事です。&lt;/p&gt;
 &lt;p&gt;何かとDDDの話はサーバサイドエンジニアの話として取り上げられます。
 それもそのはず、サービスの根幹となるビジネスドメインのロジックはサーバサイド上組まれる事が多い事にあると思います。
@@ -24,21 +24,24 @@
 現実的な話をすれば、蒸留という行為自体独立して必要に応じてやればいい、やっていくだけという話なのですが、それで結論づけてしまうと元も子もないのと、必要なタイミングで懐刀がないというのはよろしくないですし、クライアントアプリケーションをよりより素早く、より漸進的な設計で形にするヒントが隠されているかもしれません。&lt;/p&gt;
 &lt;p&gt;まだ検証段階なのですが(本当はAdvent Calendarに間に合わせたかったけど無理があった)、クライアント設計パターンの1つである所のVIPERを蒸留することでいくつか見えてきた事があるので、書き残しておきます。&lt;/p&gt;
 &lt;p&gt;DDD関連用語: 蒸留、宣言的設計、進化する秩序、戦略的設計&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/distilling-viper-architecture.html</guid>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
+      <atom:updated>2018-1219-19T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
     <item>
       <title>ドメイン駆動設計の実践は実装だけがすべてじゃないよという話</title>
       <link>https://uzzu.co/post/ddd-insight.html</link>
-      <pubDate>Tue, 22 Dec 2015 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/ddd-insight.html</guid>
       <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2015/dwango2&#34;&gt;第2のドワンゴ Advent Calendar 2015&lt;/a&gt;の22日目のエントリです。&lt;/p&gt;
 &lt;p&gt;Goで&lt;a href=&#34;https://github.com/google/gxui&#34;&gt;gxui&lt;/a&gt;使って2画面ファイラー作ってワショーイしてたんですが、もうちょっと寝かしたいなと思ったので他の事書きます。&lt;/p&gt;
 &lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
 &lt;p&gt;こっちはこっちで追って公開したいですね。&lt;/p&gt;
 &lt;p&gt;というわけで本題です。&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/ddd-insight.html</guid>
+      <pubDate>Tue, 22 Dec 2015 00:00:00 +0900</pubDate>
+      <atom:updated>2015-1222-22T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>

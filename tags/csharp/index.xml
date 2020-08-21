@@ -1,26 +1,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>csharp on Uzzu::Blog</title>
+    <title>Uzzu::Blog</title>
+    <description>unko:Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/csharp.html</link>
-    <description>Recent content in csharp on Uzzu::Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <image>
+      <url>https://uzzu.co/images/avatar.jpg</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/csharp.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
     <lastBuildDate>Tue, 23 Dec 2014 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/csharp.html" rel="self" type="application/rss+xml" />
-    
     <item>
       <title>C#でパターンマッチング</title>
       <link>https://uzzu.co/post/switch-case-cs.html</link>
-      <pubDate>Tue, 23 Dec 2014 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/post/switch-case-cs.html</guid>
       <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2014/csharp&#34;&gt;C# Advent Calendar 2014&lt;/a&gt;の23日目のエントリです。
 &lt;a href=&#34;http://moririring.hatenablog.com/entry/2014/12/22/002337&#34;&gt;22日目はC#のIntの話でした。&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;クライアントアプリを書いていると何かとステートフルになり、かつ状態毎の描画もころころ変わります。さらに、WPFの恩恵を受けられないC#でかつ古いmono環境化(決してゲームエンジンは指していませんね?)では、かなり悲しみを背負う事になります。なにも悲しみを背負うので、Rxが再実装されたり、データバインディング機構を再実装したりします。辛い。&lt;/p&gt;
 &lt;p&gt;ステートフルかつ何も恩恵が得られないとなれば、無限に繁殖するifとswitch-caseですね。ifはさておき、C#のswitch-caseは非常にシンプルなんですが、シンプルが故にかゆい所に手が届かなくて辛い。
 そもそも状態と条件分岐は○○モデルにしましょうよ！的な所で、&lt;a href=&#34;https://gist.github.com/uzzu/5412336c0532508dd17c&#34;&gt;参照型Enum&lt;/a&gt;を作ったりします。JavaのEnumっぽい何かですね。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/switch-case-cs.html</guid>
+      <pubDate>Tue, 23 Dec 2014 00:00:00 +0900</pubDate>
+      <atom:updated>2014-1223-23T00:00:0000&#43;0900</atom:updated>
+      
     </item>
-    
   </channel>
 </rss>
