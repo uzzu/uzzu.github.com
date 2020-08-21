@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Uzzu::Blog</title>
@@ -7,65 +6,11 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 09 Jan 2013 13:03:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 Aug 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags.html" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>As3 Flexunit4</title>
-      <link>https://uzzu.co/tags/as3-flexunit4.html</link>
-      <pubDate>Wed, 09 Jan 2013 13:03:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/tags/as3-flexunit4.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Csharp</title>
-      <link>https://uzzu.co/tags/csharp.html</link>
-      <pubDate>Tue, 23 Dec 2014 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/tags/csharp.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Csharp Mono</title>
-      <link>https://uzzu.co/tags/csharp-mono.html</link>
-      <pubDate>Wed, 10 Dec 2014 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/tags/csharp-mono.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dci Ddd</title>
-      <link>https://uzzu.co/tags/dci-ddd.html</link>
-      <pubDate>Sat, 04 Jan 2014 08:53:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/tags/dci-ddd.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ddd</title>
-      <link>https://uzzu.co/tags/ddd.html</link>
-      <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/tags/ddd.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gradle</title>
-      <link>https://uzzu.co/tags/gradle.html</link>
-      <pubDate>Sun, 16 Feb 2020 15:00:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/tags/gradle.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gradle Kotlin</title>
+      <title>gradle, kotlin</title>
       <link>https://uzzu.co/tags/gradle-kotlin.html</link>
       <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
       
@@ -74,25 +19,16 @@
     </item>
     
     <item>
-      <title>Java</title>
-      <link>https://uzzu.co/tags/java.html</link>
-      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
+      <title>gradle</title>
+      <link>https://uzzu.co/tags/gradle.html</link>
+      <pubDate>Sun, 16 Feb 2020 15:00:00 +0900</pubDate>
       
-      <guid>https://uzzu.co/tags/java.html</guid>
+      <guid>https://uzzu.co/tags/gradle.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Kotlin</title>
-      <link>https://uzzu.co/tags/kotlin.html</link>
-      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
-      
-      <guid>https://uzzu.co/tags/kotlin.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Kotlin Gradle</title>
+      <title>kotlin, gradle</title>
       <link>https://uzzu.co/tags/kotlin-gradle.html</link>
       <pubDate>Thu, 13 Feb 2020 13:00:00 +0900</pubDate>
       
@@ -101,16 +37,70 @@
     </item>
     
     <item>
-      <title>Test</title>
-      <link>https://uzzu.co/tags/test.html</link>
-      <pubDate>Sun, 30 Sep 2012 21:46:00 +0900</pubDate>
+      <title>java</title>
+      <link>https://uzzu.co/tags/java.html</link>
+      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
       
-      <guid>https://uzzu.co/tags/test.html</guid>
+      <guid>https://uzzu.co/tags/java.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Virtualbox Windows7 Batchfile</title>
+      <title>kotlin</title>
+      <link>https://uzzu.co/tags/kotlin.html</link>
+      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/tags/kotlin.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>zatsu</title>
+      <link>https://uzzu.co/tags/zatsu.html</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/tags/zatsu.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ddd</title>
+      <link>https://uzzu.co/tags/ddd.html</link>
+      <pubDate>Wed, 19 Dec 2018 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/tags/ddd.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>csharp</title>
+      <link>https://uzzu.co/tags/csharp.html</link>
+      <pubDate>Tue, 23 Dec 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/tags/csharp.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>csharp, mono</title>
+      <link>https://uzzu.co/tags/csharp-mono.html</link>
+      <pubDate>Wed, 10 Dec 2014 00:00:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/tags/csharp-mono.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>dci, ddd</title>
+      <link>https://uzzu.co/tags/dci-ddd.html</link>
+      <pubDate>Sat, 04 Jan 2014 08:53:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/tags/dci-ddd.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>virtualbox, windows7, batchfile</title>
       <link>https://uzzu.co/tags/virtualbox-windows7-batchfile.html</link>
       <pubDate>Wed, 16 Jan 2013 16:41:00 +0900</pubDate>
       
@@ -119,11 +109,20 @@
     </item>
     
     <item>
-      <title>Zatsu</title>
-      <link>https://uzzu.co/tags/zatsu.html</link>
-      <pubDate>Sun, 03 Feb 2019 00:00:00 +0900</pubDate>
+      <title>as3, flexunit4</title>
+      <link>https://uzzu.co/tags/as3-flexunit4.html</link>
+      <pubDate>Wed, 09 Jan 2013 13:03:00 +0900</pubDate>
       
-      <guid>https://uzzu.co/tags/zatsu.html</guid>
+      <guid>https://uzzu.co/tags/as3-flexunit4.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>test</title>
+      <link>https://uzzu.co/tags/test.html</link>
+      <pubDate>Sun, 30 Sep 2012 21:46:00 +0900</pubDate>
+      
+      <guid>https://uzzu.co/tags/test.html</guid>
       <description></description>
     </item>
     

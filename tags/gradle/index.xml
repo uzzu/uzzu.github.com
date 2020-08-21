@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Gradle on Uzzu::Blog</title>
+    <title>gradle on Uzzu::Blog</title>
     <link>https://uzzu.co/tags/gradle.html</link>
-    <description>Recent content in Gradle on Uzzu::Blog</description>
+    <description>Recent content in gradle on Uzzu::Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -27,7 +26,6 @@
       
       <guid>https://uzzu.co/post/new-gradle-plugin-api-management.html</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management&#34;&gt;https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management&lt;/a&gt;&lt;/p&gt;
-
 &lt;p&gt;2.1ぐらいからincubatingな New Gradle Plugin APIのPluginManagementのResolutionStrategyをそろそろ理解する。&lt;/p&gt;</description>
     </item>
     

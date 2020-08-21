@@ -7,13 +7,9 @@
         <meta property="og:title" content="Gradle Module Metadata便利" />
 <meta property="og:description" content="Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。
 
-Why do libraries like Google Guava struggle with POM metadata and what does Gradle Module Metadata offer them?Find out in this new blog post about Gradle 6 dependency management: https://t.co/VLdUWK6wSE pic.twitter.com/nsTwLQCx8h&mdash; Gradle (@gradle) January 23, 2020 
-
 JUnit5.6もサポートしましたね。
-
 Kotlin MPPで複数のNativeTarget(iosX64, linux64, etc&hellip;)を対象としたライブラリなりアプリケーションを作成する中で kotlinx-coroutines-core や
- kotlinx-serialization-runtime の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず
-
+kotlinx-serialization-runtime の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず
 kotlin {
     //
     // 略
@@ -35,17 +31,13 @@ kotlin {
         //
     }
 }
-
-
 というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの kotlinx-coroutines-core の依存関係を解決してくれます。
-
 これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/gradle-module-metadata.html" />
-
-<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
-<meta property="article:published_time" content="2020-02-05T18:30:00&#43;09:00"/>
-<meta property="article:modified_time" content="2020-02-05T18:30:00&#43;09:00"/>
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
+<meta property="article:published_time" content="2020-02-05T18:30:00+09:00" />
+<meta property="article:modified_time" content="2020-02-05T18:30:00+09:00" />
 
         
         <meta name="twitter:card" content="summary"/>
@@ -98,60 +90,45 @@ kotlin {
   </div>
   <div class="blog-post-content">
     <p>Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。</p>
-
-<p><blockquote class="twitter-tweet"><p lang="en" dir="ltr">Why do libraries like Google Guava struggle with POM metadata and what does Gradle Module Metadata offer them?<br><br>Find out in this new blog post about Gradle 6 dependency management: <a href="https://t.co/VLdUWK6wSE">https://t.co/VLdUWK6wSE</a> <a href="https://t.co/nsTwLQCx8h">pic.twitter.com/nsTwLQCx8h</a></p>&mdash; Gradle (@gradle) <a href="https://twitter.com/gradle/status/1220255795394248704?ref_src=twsrc%5Etfw">January 23, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></p>
-
+<!-- raw HTML omitted -->
 <p><a href="https://junit.org/junit5/docs/current/release-notes/index.html#release-notes-5.6.0-overall-improvements">JUnit5.6もサポートしましたね。</a></p>
-
 <p>Kotlin MPPで複数のNativeTarget(iosX64, linux64, etc&hellip;)を対象としたライブラリなりアプリケーションを作成する中で <code>kotlinx-coroutines-core</code> や
- <code>kotlinx-serialization-runtime</code> の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず</p>
-
-<pre><code class="language-gradle">kotlin {
-    //
-    // 略
-    //
-    sourceSets {
-        //
-        // 略
-        //
-        nativeMain {
+<code>kotlinx-serialization-runtime</code> の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-gradle" data-lang="gradle">kotlin <span style="color:#f92672">{</span>
+    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// 略
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    sourceSets <span style="color:#f92672">{</span>
+        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 略
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>        nativeMain <span style="color:#f92672">{</span>
             dependsOn commonMain
-            dependencies {
-                implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3-native-mt'
-            }
-        }
-        iosX64Main.dependsOn nativeMain
-        linux64Main.dependsOn nativeMain
-        //
-        // 略
-        //
-    }
-}
-</code></pre>
-
-<p>というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの <code>kotlinx-coroutines-core</code> の依存関係を解決してくれます。</p>
-
+            dependencies <span style="color:#f92672">{</span>
+                implementation <span style="color:#e6db74">&#39;org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3-native-mt&#39;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        iosX64Main<span style="color:#f92672">.</span><span style="color:#a6e22e">dependsOn</span> nativeMain
+        linux64Main<span style="color:#f92672">.</span><span style="color:#a6e22e">dependsOn</span> nativeMain
+        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// 略
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">//
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの <code>kotlinx-coroutines-core</code> の依存関係を解決してくれます。</p>
 <p>これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。</p>
-
 <p><a href="https://blog.gradle.org/gradle-metadata-1.0">https://blog.gradle.org/gradle-metadata-1.0</a></p>
-
 <p>↑を読めば答えが全て載ってますが、ざっと3行でまとめると</p>
-
 <ul>
 <li>ライブラリ開発者側でmodule metadataを含むartifactをpublishする</li>
 <li>ライブラリ利用者は対象のGradle versionを利用して(6.0未満ではsettings.gradleにて <code>enableFeaturePreview(&quot;GRADLE_METADATA&quot;)</code> する)、dependencies(DependencyHandlerScope)内で build targetのartifact idを直接指定するのではなく、module metadataを含むartifactのidを代わりに指定する</li>
 <li>Gradleが現在のbuild targetに合わせてよしなに依存関係をしてくれる</li>
 </ul>
-
 <p>というわけです。</p>
-
 <p>module metadataの中身がどうなっているかは <code>~/.gradle/caches/modules-2/files-2.1/</code> に生のartifact群があるので、対象artifactの<code>.module</code> な拡張子のJSONファイルを確認しましょう。module metadataによる依存解決機能を利用する際も、commonMainだけに依存を書いて特定のbuild targetの依存ライブラリが解決できない場合、同ディレクトリ中の対象artifactを確認すると、Gradle Module Metadataに対応しているか、あるいは利用しようとしているbuild targetに対応しているが確認できます。</p>
-
 <p>Kotlin Multiplatform Libraryにおいてはplugin側が既に対応しているので、後はGradleのバージョンを上げるかfeature previewを有効にすると出力してくれます。module metadataを含むmaven publication nameは <code>kotlinMultiplatform</code> なので、これをハンドルしてartifact idを変更する事もできます。<a href="https://github.com/Kotlin/kotlinx.coroutines/blob/c5a42da5318bc468c63ddea270b326d47cb34f09/gradle/publish-bintray.gradle#L78">kotlinx-coroutines-core-nativeもgradle metadata artifactのidをリネームしてたんですね</a></p>
-
 <p>もちろん全部が全部乗っかれるわけではない(AndroidだけどJUnit5したい等)のでその辺は適宜いい感じにやりましょう。
 MPPライブラリ開発者の方はignoreせずmodule metadata artifactもpublishしましょう。</p>
-
 <p>とにかく、Gradle scriptから冗長な依存関係の記述が消えて気持ちよくなった。これは良いものですね。</p>
   </div>
 </div>

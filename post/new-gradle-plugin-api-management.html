@@ -6,14 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <meta property="og:title" content="GradleのPluginManagementの仕組み" />
 <meta property="og:description" content="https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management
-
 2.1ぐらいからincubatingな New Gradle Plugin APIのPluginManagementのResolutionStrategyをそろそろ理解する。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/new-gradle-plugin-api-management.html" />
-
-<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
-<meta property="article:published_time" content="2019-02-16T00:00:00&#43;09:00"/>
-<meta property="article:modified_time" content="2019-02-16T00:00:00&#43;09:00"/>
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
+<meta property="article:published_time" content="2019-02-16T00:00:00+09:00" />
+<meta property="article:modified_time" content="2019-02-16T00:00:00+09:00" />
 
         
         <meta name="twitter:card" content="summary"/>
@@ -66,55 +64,41 @@
   </div>
   <div class="blog-post-content">
     <p><a href="https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management">https://docs.gradle.org/5.2/userguide/plugins.html#sec:plugin_management</a></p>
-
 <p>2.1ぐらいからincubatingな New Gradle Plugin APIのPluginManagementのResolutionStrategyをそろそろ理解する。</p>
-
 <h2 id="plugin作成">Plugin作成</h2>
-
 <p>とりあえずPluginを実装します。はい。実装しました。</p>
-
 <p>ではPlugin配布の為のビルドスクリプトを書いていきます。　<code>java-gradle-plugin</code> のplugin applyをお忘れなく。まずはGradlePluginの設定です。
 Kotlin DSLですが、だいたいGroovyDSLなので良いでしょう。</p>
-
-<pre><code class="language-kotlin">gradlePlugin {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">gradlePlugin {
     plugins {
-        register(&quot;greatPlugin&quot;) {
-            id = &quot;com.github.uzzu.gradle.great&quot;
-            implementationClass = &quot;com.github.uzzu.gradle.GreatPlugin&quot;
+        register(<span style="color:#e6db74">&#34;greatPlugin&#34;</span>) {
+            id = <span style="color:#e6db74">&#34;com.github.uzzu.gradle.great&#34;</span>
+            implementationClass = <span style="color:#e6db74">&#34;com.github.uzzu.gradle.GreatPlugin&#34;</span>
         }
-        register(&quot;superPlugin&quot;) {
-            id = &quot;super-uzzu&quot;
-            implementationClass = &quot;com.github.uzzu.gradle.SuperPlugin&quot;
+        register(<span style="color:#e6db74">&#34;superPlugin&#34;</span>) {
+            id = <span style="color:#e6db74">&#34;super-uzzu&#34;</span>
+            implementationClass = <span style="color:#e6db74">&#34;com.github.uzzu.gradle.SuperPlugin&#34;</span>
         }
 }
-</code></pre>
-
-<p>デプロイスクリプトを書きます。GradlePluginPortalやその他maven repositoryに配布する場合はその記述が必要ですが今回は省略します。 <code>maven-publish</code> のplugin applyをお忘れなく。</p>
-
-<pre><code class="language-kotlin">group = &quot;com.github.uzzu.gradle.awesome&quot;
-version = &quot;1.0&quot;
+</code></pre></div><p>デプロイスクリプトを書きます。GradlePluginPortalやその他maven repositoryに配布する場合はその記述が必要ですが今回は省略します。 <code>maven-publish</code> のplugin applyをお忘れなく。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">group = <span style="color:#e6db74">&#34;com.github.uzzu.gradle.awesome&#34;</span>
+version = <span style="color:#e6db74">&#34;1.0&#34;</span>
 publishing {
     repositories {
         mavenLocal()
     }
 
     (publications) {
-        register(&quot;pluginMaven&quot;, MavenPublication::class) {
-            artifactId = &quot;awesome-plugin&quot;
+        register(<span style="color:#e6db74">&#34;pluginMaven&#34;</span>, MavenPublication<span style="color:#f92672">::</span><span style="color:#66d9ef">class</span>) {
+            artifactId = <span style="color:#e6db74">&#34;awesome-plugin&#34;</span>
         }
     }
 }
-</code></pre>
-
-<p>やりました。では <code>./gradlew publish</code> します。はい。しました。</p>
-
-<h2 id="plugin読込-解決">Plugin読込(解決)</h2>
-
+</code></pre></div><p>やりました。では <code>./gradlew publish</code> します。はい。しました。</p>
+<h2 id="plugin読込解決">Plugin読込(解決)</h2>
 <p>ではデプロイしたPluginを読み込んでみます。</p>
-
 <p>settings.gradle(.kts)にPluginManagementの記述をしていきます。 <code>enableFeaturePreview</code> を使用している場合はその下に書きます。</p>
-
-<pre><code class="language-kotlin">pluginManagement {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">pluginManagement {
     repositories {
         mavenLocal()
     }
@@ -122,109 +106,84 @@ publishing {
     resolutionStrategy {
     }
 }
-</code></pre>
-
-<p>書きました。では実際にprojectから読み込んでみます。</p>
-
-<pre><code class="language-kotlin">plugins {
-    id(&quot;com.github.uzzu.gradle.great&quot;) version &quot;1.0&quot;
-    id(&quot;super-uzzu&quot;) version &quot;1.0&quot;
+</code></pre></div><p>書きました。では実際にprojectから読み込んでみます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">plugins {
+    id(<span style="color:#e6db74">&#34;com.github.uzzu.gradle.great&#34;</span>) version <span style="color:#e6db74">&#34;1.0&#34;</span>
+    id(<span style="color:#e6db74">&#34;super-uzzu&#34;</span>) version <span style="color:#e6db74">&#34;1.0&#34;</span>
 }
-</code></pre>
-
-<p>読み込めました。</p>
-
+</code></pre></div><p>読み込めました。</p>
 <p>以下の形でも大丈夫です。</p>
-
-<pre><code class="language-kotlin">// settings.gradle.kts
-pluginManagement {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">// settings.gradle.kts
+</span><span style="color:#75715e"></span>pluginManagement {
     repositories {
         mavenLocal()
     }
 
     resolutionStrategy {
         eachPlugin {
-            when (requested.id.id) {
-                &quot;com.github.uzzu.gradle.great&quot;,
-                &quot;super-uzzu&quot; -&gt; {
-                    useVersion(&quot;1.0&quot;)
+            <span style="color:#66d9ef">when</span> (requested.id.id) {
+                <span style="color:#e6db74">&#34;com.github.uzzu.gradle.great&#34;</span>,
+                <span style="color:#e6db74">&#34;super-uzzu&#34;</span> -&gt; {
+                    useVersion(<span style="color:#e6db74">&#34;1.0&#34;</span>)
                 }
             }
         }
     }
 }
-</code></pre>
-
-<pre><code class="language-kotlin">// build.gradle.kts
-plugins {
-    id(&quot;com.github.uzzu.gradle.great&quot;)
-    id(&quot;super-uzzu&quot;)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">// build.gradle.kts
+</span><span style="color:#75715e"></span>plugins {
+    id(<span style="color:#e6db74">&#34;com.github.uzzu.gradle.great&#34;</span>)
+    id(<span style="color:#e6db74">&#34;super-uzzu&#34;</span>)
 }
-</code></pre>
-
-<p>従来のように <code>buildscript</code> の <code>classpath</code> を記述せずともPluginを読み込めました。そしてデプロイしたはずの <code>com.github.uzzu.gradle.awesome-plugin</code> の記述はありません。どういう理屈なのでしょうか。</p>
-
+</code></pre></div><p>従来のように <code>buildscript</code> の <code>classpath</code> を記述せずともPluginを読み込めました。そしてデプロイしたはずの <code>com.github.uzzu.gradle.awesome-plugin</code> の記述はありません。どういう理屈なのでしょうか。</p>
 <h2 id="色々覗いてみる">色々覗いてみる</h2>
-
 <p>まずはmaven repositoryを覗きます。</p>
-
 <p>やたら名前が長い感じのrepositoryになってます。POMも見てみます。</p>
-
 <h3 id="greatplugin">GreatPlugin</h3>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;    
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;    
-  &lt;groupId&gt;com.github.uzzu.gradle.great&lt;/groupId&gt;    
-  &lt;artifactId&gt;com.github.uzzu.gradle.great.gradle.plugin&lt;/artifactId&gt;    
-  &lt;version&gt;1.0&lt;/version&gt;    
-  &lt;packaging&gt;pom&lt;/packaging&gt;    
-  &lt;dependencies&gt;    
-    &lt;dependency&gt;    
-      &lt;groupId&gt;com.github.uzzu.gradle&lt;/groupId&gt;    
-      &lt;artifactId&gt;awesome-plugin&lt;/artifactId&gt;    
-      &lt;version&gt;1.0&lt;/version&gt;    
-    &lt;/dependency&gt;    
-  &lt;/dependencies&gt;    
-&lt;/project&gt; 
-</code></pre>
-
-<h3 id="superplugin">SuperPlugin</h3>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;groupId&gt;super-uzzu&lt;/groupId&gt;
-  &lt;artifactId&gt;super-uzzu.gradle.plugin&lt;/artifactId&gt;
-  &lt;version&gt;1.0&lt;/version&gt;
-  &lt;packaging&gt;pom&lt;/packaging&gt;
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-      &lt;groupId&gt;com.github.uzzu.gradle&lt;/groupId&gt;
-      &lt;artifactId&gt;awesome-plugin&lt;/artifactId&gt;
-      &lt;version&gt;1.0&lt;/version&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-&lt;/project&gt;
-</code></pre>
-
-<h3 id="awesomeplugin">AwesomePlugin</h3>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot; xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
-    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;groupId&gt;com.github.uzzu.gradle&lt;/groupId&gt;
-  &lt;artifactId&gt;awesome-plugin&lt;/artifactId&gt;
-  &lt;version&gt;1.0&lt;/version&gt;
-  &lt;dependencies&gt;
-    &lt;!-- (omitted) --&gt;
-  &lt;/dependencies&gt;
-&lt;/project&gt;
-</code></pre>
-
-<p>はーなるほど、POMのみのartifactを作って、そこでPlugin本体である所のAwesomeの依存を解決して読み込んでいる。AwesomePluginのjarの中を見るとこんな感じ</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>    
+<span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span> <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;modelVersion&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>    
+  <span style="color:#f92672">&lt;groupId&gt;</span>com.github.uzzu.gradle.great<span style="color:#f92672">&lt;/groupId&gt;</span>    
+  <span style="color:#f92672">&lt;artifactId&gt;</span>com.github.uzzu.gradle.great.gradle.plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>    
+  <span style="color:#f92672">&lt;version&gt;</span>1.0<span style="color:#f92672">&lt;/version&gt;</span>    
+  <span style="color:#f92672">&lt;packaging&gt;</span>pom<span style="color:#f92672">&lt;/packaging&gt;</span>    
+  <span style="color:#f92672">&lt;dependencies&gt;</span>    
+    <span style="color:#f92672">&lt;dependency&gt;</span>    
+      <span style="color:#f92672">&lt;groupId&gt;</span>com.github.uzzu.gradle<span style="color:#f92672">&lt;/groupId&gt;</span>    
+      <span style="color:#f92672">&lt;artifactId&gt;</span>awesome-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>    
+      <span style="color:#f92672">&lt;version&gt;</span>1.0<span style="color:#f92672">&lt;/version&gt;</span>    
+    <span style="color:#f92672">&lt;/dependency&gt;</span>    
+  <span style="color:#f92672">&lt;/dependencies&gt;</span>    
+<span style="color:#f92672">&lt;/project&gt;</span> 
+</code></pre></div><h3 id="superplugin">SuperPlugin</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0&#34;</span> <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span> <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;modelVersion&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>
+  <span style="color:#f92672">&lt;groupId&gt;</span>super-uzzu<span style="color:#f92672">&lt;/groupId&gt;</span>
+  <span style="color:#f92672">&lt;artifactId&gt;</span>super-uzzu.gradle.plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+  <span style="color:#f92672">&lt;version&gt;</span>1.0<span style="color:#f92672">&lt;/version&gt;</span>
+  <span style="color:#f92672">&lt;packaging&gt;</span>pom<span style="color:#f92672">&lt;/packaging&gt;</span>
+  <span style="color:#f92672">&lt;dependencies&gt;</span>
+    <span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>com.github.uzzu.gradle<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>awesome-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>1.0<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;/dependency&gt;</span>
+  <span style="color:#f92672">&lt;/dependencies&gt;</span>
+<span style="color:#f92672">&lt;/project&gt;</span>
+</code></pre></div><h3 id="awesomeplugin">AwesomePlugin</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">xsi:schemaLocation=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span> <span style="color:#a6e22e">xmlns=</span><span style="color:#e6db74">&#34;http://maven.apache.org/POM/4.0.0&#34;</span>
+    <span style="color:#a6e22e">xmlns:xsi=</span><span style="color:#e6db74">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span><span style="color:#f92672">&gt;</span>
+  <span style="color:#f92672">&lt;modelVersion&gt;</span>4.0.0<span style="color:#f92672">&lt;/modelVersion&gt;</span>
+  <span style="color:#f92672">&lt;groupId&gt;</span>com.github.uzzu.gradle<span style="color:#f92672">&lt;/groupId&gt;</span>
+  <span style="color:#f92672">&lt;artifactId&gt;</span>awesome-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
+  <span style="color:#f92672">&lt;version&gt;</span>1.0<span style="color:#f92672">&lt;/version&gt;</span>
+  <span style="color:#f92672">&lt;dependencies&gt;</span>
+    <span style="color:#75715e">&lt;!-- (omitted) --&gt;</span>
+  <span style="color:#f92672">&lt;/dependencies&gt;</span>
+<span style="color:#f92672">&lt;/project&gt;</span>
+</code></pre></div><p>はーなるほど、POMのみのartifactを作って、そこでPlugin本体である所のAwesomeの依存を解決して読み込んでいる。AwesomePluginのjarの中を見るとこんな感じ</p>
 <pre><code>├── META-INF
 │   ├── MANIFEST.MF
 │   └── gradle-plugins
@@ -240,26 +199,15 @@ $ cat META-INF/gradle-plugins/com.github.uzzu.gradle.great.properties
 implementation-class=com.github.uzzu.gradle.GreatPlugin
 $ cat META-INF/gradle-plugins/super-uzzu.properties
 implementation-class=com.github.uzzu.gradle.SuperPlugin
-</code></pre>
-
-<p>なるほどですね。</p>
-
+</code></pre><p>なるほどですね。</p>
 <p>実際にPOMを作っている部分のソースを見てみます。</p>
-
 <p><a href="https://github.com/gradle/gradle/blob/v5.2.0/subprojects/plugin-development/src/main/java/org/gradle/plugin/devel/plugins/MavenPluginPublishPlugin.java#L84-L107">https://github.com/gradle/gradle/blob/v5.2.0/subprojects/plugin-development/src/main/java/org/gradle/plugin/devel/plugins/MavenPluginPublishPlugin.java#L84-L107</a></p>
-
 <p>おおなるほど、確かに POMに書かれている通りgroupIdとartifactIdを生成している。</p>
-
 <p>読込側も見てみます。</p>
-
 <p><a href="https://github.com/gradle/gradle/blob/v5.2.0/subprojects/plugin-use/src/main/java/org/gradle/plugin/use/resolve/internal/ArtifactRepositoriesPluginResolver.java#L118-L127">https://github.com/gradle/gradle/blob/v5.2.0/subprojects/plugin-use/src/main/java/org/gradle/plugin/use/resolve/internal/ArtifactRepositoriesPluginResolver.java#L118-L127</a></p>
-
 <h2 id="余談">余談</h2>
-
 <p>Android Gradle PluginやKotlin Gradle PluginはNew Gradle Plugin APIには対応してなさそう。 <code>useModule</code> で単体では読み込めても、 Kotlin MPP + multimoduleをやっていると同2つのpluginの適用ががうまくいかない。根気が尽きた。Kotlinにおいては中の人的にもincubating featureだから使ってない旨のissue commentをどっかでみたけど忘れた。忘れてください。Gradle難しい。最悪、今まで通りbuildscript使えばいいのでまあいいでしょう。</p>
-
 <h2 id="結論">結論</h2>
-
 <p>個人的には「これいるのかな…」という感じで、ずっとincubating なのも頷けます。pluginManagementにおけるresolutionStrategyはいまいち目的が見えない。誰か教えてください。ライブラリ管理におけるresolutionStrategyはexclude地獄を排除できるのでぼちぼち便利なんですけどね。うーん。</p>
   </div>
 </div>

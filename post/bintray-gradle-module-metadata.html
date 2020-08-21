@@ -8,10 +8,9 @@
 <meta property="og:description" content="gradle-bintray-plugin の代わりに maven-publish plugin を 利用して Gradle module metadata を公開する方法について。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/bintray-gradle-module-metadata.html" />
-
-<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
-<meta property="article:published_time" content="2020-08-12T00:00:00&#43;09:00"/>
-<meta property="article:modified_time" content="2020-08-12T00:00:00&#43;09:00"/>
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
+<meta property="article:published_time" content="2020-08-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-08-12T00:00:00+09:00" />
 
         
         <meta name="twitter:card" content="summary"/>
@@ -64,13 +63,9 @@
   </div>
   <div class="blog-post-content">
     <p>gradle-bintray-plugin は現在、 Gradle module metadata のアップロードに対応していません。</p>
-
 <p><a href="https://github.com/bintray/gradle-bintray-plugin/issues/229">https://github.com/bintray/gradle-bintray-plugin/issues/229</a></p>
-
 <p>この issue 上で workaround がいくつか議論されていますが、私は maven-publish を利用する事にしました。 BintrayUploadTask に依存していると、 Kotlin Multiplatform Library 開発において後から build target を追加する際、追加したはずの build target の artifact をアップロードしてくれない、という別の問題も抱えていたためです。</p>
-
 <p>公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに <a href="https://github.com/uzzu/kortex/commit/89222eb11b0011e85ca0ca08e408be7ee0b2aacd">maven-publish を利用するようにしました。 </a></p>
-
 <p>これで後から build target を追加した際も <code>./gradlew publish</code> で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も kotlinMultiplatform artifact のみを dependencies に記述する( Kotlin Multiplatform Project の場合は commonMain の dependencies に記述する )だけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</p>
 
   </div>

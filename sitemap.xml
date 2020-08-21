@@ -1,10 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://uzzu.co/post/bintray-gradle-module-metadata.html</loc>
     <lastmod>2020-08-12T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags/gradle-kotlin.html</loc>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/post.html</loc>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags.html</loc>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/</loc>
+    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags/gradle.html</loc>
+    <lastmod>2020-02-16T15:00:00+09:00</lastmod>
   </url>
   
   <url>
@@ -18,6 +43,16 @@
   </url>
   
   <url>
+    <loc>https://uzzu.co/tags/kotlin-gradle.html</loc>
+    <lastmod>2020-02-13T13:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags/java.html</loc>
+    <lastmod>2020-02-11T18:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/java-env.html</loc>
     <lastmod>2020-02-11T18:30:00+09:00</lastmod>
   </url>
@@ -28,8 +63,18 @@
   </url>
   
   <url>
+    <loc>https://uzzu.co/tags/kotlin.html</loc>
+    <lastmod>2020-02-05T18:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/new-gradle-plugin-api-management.html</loc>
     <lastmod>2019-02-16T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags/zatsu.html</loc>
+    <lastmod>2019-02-03T00:00:00+09:00</lastmod>
   </url>
   
   <url>
@@ -73,6 +118,11 @@
   </url>
   
   <url>
+    <loc>https://uzzu.co/tags/ddd.html</loc>
+    <lastmod>2018-12-19T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/distilling-viper-architecture.html</loc>
     <lastmod>2018-12-19T00:00:00+09:00</lastmod>
   </url>
@@ -88,8 +138,23 @@
   </url>
   
   <url>
+    <loc>https://uzzu.co/tags/csharp.html</loc>
+    <lastmod>2014-12-23T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags/csharp-mono.html</loc>
+    <lastmod>2014-12-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/mono-reading.html</loc>
     <lastmod>2014-12-10T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags/dci-ddd.html</loc>
+    <lastmod>2014-01-04T08:53:00+09:00</lastmod>
   </url>
   
   <url>
@@ -98,13 +163,28 @@
   </url>
   
   <url>
+    <loc>https://uzzu.co/tags/virtualbox-windows7-batchfile.html</loc>
+    <lastmod>2013-01-16T16:41:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/host-win7-and-guest-os-share-environment-of-dotfiles.html</loc>
     <lastmod>2013-01-16T16:41:00+09:00</lastmod>
   </url>
   
   <url>
+    <loc>https://uzzu.co/tags/as3-flexunit4.html</loc>
+    <lastmod>2013-01-09T13:03:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/stage-reference-in-flexunit4.html</loc>
     <lastmod>2013-01-09T13:03:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags/test.html</loc>
+    <lastmod>2012-09-30T21:46:00+09:00</lastmod>
   </url>
   
   <url>
@@ -118,104 +198,7 @@
   </url>
   
   <url>
-    <loc>https://uzzu.co/tags/as3-flexunit4.html</loc>
-    <lastmod>2013-01-09T13:03:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://uzzu.co/categories.html</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/csharp.html</loc>
-    <lastmod>2014-12-23T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/csharp-mono.html</loc>
-    <lastmod>2014-12-10T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/dci-ddd.html</loc>
-    <lastmod>2014-01-04T08:53:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/ddd.html</loc>
-    <lastmod>2018-12-19T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/gradle.html</loc>
-    <lastmod>2020-02-16T15:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/gradle-kotlin.html</loc>
-    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/java.html</loc>
-    <lastmod>2020-02-11T18:30:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/kotlin.html</loc>
-    <lastmod>2020-02-05T18:30:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/kotlin-gradle.html</loc>
-    <lastmod>2020-02-13T13:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/post.html</loc>
-    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags.html</loc>
-    <lastmod>2013-01-09T13:03:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/test.html</loc>
-    <lastmod>2012-09-30T21:46:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/</loc>
-    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/virtualbox-windows7-batchfile.html</loc>
-    <lastmod>2013-01-16T16:41:00+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/zatsu.html</loc>
-    <lastmod>2019-02-03T00:00:00+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>

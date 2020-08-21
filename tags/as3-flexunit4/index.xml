@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>As3 Flexunit4 on Uzzu::Blog</title>
+    <title>as3, flexunit4 on Uzzu::Blog</title>
     <link>https://uzzu.co/tags/as3-flexunit4.html</link>
-    <description>Recent content in As3 Flexunit4 on Uzzu::Blog</description>
+    <description>Recent content in as3, flexunit4 on Uzzu::Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -16,8 +15,8 @@
       <pubDate>Wed, 09 Jan 2013 13:03:00 +0900</pubDate>
       
       <guid>https://uzzu.co/post/stage-reference-in-flexunit4.html</guid>
-      <description>&lt;p&gt;FlexUnit4を利用する上でflash.display.Stageに依存する処理のテストを書きたいんだけど、&lt;br /&gt;
-TestクラスからどうやってStageオブジェクトを参照したりStageからのイベントを送出したら良いか分からない!&lt;br /&gt;
+      <description>&lt;p&gt;FlexUnit4を利用する上でflash.display.Stageに依存する処理のテストを書きたいんだけど、&lt;br&gt;
+TestクラスからどうやってStageオブジェクトを参照したりStageからのイベントを送出したら良いか分からない!&lt;br&gt;
 a)力技な方法と、b)fluintの機能を利用する方法があります。後者をおすすめします。&lt;/p&gt;</description>
     </item>
     

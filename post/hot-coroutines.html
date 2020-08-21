@@ -8,18 +8,15 @@
 <meta property="og:description" content="Rxの世界ではHot Observableをよく使っていたけど、Coroutinesでも使いたい。
 直近自分には2つの需要があるかなというところ。
 
-
 多重に launch しない (GUIの連打防止をGUIの実装上でやるのが面倒)
 多重に suspend functionを呼び出したくはないが、結果だけは欲しい
-
 
 というわけで作ってみました。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/hot-coroutines.html" />
-
-<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
-<meta property="article:published_time" content="2019-01-16T00:00:00&#43;09:00"/>
-<meta property="article:modified_time" content="2019-01-16T00:00:00&#43;09:00"/>
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
+<meta property="article:published_time" content="2019-01-16T00:00:00+09:00" />
+<meta property="article:modified_time" content="2019-01-16T00:00:00+09:00" />
 
         
         <meta name="twitter:card" content="summary"/>
@@ -73,22 +70,15 @@
   <div class="blog-post-content">
     <p>Rxの世界ではHot Observableをよく使っていたけど、Coroutinesでも使いたい。
 直近自分には2つの需要があるかなというところ。</p>
-
 <ul>
 <li>多重に <code>launch</code> しない (GUIの連打防止をGUIの実装上でやるのが面倒)</li>
 <li>多重に suspend functionを呼び出したくはないが、結果だけは欲しい</li>
 </ul>
-
 <p>というわけで作ってみました。</p>
-
 <p>叩きのコードは以下</p>
-
 <h3 id="多重launch防止">多重launch防止</h3>
-
-<script src="https://gist.github.com/uzzu/ce45d53c859629f9463070e4bff6c4fb.js?file=00_hot-launch-repl.kt"></script>
-
+<!-- raw HTML omitted -->
 <p>実行してみると、launchによって開始されたCoroutineが実行中間は同じCoroutineがあるので呼び出されず、結果も一度だけ返却されています。</p>
-
 <pre><code>call[0]
 hot jobs count: 0
 [suspendFun5] launch
@@ -109,14 +99,9 @@ call[6]
 hot jobs count: 0
 [suspendFun5] launch
 :
-</code></pre>
-
-<h3 id="多重にsuspend-functionを呼び出さないが-結果だけは欲しい">多重にsuspend functionを呼び出さないが、結果だけは欲しい</h3>
-
-<script src="https://gist.github.com/uzzu/2efae3f1b52c4395062c7f348527d985.js?file=00_hot_suspend_function.kt"></script>
-
+</code></pre><h3 id="多重にsuspend-functionを呼び出さないが結果だけは欲しい">多重にsuspend functionを呼び出さないが、結果だけは欲しい</h3>
+<!-- raw HTML omitted -->
 <p>実行してみると、実行中のsuspend functionがある場合に実行中のsuspend functionが使い回され、完了すると、中断していたCoroutineすべての処理が結果を受け取りつつ再開されます。</p>
-
 <pre><code>call[0]
 channel created
 call[1]
@@ -145,31 +130,18 @@ channel reused
 call[8]
 channel reused
 :
-</code></pre>
-
-<p>内部的にBroadcastChannelを使っていますが、使用する側からすれば特にChannelを使用している意識する事なく結果だけが受け取れます。
+</code></pre><p>内部的にBroadcastChannelを使っていますが、使用する側からすれば特にChannelを使用している意識する事なく結果だけが受け取れます。
 Channelはいうて難しいので使っている事を意識したくないです。</p>
-
 <p>本当に何も意識しなくていいのか？残念ながらそう簡単にもいかなくて、BroadcastChannelの購読は順序が保証されないという点を意識しなければいけません。これは長年UI開発やってきた人々からすると、 <code>Event(Listener|Emitter|Dispatcher)</code> の挙動を想像する(購読を開始した順に通知されてほしい)ので、自然ではない。呼び出し順序が保証されたBroadcastChannelが作れればいいのかな。とりあえず自分の需要としてはこれは大丈夫そうなので放置します。</p>
-
 <h3 id="ライブラリ化">ライブラリ化</h3>
-
 <p>さすがにこのままでは使い物にならないので、整理しつつライブラリ化します。</p>
-
 <p>毎度 <code>MutableMap</code> や <code>Mutex</code> を引数に渡すのは億劫すぎるので、これらは <code>CoroutineContext.Element</code> にしてしまい、suspend function内から参照できるようにし、各メソッドはCoroutineScopeのExtensionとして用意します。</p>
-
 <p>というわけで、できました。</p>
-
 <p><a href="https://github.com/uzzu/kortex">https://github.com/uzzu/kortex</a></p>
-
 <h3 id="どういう時に使うか">どういう時に使うか</h3>
-
 <p>たとえばOkHttpのAuthenticator上でsuspend functionを用いて再度認証をした上で復帰する場合、 <code>runBlocking</code> を用いる事になると思いますが、 <code>runBlocking</code> はあくまでも現在の実行スレッドをブロックするCoroutineである事、okhttpのDispatcherは指定次第では並列実行される為、 <code>runBlocking</code> のみを前提とした <code>Authenticator#authenticate</code> 並列実行を考慮する必要があり、その実装は複雑になりがちです。</p>
-
-<script src="https://gist.github.com/uzzu/2efae3f1b52c4395062c7f348527d985.js?file=99_custom_authenticator.kt"></script>
-
+<!-- raw HTML omitted -->
 <p>こうする事で、(既にキューに積まれたリクエストについてはunauthorizedにならざるを得ないのでどうしようもないですが)少なくとも<code>Authenticator#authenticate</code> は並列実行されないようになり、多少はシンプルに記述できるようになるでしょう。かつ新しい認証処理の結果はすべてのunauthorizedなリクエストに適用されます。便利そうですね。</p>
-
 <p>どうぞ。</p>
   </div>
 </div>

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Java on Uzzu::Blog</title>
+    <title>java on Uzzu::Blog</title>
     <link>https://uzzu.co/tags/java.html</link>
-    <description>Recent content in Java on Uzzu::Blog</description>
+    <description>Recent content in java on Uzzu::Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
@@ -17,7 +16,7 @@
       
       <guid>https://uzzu.co/post/java-env.html</guid>
       <description>最近よくJavaの実行環境を切り替えるので、以下の雑shell scriptで凌いでいます。
- $ javaenv /Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home $ javaenv 11 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home $ javaenv 1.8 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home  </description>
+ $ javaenv /Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home $ javaenv 11 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home $ javaenv 1.8 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home </description>
     </item>
     
   </channel>

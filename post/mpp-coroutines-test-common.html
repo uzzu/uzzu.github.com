@@ -8,10 +8,9 @@
 <meta property="og:description" content="そのうちリリースされると思うけど、まだっぽいのでメモ。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/mpp-coroutines-test-common.html" />
-
-<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
-<meta property="article:published_time" content="2019-01-10T00:00:00&#43;09:00"/>
-<meta property="article:modified_time" content="2019-01-10T00:00:00&#43;09:00"/>
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
+<meta property="article:published_time" content="2019-01-10T00:00:00+09:00" />
+<meta property="article:modified_time" content="2019-01-10T00:00:00+09:00" />
 
         
         <meta name="twitter:card" content="summary"/>
@@ -64,24 +63,15 @@
   </div>
   <div class="blog-post-content">
     <p>そのうちリリースされると思うけど、まだっぽいのでメモ。</p>
-
 <p>JVM環境では <code>runBlocking</code> を使う事でCoroutinesのテストをかけていたけど、 <code>runBlocking</code> はcoroutines-core (jvm)の機能なので、
 Kotlin MPPでのcommon moduleでCoroutinesのテストをするにはいい感じにやってやる必要があります。</p>
-
 <h4 id="common">common</h4>
-
 <p>dependencies: kotlin-test-common, kotlinx-coroutines-core-common</p>
-
-<script src="https://gist.github.com/uzzu/58cb8bb12c17605017edd01b8498915a.js?file=mpp-common-runtest.kt"></script>
-
+<!-- raw HTML omitted -->
 <h4 id="jvm">jvm</h4>
-
 <p>dependencies: kotlin-test-junit5 or kotlin-test-junit4, kotlinx-coroutines-core</p>
-
-<script src="https://gist.github.com/uzzu/58cb8bb12c17605017edd01b8498915a.js?file=mpp-jvm-runtest.kt"></script>
-
+<!-- raw HTML omitted -->
 <p>ついでにsuspend functionのexpected exception assertionに対応しています。</p>
-
 <p>assertkでもsuspend functionのテストを簡単に書けるようになるといいなと思います。まだ対応は進んでないようです。</p>
   </div>
 </div>

@@ -8,10 +8,9 @@
 <meta property="og:description" content="一般的に、Gradle ScriptやGradle Plugin上で外部からの設定値を取り扱う際は Gradle PropertiesやCommand-line flags、System Propertiesの仕組みを利用します。それらから参照される gradle.properties ファイルは、言いなりのままに(誰の?)設定を追加し続けると、秘匿値と秘匿する必要のない値が混在してしまい、加えて近年Gradle Plugin側からビルドに必要なパラメータとしてGradle Propertiesに設定する事を要求されるシーンが増えてきた為、結果的に gradle.propeties を編集する機会が増えてきて、開くたびに視界に入る秘匿値に溜息をついてきました。秘匿値は分離して管理したい。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/dotenv-gradle.html" />
-
-<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
-<meta property="article:published_time" content="2020-02-13T13:00:00&#43;09:00"/>
-<meta property="article:modified_time" content="2020-02-13T13:00:00&#43;09:00"/>
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
+<meta property="article:published_time" content="2020-02-13T13:00:00+09:00" />
+<meta property="article:modified_time" content="2020-02-13T13:00:00+09:00" />
 
         
         <meta name="twitter:card" content="summary"/>
@@ -64,56 +63,34 @@
   </div>
   <div class="blog-post-content">
     <p>一般的に、Gradle ScriptやGradle Plugin上で外部からの設定値を取り扱う際は Gradle PropertiesやCommand-line flags、System Propertiesの仕組みを利用します。それらから参照される <code>gradle.properties</code> ファイルは、言いなりのままに(誰の?)設定を追加し続けると、秘匿値と秘匿する必要のない値が混在してしまい、加えて近年Gradle Plugin側からビルドに必要なパラメータとしてGradle Propertiesに設定する事を要求されるシーンが増えてきた為、結果的に <code>gradle.propeties</code> を編集する機会が増えてきて、開くたびに視界に入る秘匿値に溜息をついてきました。秘匿値は分離して管理したい。</p>
-
 <p>最終的なゴールとしては <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS System Manager Parameter Store</a>のような外部の設定データ管理ストレージに載せる事になると思われますが、まずはミニマムスタートということで、環境変数にする事から始めます。</p>
-
 <p>Gradleにおいて環境変数を参照する事は決して難しい事ではないですが、外の世界ではdotenvな文化があるので、これに追従する事にします。</p>
-
 <p>まずは環境変数が存在しない場合 <code>.env</code> ファイルの内容を見にいくGradle Pluginを作成します。</p>
-
-<p><div class="github-card" data-github="uzzu/dotenv-gradle" data-width="400" data-height="" data-theme="default"></div>
-<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script></p>
-
+<!-- raw HTML omitted -->
 <p><a href="https://plugins.gradle.org/plugin/co.uzzu.dotenv.gradle">Gradle Plugin Portal</a></p>
-
 <p>作成しました。
 このpluginでは <code>.env</code> または <code>.env.template</code> ファイルに利用する環境変数名を定義しておくと自動でextension化され、Gradle build script上で簡単に参照できるようになります。</p>
-
 <p>例えば環境変数 <code>HOGE_API_KEY</code> を利用する場合、pluginを入れただけの状態では</p>
-
 <pre><code>env.isPresent(&quot;HOGE_API_KEY&quot;)               // true or false
 env.fetch(&quot;HOGE_API_KEY&quot;)                   // 存在しない場合は例外をスロー
 env.fetch(&quot;HOGE_API_KEY&quot;, &quot;default_value&quot;)  // 存在しない場合引数の値を返却
 env.fetchOrNull(&quot;HOGE_API_KEY&quot;)             // 存在しない場合はnull
-</code></pre>
-
-<p>このように参照しますが、project rootに <code>.env.template</code>,  <code>.env</code> に</p>
-
+</code></pre><p>このように参照しますが、project rootに <code>.env.template</code>,  <code>.env</code> に</p>
 <pre><code>HOGE_API_KEY=
-</code></pre>
-
-<p>な定義が存在していた場合</p>
-
+</code></pre><p>な定義が存在していた場合</p>
 <pre><code>env.HOGE_API_KEY.isPresent                  // true or false
 env.HOGE_API_KEY.value                      // 存在しない場合は例外をスロー
 env.HOGE_API_KEY.orElse(&quot;default_value&quot;)    // 存在しない場合は引数の値を返却
 env.HOGE_API_KEY.orNull()                   // 存在しない場合はnull
-</code></pre>
-
-<p>このように参照できます。Gradle Kotlin DSLを利用していれば入力補完が効きます。
+</code></pre><p>このように参照できます。Gradle Kotlin DSLを利用していれば入力補完が効きます。
 環境変数を参照する際の優先度は従来のdotenvに同じく、システムの環境変数 &gt; <code>.env</code> になっています。</p>
-
 <p>という訳で、Dotenv Gradleを利用する事でGradle build script上で簡単に環境変数を取り扱えるようになりました。</p>
-
 <p>この先:</p>
-
 <ul>
 <li><code>.env.template</code> を予め用意しておく</li>
 <li><code>.env</code> が存在しなければ、 <code>.env.template</code> の変数定義をもとに外部の設定データ管理ストレージから値を参照して <code>.env</code> を作成する</li>
 </ul>
-
 <p>といった事が出来るようになると、今まで通り秘匿値がVCS管理化にない状態を維持しつつ、ビルドに必要な環境変数は <code>.env.template</code> で網羅されており、Gradle build script上ではGradle Kotlin DSLを利用していれば入力補完も効いて便利、という状況になって良さそうですね。<a href="https://developer.android.com/studio/preview/features?hl=en#kts-compat">Android Studio 4.0からGradle Kotlin DSLがサポートされます。</a></p>
-
 <p>※くれぐれも <code>.env</code> はVCS管理下に置かないようにしましょう。</p>
   </div>
 </div>

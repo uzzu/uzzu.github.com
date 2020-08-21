@@ -7,17 +7,14 @@
         <meta property="og:title" content="C#でパターンマッチング" />
 <meta property="og:description" content="この記事はC# Advent Calendar 2014の23日目のエントリです。
 22日目はC#のIntの話でした。
-
 クライアントアプリを書いていると何かとステートフルになり、かつ状態毎の描画もころころ変わります。さらに、WPFの恩恵を受けられないC#でかつ古いmono環境化(決してゲームエンジンは指していませんね?)では、かなり悲しみを背負う事になります。なにも悲しみを背負うので、Rxが再実装されたり、データバインディング機構を再実装したりします。辛い。
-
 ステートフルかつ何も恩恵が得られないとなれば、無限に繁殖するifとswitch-caseですね。ifはさておき、C#のswitch-caseは非常にシンプルなんですが、シンプルが故にかゆい所に手が届かなくて辛い。
 そもそも状態と条件分岐は○○モデルにしましょうよ！的な所で、参照型Enumを作ったりします。JavaのEnumっぽい何かですね。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/switch-case-cs.html" />
-
-<meta property="og:image" content="https://uzzu.co/images/avatar.jpg" />
-<meta property="article:published_time" content="2014-12-23T00:00:00&#43;09:00"/>
-<meta property="article:modified_time" content="2014-12-23T00:00:00&#43;09:00"/>
+<meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
+<meta property="article:published_time" content="2014-12-23T00:00:00+09:00" />
+<meta property="article:modified_time" content="2014-12-23T00:00:00+09:00" />
 
         
         <meta name="twitter:card" content="summary"/>
@@ -71,37 +68,26 @@
   <div class="blog-post-content">
     <p>この記事は<a href="http://qiita.com/advent-calendar/2014/csharp">C# Advent Calendar 2014</a>の23日目のエントリです。
 <a href="http://moririring.hatenablog.com/entry/2014/12/22/002337">22日目はC#のIntの話でした。</a></p>
-
 <p>クライアントアプリを書いていると何かとステートフルになり、かつ状態毎の描画もころころ変わります。さらに、WPFの恩恵を受けられないC#でかつ古いmono環境化(決してゲームエンジンは指していませんね?)では、かなり悲しみを背負う事になります。なにも悲しみを背負うので、Rxが再実装されたり、データバインディング機構を再実装したりします。辛い。</p>
-
 <p>ステートフルかつ何も恩恵が得られないとなれば、無限に繁殖するifとswitch-caseですね。ifはさておき、C#のswitch-caseは非常にシンプルなんですが、シンプルが故にかゆい所に手が届かなくて辛い。
 そもそも状態と条件分岐は○○モデルにしましょうよ！的な所で、<a href="https://gist.github.com/uzzu/5412336c0532508dd17c">参照型Enum</a>を作ったりします。JavaのEnumっぽい何かですね。</p>
-
 <p>ドメイン層のモデルにおいては、正しく責務が与えられているはずなので、この<a href="https://gist.github.com/uzzu/5412336c0532508dd17c">参照型Enum</a>というアプローチは有効なんですが、UI層でも同様に、Aggregate(ViewModel)の状態とその描画方法を見通しよく記述できるかというと、必ずしもそうでもないんじゃないかなというのが経験上の持論です。(異論は認める)</p>
-
 <p>そこで条件分岐なんとかしようやと、とりあえず試しにパターンマッチング実装してみた。
 ぶっちゃけ途中掛けで、full-AOT問題と、あとはgenerics周りの問題を解決したら、原型をとどめてないインターフェースになりそう。</p>
-
 <p><a href="https://gist.github.com/uzzu/32f9d0bc401f6e219f01">Case.cs</a></p>
-
 <p>＜＜＜追記＞＞＞</p>
-
 <p>型推論効く形にちょいと手直ししました。各APIの利便性を優先、した結果、型推論効かないときはコンパイルエラーになっちゃうけどまあそこは手前で型引数渡せば良いのでしゃーなし。
 だいぶスッキリはしたけど、full-AOTは未着手。</p>
-
 <p>＜＜＜追記おわり＞＞＞</p>
-
 <p>Linqを書くときみたいに三項演算子をモリモリ書いていくのもなんだか違和感あるし、でも条件分岐の判定部分はPredicateにしたいし、とか詰め込みながらモリモリと書いていき、
 だんだん作るのが楽しくなってきて、もうちょっと便利にとか、型推論効かせて記述を楽にしようとかしてたら、結果としてたくさんCS0411を引きまくって一旦元に戻しました。</p>
-
 <p>UIロジックも関数型ライクなDSLっぽくっていうかF#で書いたらこのご時世でももうちょっとマシなコードになりそうな気がするんだよなあと思ったところで終了です。
 下はサンプルですが、もうちょっと複雑なのもいけるのでまあ<a href="https://gist.github.com/uzzu/32f9d0bc401f6e219f01#file-casetest-cs">テストとか読んでみてください</a>。</p>
-
-<pre><code class="language-cs">public class CharacterStatusView
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cs" data-lang="cs"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">CharacterStatusView</span>
 {
-    private Case&lt;CharacterStatus&gt;.IMatcher characterStatusRenderer;
+    <span style="color:#66d9ef">private</span> Case&lt;CharacterStatus&gt;.IMatcher characterStatusRenderer;
 
-    public void Initialize()
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> Initialize()
     {
         characterStatusRenderer = CaseAction
             .When(status =&gt; status.Dead  , RenderAsDead)
@@ -110,34 +96,34 @@
             .Default(RenderAsSafety);
     }
 
-    void OnCharacterStatusChanged(object sender, PropertyChangedEventArgs&lt;CharacterStatus&gt; e)
+    <span style="color:#66d9ef">void</span> OnCharacterStatusChanged(<span style="color:#66d9ef">object</span> sender, PropertyChangedEventArgs&lt;CharacterStatus&gt; e)
     {
         characterStatusRenderer.Apply(e.NewValue);
     }
 
-    void RenderAsDead(CharacterStatus status)
+    <span style="color:#66d9ef">void</span> RenderAsDead(CharacterStatus status)
     {
-        // 死んだお
-    }
+        <span style="color:#75715e">// 死んだお
+</span><span style="color:#75715e"></span>    }
 
-    void RenderAsDanger(CharacterStatus status)
+    <span style="color:#66d9ef">void</span> RenderAsDanger(CharacterStatus status)
     {
-        // ピンチだお
-    }
+        <span style="color:#75715e">// ピンチだお
+</span><span style="color:#75715e"></span>    }
 
-    void RenderAsWarning(CharacterStatus status)
+    <span style="color:#66d9ef">void</span> RenderAsWarning(CharacterStatus status)
     {
-        // そろそろやばいお
-    }
+        <span style="color:#75715e">// そろそろやばいお
+</span><span style="color:#75715e"></span>    }
 
-    void RenderAsSafety(CharacterStatus status)
+    <span style="color:#66d9ef">void</span> RenderAsSafety(CharacterStatus status)
     {
-        // 元気モリモリ
-    }
+        <span style="color:#75715e">// 元気モリモリ
+</span><span style="color:#75715e"></span>    }
 
 }
 
-</code></pre>
+</code></pre></div>
   </div>
 </div>
 <div id="disqus_thread"></div>
