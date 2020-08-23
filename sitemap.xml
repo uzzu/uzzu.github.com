@@ -3,27 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://uzzu.co/tags/kotlin.html</loc>
+    <lastmod>2020-08-23T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/post/kotlin-main-kts-first-impression.html</loc>
+    <lastmod>2020-08-23T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/post.html</loc>
+    <lastmod>2020-08-23T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags.html</loc>
+    <lastmod>2020-08-23T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/</loc>
+    <lastmod>2020-08-23T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/post/bintray-gradle-module-metadata.html</loc>
     <lastmod>2020-08-12T00:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://uzzu.co/tags/gradle-kotlin.html</loc>
-    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/post.html</loc>
-    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags.html</loc>
-    <lastmod>2020-08-12T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/</loc>
     <lastmod>2020-08-12T00:00:00+09:00</lastmod>
   </url>
   
@@ -59,11 +69,6 @@
   
   <url>
     <loc>https://uzzu.co/post/gradle-module-metadata.html</loc>
-    <lastmod>2020-02-05T18:30:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags/kotlin.html</loc>
     <lastmod>2020-02-05T18:30:00+09:00</lastmod>
   </url>
   
