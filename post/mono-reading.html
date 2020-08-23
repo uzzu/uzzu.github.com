@@ -93,7 +93,8 @@ git clone https://github.com/Unity-Technologies/mono.git
 ものすごいたくさんの数値やバイトコードが列挙された配列がありますが、怖くはなくて、cultureIDに紐づくCultureInfoやRegionInfoに相当する値が入っている配列のアドレスが列挙されているとかそんな感じです。つまり定義済みのCultureInfoやRegionInfoにアクセスしているということです。ちゃんと読み進めると、各要素がISOCurrencySymbolだったりに紐付いている事が分かります。なるほどーためになる。</p>
 <p>＜＜ 追記 ＞＞</p>
 <p>Atsushi Enoさんから捕捉頂きました。ありがとうございますm(_ _)m</p>
-<!-- raw HTML omitted -->
+<blockquote>ちなみにculture-info-table.hはmono/tools/locale-builder でUnicode CLDRから生成されているので、そっちを見るともっと人にやさしいです。</blockquote>
+とのことです。実際に[locale-buiilderを読んでみると](https://github.com/mono/mono/tree/master/tools/locale-builder)、C#で書かれていて、culture\_info\_entryやregion\_info\_entryのソースコードがモリモリ生成されていたりするのが分かります。とても人にやさしいですね！
 <p>今回コードリーディングの対象にしたCultureInfoですが、偶然にも<a href="http://sta-blockhead.blogspot.jp/2010/03/datetimeformatinfofulldatetimepattern.html">staさんが詳細にまとめてくれていました。</a> CultureInfoの詳細はこちらの記事を読むと良いです。ありがとうございますm(_ _)m</p>
 <p>＜＜ 追記おわり ＞＞</p>
 <p>ここで、例えばUnity-Technologiesのmonoと、本家のmonoとでdiffを取ったりして、あーここは対応が追いついてないみたいだから、最新のmonoの実行結果からCodeDomを用いてソースコードを自動生成しておこうとかそういった行為がとれるわけですね。「いやあのそれはソースコード読まなくても普通に実行すれば分かるでしょ」というのもありますが、この記事を読んだ皆さんは、mono環境におけるInternalCallの壁を超えたようなものなので、実行する以外のアプローチがとれるようになって皆さんの業務の幅が広がって私はとても嬉しく思います。</p>

@@ -34,10 +34,11 @@
       <link>https://uzzu.co/post/ddd-insight.html</link>
       <description>&lt;p&gt;この記事は&lt;a href=&#34;http://qiita.com/advent-calendar/2015/dwango2&#34;&gt;第2のドワンゴ Advent Calendar 2015&lt;/a&gt;の22日目のエントリです。&lt;/p&gt;
 &lt;p&gt;Goで&lt;a href=&#34;https://github.com/google/gxui&#34;&gt;gxui&lt;/a&gt;使って2画面ファイラー作ってワショーイしてたんですが、もうちょっと寝かしたいなと思ったので他の事書きます。&lt;/p&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://uzzu.co/images/df_screenshot.png&#34; width=&#34;480&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;こっちはこっちで追って公開したいですね。&lt;/p&gt;
 &lt;p&gt;というわけで本題です。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+&lt;blockquote class=&#34;twitter-tweet&#34; lang=&#34;en&#34;&gt;&lt;p lang=&#34;ja&#34; dir=&#34;ltr&#34;&gt;はい。Evans本3部4部ちゃんと理解してない人はやり直しです / “ドメイン駆動設計の間違った方向性” &lt;a href=&#34;http://t.co/tcgxlWVONq&#34;&gt;http://t.co/tcgxlWVONq&lt;/a&gt;&lt;/p&gt;&amp;mdash; ソフトウェア設計おじさん (@uzzu) &lt;a href=&#34;https://twitter.com/uzzu/status/613990950231093248&#34;&gt;June 25, 2015&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;</description>
       <guid isPermaLink="true">https://uzzu.co/post/ddd-insight.html</guid>
       <pubDate>Tue, 22 Dec 2015 00:00:00 +0900</pubDate>
       <atom:updated>2015-1222-22T00:00:0000&#43;0900</atom:updated>

@@ -66,7 +66,8 @@
 <p>最終的なゴールとしては <a href="https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html">AWS System Manager Parameter Store</a>のような外部の設定データ管理ストレージに載せる事になると思われますが、まずはミニマムスタートということで、環境変数にする事から始めます。</p>
 <p>Gradleにおいて環境変数を参照する事は決して難しい事ではないですが、外の世界ではdotenvな文化があるので、これに追従する事にします。</p>
 <p>まずは環境変数が存在しない場合 <code>.env</code> ファイルの内容を見にいくGradle Pluginを作成します。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="github-card" data-github="uzzu/dotenv-gradle" data-width="400" data-height="" data-theme="default"></div>
+<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 <p><a href="https://plugins.gradle.org/plugin/co.uzzu.dotenv.gradle">Gradle Plugin Portal</a></p>
 <p>作成しました。
 このpluginでは <code>.env</code> または <code>.env.template</code> ファイルに利用する環境変数名を定義しておくと自動でextension化され、Gradle build script上で簡単に参照できるようになります。</p>

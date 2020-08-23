@@ -73,10 +73,10 @@ flash.display.DisplayObjectContainerを継承するクラス(Sprite, MovieClip, 
 addChildしてやるなどしたあと、<br>
 そのオブジェクトを任意のクラスのプロパティとして保持します。<br>
 おおよそこんな感じです。</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/4491370.js?file=ATestRunner.mxml"></script>
+<script src="https://gist.github.com/4491370.js?file=ATestContext.as"></script>
 <p>ってやっとけばTestクラスでは</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/4491370.js?file=ATest.as"></script>
 <p>とできます。力技ですね。</p>
 <h3 id="bfluintの機能を利用する">b)Fluintの機能を利用する</h3>
 <p>fluintに含まれるorg.fluint.uiImpersonationパッケージの諸々のクラスを利用します。<br>
@@ -84,12 +84,12 @@ addChildしてやるなどしたあと、<br>
 あらゆる環境でのテストコードの保守を考えると<br>
 こちらを利用しておくのがbetterです。</p>
 <p>a) の方法と途中まで(適当なDisplayObjectContainerをaddChildするところまで)は同じです。</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/4491795.js?file=BTestRunner.mxml"></script>
 <p>VisualEnvironmentBuilderに対してDisplayObjectContainerを設定することで、<br>
 以降テストクラスからは、org.fluint.uiImpersonation.UIImpersonatorクラスの各メソッドを介して<br>
 アクセスすることができます。</p>
 <p>実際のテストコード中での利用方法はこんな感じです。</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/4491795.js?file=BTest.as"></script>
 <p>利用する際に、注意点が2点あります。</p>
 <h3 id="displayobjectcontainerクラスの提供するインターフェースがすべて提供される訳ではない">DisplayObjectContainerクラスの提供するインターフェースがすべて提供される訳ではない</h3>
 <p>UIImpersonatorのインターフェースはで定義されているメソッドは以下のメソッドだけです。</p>

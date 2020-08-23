@@ -10,7 +10,7 @@
 先に結論からいうと IDEA で書いている分にはいけそう、といういつものKotlinの感想を持ちました。@file:Repository, @file:DependsOnあたりを書いてるとIDEAが変更を検知してスクリプトの補完が効くよう読み込んでくれて、あとはいつものKotlinを書いているように自動補完してくれるので、いつものKotlin programmingだなあという感じ。
 ただ kotlin-main-kts は1.4.0の段階ではartifactの依存関係を探索的に解決してくれないので implementation dependencyで依存解決されているライブラリを利用する際は手前で依存解決をしなければいけないというのがあります。kotlin-main-kts向けのライブラリを開発・配布する際は、api dependency で解決しつつ transitive = true にしてやると、依存ライブラリも含まれるのでkotlin-main-ktsでも開発したライブラリの依存解決のみすれば使えるようになります。この辺は今後に期待ですね。Gradle Module Metadataまで含めた依存解決やっていくのかと思うとちょっと大変そうだなと思いますが…。
 あとは、いわゆる雑なスクリプトを書く際にはファイル操作とか子プロセスの実行とかよくやると思うんですが、Kotlinの場合、Kotlinに無い機能についてはJavaの資産に乗っかる事になります。動くものを作る分には問題ないんですが、どうしても他のスクリプト言語に比べて冗長な記述になってしまう所が出てきます。そういう所をKotlin extensionなりを含むヘルパーライブラリを用意して冗長さを軽減していくと、日頃の業務などで書く雑なスクリプトの言語選択肢にKotlinも挙がってくるんじゃないかなと思いました。
-書いてて冗長だなと思ったらextensionを追加していって、雑なお仕事をシュッとKotlinで解決できるようになりたいですね。" />
+  書いてて冗長だなと思ったらextensionを追加していって、雑なお仕事をシュッとKotlinで解決できるようになりたいですね。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/kotlin-main-kts-first-impression.html" />
 <meta property="og:image" content="https://uzzu.co/images/avatar.jpg"/>
@@ -72,7 +72,8 @@
 <p>先に結論からいうと IDEA で書いている分にはいけそう、といういつものKotlinの感想を持ちました。<code>@file:Repository</code>, <code>@file:DependsOn</code>あたりを書いてるとIDEAが変更を検知してスクリプトの補完が効くよう読み込んでくれて、あとはいつものKotlinを書いているように自動補完してくれるので、いつものKotlin programmingだなあという感じ。</p>
 <p>ただ kotlin-main-kts は1.4.0の段階ではartifactの依存関係を探索的に解決してくれないので implementation dependencyで依存解決されているライブラリを利用する際は手前で依存解決をしなければいけないというのがあります。kotlin-main-kts向けのライブラリを開発・配布する際は、api dependency で解決しつつ <code>transitive = true</code> にしてやると、依存ライブラリも含まれるのでkotlin-main-ktsでも開発したライブラリの依存解決のみすれば使えるようになります。この辺は今後に期待ですね。Gradle Module Metadataまで含めた依存解決やっていくのかと思うとちょっと大変そうだなと思いますが…。</p>
 <p>あとは、いわゆる雑なスクリプトを書く際にはファイル操作とか子プロセスの実行とかよくやると思うんですが、Kotlinの場合、Kotlinに無い機能についてはJavaの資産に乗っかる事になります。動くものを作る分には問題ないんですが、どうしても他のスクリプト言語に比べて冗長な記述になってしまう所が出てきます。そういう所をKotlin extensionなりを含むヘルパーライブラリを用意して冗長さを軽減していくと、日頃の業務などで書く雑なスクリプトの言語選択肢にKotlinも挙がってくるんじゃないかなと思いました。</p>
-<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<div class="github-card" data-github="uzzu/strikts" data-width="400" data-height="" data-theme="default"></div>
+<script src="//cdn.jsdelivr.net/github-cards/latest/widget.js"></script>
 <p>書いてて冗長だなと思ったらextensionを追加していって、雑なお仕事をシュッとKotlinで解決できるようになりたいですね。</p>
 
   </div>

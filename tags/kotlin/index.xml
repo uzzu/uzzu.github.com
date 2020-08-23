@@ -20,7 +20,7 @@
 先に結論からいうと IDEA で書いている分にはいけそう、といういつものKotlinの感想を持ちました。@file:Repository, @file:DependsOnあたりを書いてるとIDEAが変更を検知してスクリプトの補完が効くよう読み込んでくれて、あとはいつものKotlinを書いているように自動補完してくれるので、いつものKotlin programmingだなあという感じ。
 ただ kotlin-main-kts は1.4.0の段階ではartifactの依存関係を探索的に解決してくれないので implementation dependencyで依存解決されているライブラリを利用する際は手前で依存解決をしなければいけないというのがあります。kotlin-main-kts向けのライブラリを開発・配布する際は、api dependency で解決しつつ transitive = true にしてやると、依存ライブラリも含まれるのでkotlin-main-ktsでも開発したライブラリの依存解決のみすれば使えるようになります。この辺は今後に期待ですね。Gradle Module Metadataまで含めた依存解決やっていくのかと思うとちょっと大変そうだなと思いますが…。
 あとは、いわゆる雑なスクリプトを書く際にはファイル操作とか子プロセスの実行とかよくやると思うんですが、Kotlinの場合、Kotlinに無い機能についてはJavaの資産に乗っかる事になります。動くものを作る分には問題ないんですが、どうしても他のスクリプト言語に比べて冗長な記述になってしまう所が出てきます。そういう所をKotlin extensionなりを含むヘルパーライブラリを用意して冗長さを軽減していくと、日頃の業務などで書く雑なスクリプトの言語選択肢にKotlinも挙がってくるんじゃないかなと思いました。
-書いてて冗長だなと思ったらextensionを追加していって、雑なお仕事をシュッとKotlinで解決できるようになりたいですね。</description>
+  書いてて冗長だなと思ったらextensionを追加していって、雑なお仕事をシュッとKotlinで解決できるようになりたいですね。</description>
       <guid isPermaLink="true">https://uzzu.co/post/kotlin-main-kts-first-impression.html</guid>
       <pubDate>Sun, 23 Aug 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-823-23T00:00:0000&#43;0900</atom:updated>
@@ -30,7 +30,7 @@
       <title>Gradle Module Metadata便利</title>
       <link>https://uzzu.co/post/gradle-module-metadata.html</link>
       <description>&lt;p&gt;Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Why do libraries like Google Guava struggle with POM metadata and what does Gradle Module Metadata offer them?&lt;br&gt;&lt;br&gt;Find out in this new blog post about Gradle 6 dependency management: &lt;a href=&#34;https://t.co/VLdUWK6wSE&#34;&gt;https://t.co/VLdUWK6wSE&lt;/a&gt; &lt;a href=&#34;https://t.co/nsTwLQCx8h&#34;&gt;pic.twitter.com/nsTwLQCx8h&lt;/a&gt;&lt;/p&gt;&amp;mdash; Gradle (@gradle) &lt;a href=&#34;https://twitter.com/gradle/status/1220255795394248704?ref_src=twsrc%5Etfw&#34;&gt;January 23, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
 &lt;p&gt;&lt;a href=&#34;https://junit.org/junit5/docs/current/release-notes/index.html#release-notes-5.6.0-overall-improvements&#34;&gt;JUnit5.6もサポートしましたね。&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Kotlin MPPで複数のNativeTarget(iosX64, linux64, etc&amp;hellip;)を対象としたライブラリなりアプリケーションを作成する中で &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; や
 &lt;code&gt;kotlinx-serialization-runtime&lt;/code&gt; の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず&lt;/p&gt;

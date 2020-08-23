@@ -67,10 +67,10 @@
 Kotlin MPPでのcommon moduleでCoroutinesのテストをするにはいい感じにやってやる必要があります。</p>
 <h4 id="common">common</h4>
 <p>dependencies: kotlin-test-common, kotlinx-coroutines-core-common</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/uzzu/58cb8bb12c17605017edd01b8498915a.js?file=mpp-common-runtest.kt"></script>
 <h4 id="jvm">jvm</h4>
 <p>dependencies: kotlin-test-junit5 or kotlin-test-junit4, kotlinx-coroutines-core</p>
-<!-- raw HTML omitted -->
+<script src="https://gist.github.com/uzzu/58cb8bb12c17605017edd01b8498915a.js?file=mpp-jvm-runtest.kt"></script>
 <p>ついでにsuspend functionのexpected exception assertionに対応しています。</p>
 <p>assertkでもsuspend functionのテストを簡単に書けるようになるといいなと思います。まだ対応は進んでないようです。</p>
   </div>
