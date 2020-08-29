@@ -4,7 +4,7 @@
     <description>Recent content in Uzzu::Blog</description>
     <link>https://uzzu.co/tags/kotlin.html</link>
     <image>
-      <url>https://uzzu.co/images/avatar.jpg</url>
+      <url>https://uzzu.co/images/avatar.png</url>
       <title>Uzzu::Blog</title>
       <link>https://uzzu.co/tags/kotlin.html</link>
     </image><generator>Hugo -- gohugo.io</generator>
@@ -15,7 +15,7 @@
     <item>
       <title>kotlin-main-kts first impression</title>
       <link>https://uzzu.co/post/kotlin-main-kts-first-impression.html</link>
-      <description>Kotlin 1.1 からJSR-223をサポートしているのでKotlin scriptingはがんばればできるという状態で、Kotlin 1.3 より kotlin-main-kts artifactがやってきて、1.3.70ではコンパイラ及びIDEでのサポートが行われるようになりましたがmavenCentral以外のmaven repository上になるartifactの依存解決に失敗するという不具合を抱えており使えず、これが1.4.0-RC3で修正され、ようやく使い始めてみようかなという段階になってきました。
+      <description>Kotlin 1.1 からJSR-223をサポートしているのでKotlin scriptingはがんばればできるという状態で、Kotlin 1.3 より kotlin-main-kts artifactがやってきて、1.3.70ではコンパイラ及びIDEでのサポートが行われるようになりましたがmavenCentral以外のmaven repository上にあるartifactの依存解決に失敗するという不具合を抱えており使えず、これが1.4.0-RC3で修正され、ようやく使い始めてみようかなという段階になってきました。
 初回実行が遅い、スクリプトのキャッシュが生きている間の実行時間はそこそこ、といったパフォーマンス面の話がありますが、まずは書けなきゃ始まらないのでその辺は承知で気になる方に調べてもらうということでおいといて、書き味がどうなのかという所をだらだらと書きながら見ていました。
 先に結論からいうと IDEA で書いている分にはいけそう、といういつものKotlinの感想を持ちました。@file:Repository, @file:DependsOnあたりを書いてるとIDEAが変更を検知してスクリプトの補完が効くよう読み込んでくれて、あとはいつものKotlinを書いているように自動補完してくれるので、いつものKotlin programmingだなあという感じ。
 ただ kotlin-main-kts は1.4.0の段階ではartifactの依存関係を探索的に解決してくれないので implementation dependencyで依存解決されているライブラリを利用する際は手前で依存解決をしなければいけないというのがあります。kotlin-main-kts向けのライブラリを開発・配布する際は、api dependency で解決しつつ transitive = true にしてやると利用者側での探索的な依存解決は不要になります。この辺は今後に期待ですね。Gradle Module Metadataまで含めた依存解決やっていくのかと思うとちょっと大変そうだなと思いますが…。
