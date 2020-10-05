@@ -16,7 +16,7 @@
       <title>Kotlinのsealed classとdelegateを使った型遊び</title>
       <link>https://uzzu.co/post/kotlin-sealed-classes-and-delegate.html</link>
       <description>&lt;p&gt;Kotlinのsealed classとdelegateを使った型遊びです。&lt;/p&gt;
-&lt;p&gt;例えば以下のような関係のインターフェースがあったとします。&lt;/p&gt;
+&lt;p&gt;例えば以下のような関係のinterfaceがあったとします。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Model&lt;/span&gt; {
     &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; id: String
     &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; name: String

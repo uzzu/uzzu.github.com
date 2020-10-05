@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <meta property="og:title" content="Kotlinのsealed classとdelegateを使った型遊び" />
 <meta property="og:description" content="Kotlinのsealed classとdelegateを使った型遊びです。
-例えば以下のような関係のインターフェースがあったとします。
+例えば以下のような関係のinterfaceがあったとします。
 interface Model {
     val id: String
     val name: String
@@ -88,7 +88,7 @@ sealed class Element : Model {
   </div>
   <div class="blog-post-content">
     <p>Kotlinのsealed classとdelegateを使った型遊びです。</p>
-<p>例えば以下のような関係のインターフェースがあったとします。</p>
+<p>例えば以下のような関係のinterfaceがあったとします。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
     <span style="color:#66d9ef">val</span> id: String
     <span style="color:#66d9ef">val</span> name: String
@@ -134,8 +134,8 @@ class Component
 internal constructor(
     val parent: Container
 ) : Element()
-</code></pre><p>これでも大丈夫です。REPL環境下で書いているので今回はネストする事にします。
-繰り返しますが、上記のコードはもちろんコンパイルが通りません。idプロパティを実装してないからです。ContainerやComponentにはidを注入する必要があります。このクラスを使うユーザに適当にidを降られても困ります。
+</code></pre><p>これでも大丈夫です。REPL環境下で書いているので今回はネストする事にします。</p>
+<p>繰り返しますが、上記のコードはもちろんコンパイルが通りません。idプロパティを実装してないからです。ContainerやComponentにはidを注入する必要があります。これらのclassを使うユーザに適当にidを振られても困ります。
 IdGeneratorを注入するでも良いですが、そもそものContainer, Componentの生成自体を抽象化した方が筋が良さそうです。もちろんFactoryはユーザには見せたくありません。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
     <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): Element.Container
@@ -179,7 +179,7 @@ IdGeneratorを注入するでも良いですが、そもそものContainer, Comp
     <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
     <span style="color:#66d9ef">fun</span> &lt;T : Model&gt; <span style="color:#a6e22e">addAttribute</span>(name: String, value: String): T
 }
-</code></pre></div><p>これでどうでしょうか。Immutableになってますか。うるせ〜〜〜！すみませんが今回はそれが本筋ではないのでmutableにします。</p>
+</code></pre></div><p>これでどうでしょうか。Immutableになってますか。うるせ〜〜〜！すみませんが今回はそれが本筋ではないのでMutableにします。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
     <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): Element.Container
 }
@@ -275,8 +275,8 @@ IdGeneratorを注入するでも良いですが、そもそものContainer, Comp
         mutableAttributes[name] = value
     }
 }
-</code></pre></div><p>では、ここでさらに追加の要件で、Modelインターフェースを実装するクラスRelationshipを追加しましょう。
-アッ、Elementにある実装をRelationshipにも持っていきたいなァ…。</p>
+</code></pre></div><p>ではここでさらに追加の要件で、Modelインターフェースを実装するクラスRelationshipを追加しましょう。</p>
+<p>…アッ！Elementにある実装をRelationshipにも持っていきたいなァ…。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
     <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(name: String): Element.Container
 }
@@ -333,7 +333,7 @@ IdGeneratorを注入するでも良いですが、そもそものContainer, Comp
     id: String
 ): Relationship, Model <span style="color:#66d9ef">by</span> ModelDelegate(id)
 </code></pre></div><p>Kotlinはこんなときdelegateが使えるので良いですね。「継承より移譲」がちゃんと実現できています。</p>
-<p>さてここで、現実はこんなに簡単なクラスばかりではないですから、プロパティやメソッドはどんどん増えますし、一体何が本当に必要なinterfaceなのかわからなくなってきます。
+<p>さてここで、現実はこんなに簡単なclassばかりではないですから、プロパティやメソッドはどんどん増えますし、一体何が本当に必要なinterfaceなのかわからなくなってきます。
 それでもsealed classの恩恵は大きいので維持したい。いっそ今後は一生sealed classに手を触れずに、sealed classの機能を追加していきたい。
 そしてdelegateによる実装も有効活用していきたい。</p>
 <p>やってみましょう。本当に必要なinterfaceですから、ContractsとかRequirementsなんて名前が良さそうですね。今回はRequirementsでいったんやっていきます。
@@ -397,7 +397,7 @@ IdGeneratorを注入するでも良いですが、そもそものContainer, Comp
         mutableAttributes[name] = value
     }
 }
-</code></pre></div><p>このコードはModelの実装クラスの実装をElementの継承クラスであるContainer、Componentだけでなく、Relationshipクラスでも移譲できるように作られました。
+</code></pre></div><p>このコードはModelの実装クラスの実装をElementの継承クラスであるContainer、Componentだけでなく、Relationshipでも移譲できるように作られました。
 interface分離されたわけですから、ModelDelegateと同様に、sealed classであるElement、Container、Componentから実装クラスに移譲してしまえばよいのではないでしょうか。
 さて実装していきます。</p>
 <pre><code>// region Requirements
@@ -510,7 +510,7 @@ internal class ComponentDelegate(
         ComponentRequirements <span style="color:#66d9ef">by</span> requirements
 }
 </code></pre></div><p>sealed classの宣言以外をすべて移譲する事ができました。やりましたね。</p>
-<p>これの何が嬉しいかと言われれば、本当にElement sealed classと、それらに必要なinterfaceのみがpublicになり、他をinternalに閉じる事ができる点です。ComponentFactoryだのContainerFactoryだの最初にあーだこーだ言いましたが、facade以外はすべてinternalに閉じるので、オブジェクトの振る舞いや依存関係をどう解決するか、どう実装するかをinternalに閉じて検討する事ができます。
+<p>これの何が嬉しいかと言われれば、Element sealed classと、それらに本当に必要なinterfaceのみがpublicになり、他をinternalに閉じる事ができる点です。ComponentFactoryだのContainerFactoryだの最初にあーだこーだ言いましたが、facade以外はすべてinternalに閉じるので、オブジェクトの振る舞いや依存関係をどう解決するか、どう実装するかをinternalに閉じて検討する事ができます。
 今回の実装においては各RequirementsインターフェースをDelegateクラスが直接実装しましたが、その間にもう1枚interfaceをかます事で、非publicなプロパティやメソッドも持つことができますし、結果としてモデリングが捗る、というわけです。</p>
 <h2 id="まとめ">まとめ</h2>
 <p><strong>ご利用は計画的に。</strong></p>
