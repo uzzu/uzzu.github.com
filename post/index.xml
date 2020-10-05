@@ -10,8 +10,48 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 23 Aug 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 05 Oct 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/post.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kotlinのsealed classとdelegateを使った型遊び</title>
+      <link>https://uzzu.co/post/kotlin-sealed-classes-and-delegate.html</link>
+      <description>&lt;p&gt;Kotlinのsealed classとdelegateを使った型遊びです。&lt;/p&gt;
+&lt;p&gt;例えば以下のような関係のインターフェースがあったとします。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Model&lt;/span&gt; {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; id: String
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; name: String
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Element&lt;/span&gt; : Model
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Container&lt;/span&gt; : Element {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createComponent&lt;/span&gt;(name: String): Component
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Component&lt;/span&gt; : Element {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; parent: Container
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本来はComponentを生成する責務をContainerに持たせたくはない(Factoryとして分離するべき)ですが、ContainerにcreateComponentを生やさなければいけない、というケースであるとします。
+その上で、Element以下の関係性をsealed classとして表現したい!と思う事があります。
+具体的には&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Model&lt;/span&gt; {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; id: String
+}
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;sealed&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Element&lt;/span&gt; : Model {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Container&lt;/span&gt; : Element() {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createComponent&lt;/span&gt;(): Component = Component(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;)
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Component&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;internal&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;constructor&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; parent: Container) : Element()
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;のようにしたい。まだイメージ段階ですので当然ですが、上記のコードはもちろんコンパイルが通りません。
+それではやっていきます。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/kotlin-sealed-classes-and-delegate.html</guid>
+      <pubDate>Mon, 05 Oct 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-105-05T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>kotlin-main-kts first impression</title>
       <link>https://uzzu.co/post/kotlin-main-kts-first-impression.html</link>
@@ -183,15 +223,6 @@ https://github.com/bintray/gradle-bintray-plugin/issues/229
       <guid isPermaLink="true">https://uzzu.co/post/kotlin-mpp-boilerplate.html</guid>
       <pubDate>Fri, 04 Jan 2019 00:00:00 +0900</pubDate>
       <atom:updated>2019-14-04T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>年末年始あれこれ2018/2019</title>
-      <link>https://uzzu.co/post/20190103.html</link>
-      <description>&lt;p&gt;なんとなくここ数年SNSはちょっと距離を置いて、Twitterではほどほどにまともな事を書く生活を送っていたけど、Twitterでほどほどにまともな事を書いても効果が薄いなという当たり前の結論に至った。昔から言ってるんだがーな事が視界に入って届いてないとかで一人で消耗しているとかそういう話。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/20190103.html</guid>
-      <pubDate>Thu, 03 Jan 2019 12:33:01 +0900</pubDate>
-      <atom:updated>2019-13-03T12:33:0100&#43;0900</atom:updated>
       
     </item>
   </channel>

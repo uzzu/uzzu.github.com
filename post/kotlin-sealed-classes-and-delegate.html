@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Kotlinのsealed classとdelegateを使った型遊び</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="Kotlinのsealed classとdelegateを使った型遊び" />
+<meta property="og:description" content="Kotlinのsealed classとdelegateを使った型遊びです。
+例えば以下のような関係のインターフェースがあったとします。
+interface Model {
+    val id: String
+    val name: String
+}
+
+interface Element : Model
+
+interface Container : Element {
+    fun createComponent(name: String): Component
+}
+
+interface Component : Element {
+    val parent: Container
+}
+本来はComponentを生成する責務をContainerに持たせたくはない(Factoryとして分離するべき)ですが、ContainerにcreateComponentを生やさなければいけない、というケースであるとします。
+その上で、Element以下の関係性をsealed classとして表現したい!と思う事があります。
+具体的には
+interface Model {
+    val id: String
+}
+
+sealed class Element : Model {
+    class Container : Element() {
+        fun createComponent(): Component = Component(this)
+    }
+
+    class Component internal constructor(val parent: Container) : Element()
+}
+のようにしたい。まだイメージ段階ですので当然ですが、上記のコードはもちろんコンパイルが通りません。
+それではやっていきます。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/kotlin-sealed-classes-and-delegate.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-10-05T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-10-05T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>Kotlinのsealed classとdelegateを使った型遊び</h1>
+  <div class="blog-post-subheader">
+    <time>05 Oct 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>Kotlinのsealed classとdelegateを使った型遊びです。</p>
+<p>例えば以下のような関係のインターフェースがあったとします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> name: String
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Element</span> : Model
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Container</span> : Element {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createComponent</span>(name: String): Component
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Component</span> : Element {
+    <span style="color:#66d9ef">val</span> parent: Container
+}
+</code></pre></div><p>本来はComponentを生成する責務をContainerに持たせたくはない(Factoryとして分離するべき)ですが、ContainerにcreateComponentを生やさなければいけない、というケースであるとします。
+その上で、Element以下の関係性をsealed classとして表現したい!と思う事があります。
+具体的には</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+}
+
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span> : Model {
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span> : Element() {
+        <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createComponent</span>(): Component = Component(<span style="color:#66d9ef">this</span>)
+    }
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span> <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">val</span> parent: Container) : Element()
+}
+</code></pre></div><p>のようにしたい。まだイメージ段階ですので当然ですが、上記のコードはもちろんコンパイルが通りません。
+それではやっていきます。</p>
+<p>いきなり余談ですが、Kotlinは同一ファイル内であれば、ContainerやComponentはElementの中にネストしてコードを書く必要はありません。</p>
+<pre><code>interface Model {
+    val id: String
+}
+
+sealed class Element : Model
+
+class Container : Element() {
+    fun createComponent(): Component = Component(this)
+}
+
+class Component
+internal constructor(
+    val parent: Container
+) : Element()
+</code></pre><p>これでも大丈夫です。REPL環境下で書いているので今回はネストする事にします。
+繰り返しますが、上記のコードはもちろんコンパイルが通りません。idプロパティを実装してないからです。ContainerやComponentにはidを注入する必要があります。このクラスを使うユーザに適当にidを降られても困ります。
+IdGeneratorを注入するでも良いですが、そもそものContainer, Componentの生成自体を抽象化した方が筋が良さそうです。もちろんFactoryはユーザには見せたくありません。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): Element.Container
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ComponentFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(container: Element.Container): Element.Component
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+}
+
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span> : Model {
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> factory: ComponentFactory,
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+    ) : Element() {
+
+        <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createComponent</span>(): Component =
+            factory.create(<span style="color:#66d9ef">this</span>)
+    }
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">val</span> parent: Container,
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+    ) : Element()
+}
+
+</code></pre></div><p>ここでさらに追加の要件です。Modelにはattributeをmutableに割り当てられるようにしたいです。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+</code></pre></div><p>Mutableやめろ！Immutableに作り直せ！分かります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> &lt;T : Model&gt; <span style="color:#a6e22e">addAttribute</span>(name: String, value: String): T
+}
+</code></pre></div><p>これでどうでしょうか。Immutableになってますか。うるせ〜〜〜！すみませんが今回はそれが本筋ではないのでmutableにします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): Element.Container
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ComponentFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(container: Element.Container): Element.Component
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span> : Model {
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> factory: ComponentFactory,
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+    ) : Element() {
+
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+            <span style="color:#66d9ef">get</span>() = mutableAttributes.toMap()
+
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> mutableAttributes: MutableMap&lt;String, String&gt; = LinkedHashMap()
+
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String) {
+            mutableAttributes[name] = value
+        }
+
+        <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(container: Element.Container): Element.Component =
+            factory.create(<span style="color:#66d9ef">this</span>)
+    }
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">val</span> parent: Container,
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+    ) : Element() {
+
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+            <span style="color:#66d9ef">get</span>() = mutableAttributes.toMap()
+
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> mutableAttributes: MutableMap&lt;String, String&gt; = LinkedHashMap()
+
+        <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String) {
+            mutableAttributes[name] = value
+        }
+    }
+}
+</code></pre></div><p>実装しました。うーんだいぶ実装が被っていますね。Container or Component is a Element, Element is a Model な関係であれば、一旦Elementに持っていっても大丈夫そうでしょうか。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): Element.Container
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ComponentFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(container: Element.Container): Element.Component
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span>(
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+) : Model {
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> factory: ComponentFactory,
+        id: String
+    ) : Element(id) {
+
+        <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(container: Element.Container): Element.Component =
+            factory.create(<span style="color:#66d9ef">this</span>)
+    }
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">val</span> parent: Container,
+        id: String
+    ) : Element(id)
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+        <span style="color:#66d9ef">get</span>() = mutableAttributes.toMap()
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> mutableAttributes: MutableMap&lt;String, String&gt; = LinkedHashMap()
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String) {
+        mutableAttributes[name] = value
+    }
+}
+</code></pre></div><p>では、ここでさらに追加の要件で、Modelインターフェースを実装するクラスRelationshipを追加しましょう。
+アッ、Elementにある実装をRelationshipにも持っていきたいなァ…。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(name: String): Element.Container
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ComponentFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(container: Element.Container, name: String): Element.Component
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelDelegate</span>(
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+) : Model {
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+        <span style="color:#66d9ef">get</span>() = mutableAttributes.toMap()
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> mutableAttributes: MutableMap&lt;String, String&gt; = LinkedHashMap()
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String) {
+        mutableAttributes[name] = value
+    }
+}
+
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span>(
+    id: String
+) : Model <span style="color:#66d9ef">by</span> ModelDelegate(id) {
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> factory: ComponentFactory,
+        id: String
+    ) : Element(id)
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        <span style="color:#66d9ef">val</span> parent: Container,
+        id: String
+    ) : Element(id)
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Relationship</span> : Model {
+    <span style="color:#66d9ef">val</span> source: Element
+    <span style="color:#66d9ef">val</span> destination: Element
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RelationshipImpl</span>(
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> source: Element,
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> destination: Element,
+    id: String
+): Relationship, Model <span style="color:#66d9ef">by</span> ModelDelegate(id)
+</code></pre></div><p>Kotlinはこんなときdelegateが使えるので良いですね。「継承より移譲」がちゃんと実現できています。</p>
+<p>さてここで、現実はこんなに簡単なクラスばかりではないですから、プロパティやメソッドはどんどん増えますし、一体何が本当に必要なinterfaceなのかわからなくなってきます。
+それでもsealed classの恩恵は大きいので維持したい。いっそ今後は一生sealed classに手を触れずに、sealed classの機能を追加していきたい。
+そしてdelegateによる実装も有効活用していきたい。</p>
+<p>やってみましょう。本当に必要なinterfaceですから、ContractsとかRequirementsなんて名前が良さそうですね。今回はRequirementsでいったんやっていきます。
+もうちょっとプロパティやメソッドも増やしつつやっていきます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ElementRequirements</span> : Model {
+    <span style="color:#66d9ef">val</span> name: String
+    <span style="color:#66d9ef">val</span> description: String
+}
+
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span> : ElementRequirements
+</code></pre></div><p>はい。このあと、ContainerとComponentを追加する以外にElementに触る事はありません。しばしのお別れです。
+同じ調子で、ContainerやComponentも本当に必要なinterfaceがなんなのか明らかにしていきましょう。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ElementRequirements</span> : Model {
+    <span style="color:#66d9ef">val</span> name: String
+    <span style="color:#66d9ef">val</span> description: String
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerRequirements</span> : ElementRequirements {
+    <span style="color:#66d9ef">var</span> technology: String
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createComponent</span>(name: String): Element.Component
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ComponentRequirements</span> : ElementRequirements {
+    <span style="color:#66d9ef">val</span> parent: Element.Container
+    <span style="color:#66d9ef">var</span> technology: String
+    <span style="color:#66d9ef">val</span> codes: Set&lt;Code&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createCode</span>(type: String): Code
+}
+
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Code</span>(<span style="color:#66d9ef">val</span> type: String)
+</code></pre></div><p>Codeについてはほっといてください。まあなんか作る必要があるんでしょう。
+さてinterfaceが明らかになったわけですから、ContainerやComponentを実装していきます。
+ここで少し前のコードを思い出します。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelDelegate</span>(
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+) : Model {
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+        <span style="color:#66d9ef">get</span>() = mutableAttributes.toMap()
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> mutableAttributes: MutableMap&lt;String, String&gt; = LinkedHashMap()
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String) {
+        mutableAttributes[name] = value
+    }
+}
+</code></pre></div><p>このコードはModelの実装クラスの実装をElementの継承クラスであるContainer、Componentだけでなく、Relationshipクラスでも移譲できるように作られました。
+interface分離されたわけですから、ModelDelegateと同様に、sealed classであるElement、Container、Componentから実装クラスに移譲してしまえばよいのではないでしょうか。
+さて実装していきます。</p>
+<pre><code>// region Requirements
+
+
+interface Model {
+    val id: String
+    val attributes: Map&lt;String, String&gt;
+    fun addAttribute(name: String, value: String)
+}
+
+interface ElementRequirements : Model {
+    val name: String
+    val description: String
+}
+
+interface ContainerRequirements : ElementRequirements {
+    var technology: String
+    fun createComponent(name: String): Element.Component
+}
+
+interface ComponentRequirements : ElementRequirements {
+    val parent: Element.Container
+    var technology: String
+    val codes: Set&lt;Code&gt;
+    fun createCode(type: String): Code
+}
+
+data class Code(val type: String)
+
+// endregion
+
+// region Implementation
+
+internal class ModelDelegate(
+    override val id: String
+) : Model {
+
+    override val attributes: Map&lt;String, String&gt;
+        get() = mutableAttributes.toMap()
+
+    private val mutableAttributes: MutableMap&lt;String, String&gt; = LinkedHashMap()
+
+    override fun addAttribute(name: String, value: String) {
+        mutableAttributes[name] = value
+    }
+}
+
+internal class ElementDelegate(
+    id: String,
+    override val name: String
+) : ElementRequirements, Model by ModelDelegate(id) {
+
+    override var description: String = &quot;&quot;
+}
+
+internal class ContainerDelegate(
+    id: String,
+    name: String,
+    private val factory: ComponentFactory
+) : ContainerRequirements,
+    ElementRequirements by ElementDelegate(id, name) {
+
+    override var description: String = &quot;&quot;
+
+    override var technology: String = &quot;&quot;
+
+    override fun createComponent(name: String): Element.Component {
+        return factory.create(this, name)
+    }
+}
+
+internal class ComponentDelegate(
+    override val parent: Element.Container,
+    id: String,
+    name: String
+) : ComponentRequirements,
+    ElementRequirements by ElementDelegate(id, name) {
+
+    override var description: String = &quot;&quot;
+
+    override var technology: String = &quot;&quot;
+
+    override val codes: Set&lt;Code&gt;
+        get() = mutableCodes.toSet()
+
+    private val mutableCodes: MutableSet&lt;Code&gt; = LinkedHashSet()
+
+    override fun createCode(type: String): Code {
+        val code = Code(type)
+        mutableCodes.add(code)
+        return code
+    }
+}
+
+// endregion
+</code></pre><p>実装しました。すると、sealed classの定義は以下のようになります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span> : ElementRequirements {
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        requirements: ContainerRequirements
+    ) : Element(),
+        ContainerRequirements <span style="color:#66d9ef">by</span> requirements
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        requirements: ComponentRequirements
+    ) : Element(),
+        ComponentRequirements <span style="color:#66d9ef">by</span> requirements
+}
+</code></pre></div><p>sealed classの宣言以外をすべて移譲する事ができました。やりましたね。</p>
+<p>これの何が嬉しいかと言われれば、本当にElement sealed classと、それらに必要なinterfaceのみがpublicになり、他をinternalに閉じる事ができる点です。ComponentFactoryだのContainerFactoryだの最初にあーだこーだ言いましたが、facade以外はすべてinternalに閉じるので、オブジェクトの振る舞いや依存関係をどう解決するか、どう実装するかをinternalに閉じて検討する事ができます。
+今回の実装においては各RequirementsインターフェースをDelegateクラスが直接実装しましたが、その間にもう1枚interfaceをかます事で、非publicなプロパティやメソッドも持つことができますし、結果としてモデリングが捗る、というわけです。</p>
+<h2 id="まとめ">まとめ</h2>
+<p><strong>ご利用は計画的に。</strong></p>
+<hr>
+<h3 id="すべてのソースコード">すべてのソースコード</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#75715e">// region Requirements
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Model</span> {
+    <span style="color:#66d9ef">val</span> id: String
+    <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String)
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ElementRequirements</span> : Model {
+    <span style="color:#66d9ef">val</span> name: String
+    <span style="color:#66d9ef">val</span> description: String
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerRequirements</span> : ElementRequirements {
+    <span style="color:#66d9ef">var</span> technology: String
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createComponent</span>(name: String): Element.Component
+}
+
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ComponentRequirements</span> : ElementRequirements {
+    <span style="color:#66d9ef">val</span> parent: Element.Container
+    <span style="color:#66d9ef">var</span> technology: String
+    <span style="color:#66d9ef">val</span> codes: Set&lt;Code&gt;
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createCode</span>(type: String): Code
+}
+
+<span style="color:#75715e">// endregion
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// region sealed classes
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">sealed</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Element</span> : ElementRequirements {
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Container</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        requirements: ContainerRequirements
+    ) : Element(),
+        ContainerRequirements <span style="color:#66d9ef">by</span> requirements
+
+    <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Component</span>
+    <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">constructor</span>(
+        requirements: ComponentRequirements
+    ) : Element(),
+        ComponentRequirements <span style="color:#66d9ef">by</span> requirements
+}
+
+<span style="color:#75715e">// endregion
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// region Other dependencies
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">Relationship</span> : Model {
+    <span style="color:#66d9ef">val</span> source: Element
+    <span style="color:#66d9ef">val</span> destination: Element
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">RelationshipImpl</span>(
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> source: Element,
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> destination: Element,
+    id: String
+): Relationship, Model <span style="color:#66d9ef">by</span> ModelDelegate(id)
+
+<span style="color:#66d9ef">data</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Code</span>(<span style="color:#66d9ef">val</span> type: String)
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(): Element.Container
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ComponentFactory</span> {
+    <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">create</span>(parent: ContainerRequirements, name: String): Element.Component
+}
+
+<span style="color:#75715e">// endregion
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// region Implementation
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ModelDelegate</span>(
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> id: String
+) : Model {
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> attributes: Map&lt;String, String&gt;
+        <span style="color:#66d9ef">get</span>() = mutableAttributes.toMap()
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> mutableAttributes: MutableMap&lt;String, String&gt; = LinkedHashMap()
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">addAttribute</span>(name: String, value: String) {
+        mutableAttributes[name] = value
+    }
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ElementDelegate</span>(
+    id: String,
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> name: String
+) : ElementRequirements, Model <span style="color:#66d9ef">by</span> ModelDelegate(id) {
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">var</span> description: String = <span style="color:#e6db74">&#34;&#34;</span>
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ContainerDelegate</span>(
+    id: String,
+    name: String,
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> factory: ComponentFactory
+) : ContainerRequirements,
+    ElementRequirements <span style="color:#66d9ef">by</span> ElementDelegate(id, name) {
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">var</span> description: String = <span style="color:#e6db74">&#34;&#34;</span>
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">var</span> technology: String = <span style="color:#e6db74">&#34;&#34;</span>
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createComponent</span>(name: String): Element.Component {
+        <span style="color:#66d9ef">return</span> factory.create(<span style="color:#66d9ef">this</span>, name)
+    }
+}
+
+<span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ComponentDelegate</span>(
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> parent: Element.Container,
+    id: String,
+    name: String
+) : ComponentRequirements,
+    ElementRequirements <span style="color:#66d9ef">by</span> ElementDelegate(id, name) {
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">var</span> description: String = <span style="color:#e6db74">&#34;&#34;</span>
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">var</span> technology: String = <span style="color:#e6db74">&#34;&#34;</span>
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">val</span> codes: Set&lt;Code&gt;
+        <span style="color:#66d9ef">get</span>() = mutableCodes.toSet()
+
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">val</span> mutableCodes: MutableSet&lt;Code&gt; = LinkedHashSet()
+
+    <span style="color:#66d9ef">override</span> <span style="color:#66d9ef">fun</span> <span style="color:#a6e22e">createCode</span>(type: String): Code {
+        <span style="color:#66d9ef">val</span> code = Code(type)
+        mutableCodes.add(code)
+        <span style="color:#66d9ef">return</span> code
+    }
+}
+
+<span style="color:#75715e">// endregion
+</span></code></pre></div>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
