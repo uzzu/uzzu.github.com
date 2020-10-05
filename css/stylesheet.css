@@ -67,7 +67,7 @@ h6  {
 code {
   font-family: 'Ubuntu Mono', monospace;
   white-space: pre;
-  overflow-x: auto;
+  overflow-x: scroll;
 }
 
 pre {
