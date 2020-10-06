@@ -1,7 +1,7 @@
 body {
     font-family: 'Ubuntu', monospace;
     margin: auto;
-    max-width: 50em;
+    max-width: 48rem;
 }
 
 #page-title {
@@ -32,12 +32,13 @@ body {
 }
 
 .blog-post-content {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .posts_listing li {
   list-style-type: none;
+  margin: 0.5rem;
 }
 
 h1 {
@@ -62,6 +63,16 @@ h5  {
 
 h6  {
   font-size: 0.8rem;
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1rem;
+  margin-block-end: 1rem;
+  margin-inline-start: 0rem;
+  margin-inline-end: 0rem;
+  padding-inline-start: 0rem;
 }
 
 code {
