@@ -68,7 +68,7 @@ h6  {
 ul {
   display: block;
   list-style-type: disc;
-  margin-block-start: 1rem;
+  margin-block-start: 0rem;
   margin-block-end: 1rem;
   margin-inline-start: 2rem;
   margin-inline-end: 1rem;
