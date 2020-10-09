@@ -7,10 +7,11 @@ based on dark.css by Ivan Sagalaev
 
 .hljs {
   display: block;
-  overflow-x: auto;
+  overflow-x: scroll;
   padding: 0.5em;
   background: #3f3f3f;
   color: #dcdcdc;
+  font-size: 1.0rem;
   line-height: 1.0rem;
 }
 

@@ -88,11 +88,9 @@ ul.post-listing {
 code {
   font-family: 'Ubuntu Mono', monospace;
   white-space: pre;
-  overflow-x: scroll;
 }
 
 pre {
-  overflow-x: auto;
   background-color: #efefef
 }
 
