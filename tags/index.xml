@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 05 Oct 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>poem</title>
+      <link>https://uzzu.co/tags/poem.html</link>
+      <description></description>
+      <guid isPermaLink="true">https://uzzu.co/tags/poem.html</guid>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-121-01T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>kotlin</title>
       <link>https://uzzu.co/tags/kotlin.html</link>

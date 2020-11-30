@@ -1,0 +1,25 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Uzzu::Blog</title>
+    <description>Recent content in Uzzu::Blog</description>
+    <link>https://uzzu.co/tags/poem.html</link>
+    <image>
+      <url>https://uzzu.co/images/avatar.png</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/poem.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://uzzu.co/tags/poem.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ハワイアン2020 Introduction</title>
+      <link>https://uzzu.co/post/hawaiian2020-intro.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 1日目の記事です。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/hawaiian2020-intro.html</guid>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-121-01T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
+  </channel>
+</rss>

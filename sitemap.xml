@@ -3,27 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://uzzu.co/tags/poem.html</loc>
+    <lastmod>2020-12-01T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/post.html</loc>
+    <lastmod>2020-12-01T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/tags.html</loc>
+    <lastmod>2020-12-01T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/</loc>
+    <lastmod>2020-12-01T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://uzzu.co/post/hawaiian2020-intro.html</loc>
+    <lastmod>2020-12-01T00:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://uzzu.co/tags/kotlin.html</loc>
     <lastmod>2020-10-05T00:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://uzzu.co/post/kotlin-sealed-classes-and-delegate.html</loc>
-    <lastmod>2020-10-05T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/post.html</loc>
-    <lastmod>2020-10-05T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/tags.html</loc>
-    <lastmod>2020-10-05T00:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://uzzu.co/</loc>
     <lastmod>2020-10-05T00:00:00+09:00</lastmod>
   </url>
   
