@@ -10,8 +10,18 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ソフトウェア設計の際には遺書を書こう</title>
+      <link>https://uzzu.co/post/write-a-farewell-note.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 2日目の記事です。ツイートアナリティクスによれば、1日目のブログへのエンゲージメントは32という事だそうです。今確認のためにもう一回開いたので33です。わたしは自分のブログを何回も読み直すので、99%は自分のアクセスでしょう。これまでご愛読頂きありがとうございました。
+Advent Calendarの前半では進化的アーキテクチャについて触れてやっていくつもりなので、その為の前提を埋めていきたいと思います。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/write-a-farewell-note.html</guid>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-122-02T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>ハワイアン2020 Introduction</title>
       <link>https://uzzu.co/post/hawaiian2020-intro.html</link>
@@ -213,15 +223,6 @@ https://github.com/bintray/gradle-bintray-plugin/issues/229
       <guid isPermaLink="true">https://uzzu.co/post/mpp-coroutines-test-common.html</guid>
       <pubDate>Thu, 10 Jan 2019 00:00:00 +0900</pubDate>
       <atom:updated>2019-110-10T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>kotlinx.serialization/JSON利用時にkotlinx-serialization pluginを使用しない</title>
-      <link>https://uzzu.co/post/kotlin-json-serialization-mini.html</link>
-      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/Kotlin/kotlinx.serialization&#34;&gt;kotlinx.serialization&lt;/a&gt;は書いて字の通りserialize/deserializeライブラリで、Multiplatformサポートと、フォーマットとしてJSON、CBOR、Protobufをサポートしています。バージョンが0系ということでinterfaceに変更が入る可能性はあるけど、まあ使わなければなんとやら。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/kotlin-json-serialization-mini.html</guid>
-      <pubDate>Sat, 05 Jan 2019 00:00:00 +0900</pubDate>
-      <atom:updated>2019-15-05T00:00:0000&#43;0900</atom:updated>
       
     </item>
   </channel>

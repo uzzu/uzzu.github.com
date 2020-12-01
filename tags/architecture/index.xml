@@ -1,0 +1,26 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Uzzu::Blog</title>
+    <description>Recent content in Uzzu::Blog</description>
+    <link>https://uzzu.co/tags/architecture.html</link>
+    <image>
+      <url>https://uzzu.co/images/avatar.png</url>
+      <title>Uzzu::Blog</title>
+      <link>https://uzzu.co/tags/architecture.html</link>
+    </image><generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 02 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <atom:link href="https://uzzu.co/tags/architecture.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ソフトウェア設計の際には遺書を書こう</title>
+      <link>https://uzzu.co/post/write-a-farewell-note.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 2日目の記事です。ツイートアナリティクスによれば、1日目のブログへのエンゲージメントは32という事だそうです。今確認のためにもう一回開いたので33です。わたしは自分のブログを何回も読み直すので、99%は自分のアクセスでしょう。これまでご愛読頂きありがとうございました。
+Advent Calendarの前半では進化的アーキテクチャについて触れてやっていくつもりなので、その為の前提を埋めていきたいと思います。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/write-a-farewell-note.html</guid>
+      <pubDate>Wed, 02 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-122-02T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
+  </channel>
+</rss>

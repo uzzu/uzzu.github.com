@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ソフトウェア設計の際には遺書を書こう</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="ソフトウェア設計の際には遺書を書こう" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 2日目の記事です。ツイートアナリティクスによれば、1日目のブログへのエンゲージメントは32という事だそうです。今確認のためにもう一回開いたので33です。わたしは自分のブログを何回も読み直すので、99%は自分のアクセスでしょう。これまでご愛読頂きありがとうございました。
+Advent Calendarの前半では進化的アーキテクチャについて触れてやっていくつもりなので、その為の前提を埋めていきたいと思います。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/write-a-farewell-note.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-02T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-02T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>ソフトウェア設計の際には遺書を書こう</h1>
+  <div class="blog-post-subheader">
+    <time>02 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 2日目の記事です。ツイートアナリティクスによれば、1日目のブログへのエンゲージメントは32という事だそうです。今確認のためにもう一回開いたので33です。わたしは自分のブログを何回も読み直すので、99%は自分のアクセスでしょう。これまでご愛読頂きありがとうございました。
+Advent Calendarの前半では進化的アーキテクチャについて触れてやっていくつもりなので、その為の前提を埋めていきたいと思います。</p>
+<p>2020年現在、サービス開発や製品開発の為のソースコードの自動生成が進んでいますが、残念ながら製品開発の根幹となるロジックは人間が書いています。人間がソースコードを書くこの時代において、ソフトウェア設計とはなんの為にあるのでしょうか。リファクタリングはなぜ行うのでしょうか。綺麗なコードを書くのはなんの為でしょうか。綺麗なコードは誰にとって綺麗なコードなのでしょうか。Testableなコードを書くのはなんの為でしょうか。良い設計とはなんなのでしょうか。こうしたトピックは時代の変化とともに再考する必要があります。それはなぜかと言われれば、ソフトウェア設計はソフトウェアに対する投資の側面が非常に強いからです。例えばプロトタイプフェーズからいざ製品化やサービスの拡大となった際によく訪れる「成長痛」といったものもソフトウェアアーキテクチャの寿命が尽きたといえますし、無意味な拡張性や再利用性も理解可能性を低下させ反感を買い生産性の低下にも繋がり結果的にビジネスチャンスを失いかねません。それでも尚、サービスの根幹となるソフトウェアが漸進的に成長していくための投資のバランス感覚を養う必要があります。わたし自身そのどちらの失敗経験があるので耳の痛い話ではあります。</p>
+<p>この話をすると2日目にして全て終わらせてしまう事になるので翌日以降に回しますが、そうした経験というのは機会に恵まれなければなかなか得られないもので、想像だけでは及ばない所ではあります。しかしながら自身のエンジニアの半生を思うと常に意識してやっている事があり、これは身近な所から実践できるし、自分もこれを継続して養って来た節があるので、2日目はそれを文書化して終わりにしようと思います。</p>
+<h2 id="設計力を伸ばす為に常に遺書を残す">設計力を伸ばす為に常に遺書を残す</h2>
+<p>「遺書」とはなんらかの要因で死を覚悟した人が残す文章です。ソフトウェア開発における死の定義については人によって判断が違う所があります。生産性を伴うものであったり、ソフトウェア内部品質を下げるBad Smellなコードが生まれるようになった、ソフトウェアアーキテクチャを支えていた人がチームから離れた、そもそもサービスが終了した等、多岐に渡るでしょう。チームでのソフトウェア開発に携わっているのであれば、チームで認識を揃えておくと良いでしょう。その全ての要因を考慮した遺書を書いてください。</p>
+<p>遺書は寿命が尽きたとき、該当ソースコードが削除された時、あるいは寿命より前にサービスが終了した時にあらためて開封し、遺書の内容と現在が一致しているか確認してください。ずれていれば、設計力がまだまだ足りないという事です。予期せぬ出来事があって寿命を迎えた、もしくは寿命を迎えることなく終了したのなら、それは今後の寿命の計算に考慮しましょう。</p>
+<p>遺書の内容は可能であればチームや組織に対してオープンな方が良いですが、奥手なアーキテクトや、一個人として取り組むのであればうちに秘める形でも良いでしょう。遺書なんて表現をしてますが、要するに設計をソフトウェアに反映して一定期間運用したらちゃんと蒸留する機会を設けよう、という事です。</p>
+<p>今日あなたが取り組むものについて、寿命を計算してみてください。プログラミング初心者であれば1行のコードから徐々に、メソッド、型、コラボレーションへと対象を大きくしていきます。中級者・上級者であれば、モジュール、アプリケーション設計全体、複数アプリケーションと広げていってください。記載する内容は以下を参考にしてください。</p>
+<ul>
+<li>ソースコード、メソッド
+<ul>
+<li>たとえばソースコードの間に空白行1行を挟んだとして、その空行の意味を説明でき、かつ寿命はどれだけか、書いてください</li>
+<li>その寿命を具体的な期間として示した際の根拠となる評価軸はなんでしょうか。これも書き残してください。自分なりの表現で良いです</li>
+</ul>
+</li>
+<li>型、コラボレーション
+<ul>
+<li>その型はどうなったら寿命を迎えるのでしょうか。書いてください</li>
+<li>何かしらの設計パターンを適用してソースコードが綺麗になった、よかった、で満足せず、その設計パターンを適用する事で周辺のソースコードの寿命が何年伸びたか具体的に書いてください</li>
+<li>合算して、今あなたが開発しているソフトウェアが現在の設計で何年持つか試算してみましょう</li>
+</ul>
+</li>
+<li>モジュール、アプリケーション設計全体、複数アプリケーション
+<ul>
+<li>あなたが開発チームからいなくなったらどうなりますか</li>
+<li>チームメンバーのスキルセットを踏まえ、その設計は何年持ちますか。チームメンバーの教育も前提でしょうか。書いてください。会社務めであれば、会社の人員の流動性・組織運営の風土も考慮してください</li>
+<li>今取り組んでいるアプリケーションがn年後にどうなっているでしょうか。予測できない未来は予測しなくて良いですが、いつまでたってもそれでは成長痛から逃れられません。アーキテクトとしては未熟です。サービスに関心を持ってください。サービスの展開が想像できないのであればプロダクトオーナーともっと会話し、予測できる未来は予測し、精度を高めて遺書に書き記してください。</li>
+</ul>
+</li>
+</ul>
+<p>もちろん、これらは動くものが作れる前提です。動いてなければ寿命もなにも生まれていません。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
