@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 03 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/architecture.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>クライアントアプリケーション開発の技術の進化とLast Responsible Moment</title>
+      <link>https://uzzu.co/post/last-responsible-moment.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 4日目の記事です。今日はオンライン飲みってやつがあって、今お酒を飲んでいます。&lt;a href=&#34;https://uzzu.co/post/20201203-along-multiple-dimentions.md&#34;&gt;3日目&lt;/a&gt; はちょっとこってりだったかもですし、投稿時間も悪かったし、反省してます。反省してません。朝投稿しようかな。押し付けが厳しい、なんだかこぞって取り繕って丁寧な文章を書いてる量産型な世の中だからこそ、わたしは押し付けられたいし、初期衝動を感じる技術ブログを読みたいなという気持ちで書いています。ドリランド&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/last-responsible-moment.html</guid>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-124-04T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>複数の次元</title>
       <link>https://uzzu.co/post/along-multiple-dimentions.html</link>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>クライアントアプリケーション開発の技術の進化とLast Responsible Moment</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="クライアントアプリケーション開発の技術の進化とLast Responsible Moment" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 4日目の記事です。今日はオンライン飲みってやつがあって、今お酒を飲んでいます。3日目 はちょっとこってりだったかもですし、投稿時間も悪かったし、反省してます。反省してません。朝投稿しようかな。押し付けが厳しい、なんだかこぞって取り繕って丁寧な文章を書いてる量産型な世の中だからこそ、わたしは押し付けられたいし、初期衝動を感じる技術ブログを読みたいなという気持ちで書いています。ドリランド" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/last-responsible-moment.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-04T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-04T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>クライアントアプリケーション開発の技術の進化とLast Responsible Moment</h1>
+  <div class="blog-post-subheader">
+    <time>04 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 4日目の記事です。今日はオンライン飲みってやつがあって、今お酒を飲んでいます。<a href="/post/20201203-along-multiple-dimentions.md">3日目</a> はちょっとこってりだったかもですし、投稿時間も悪かったし、反省してます。反省してません。朝投稿しようかな。押し付けが厳しい、なんだかこぞって取り繕って丁寧な文章を書いてる量産型な世の中だからこそ、わたしは押し付けられたいし、初期衝動を感じる技術ブログを読みたいなという気持ちで書いています。ドリランド</p>
+<p>進化的アーキテクチャの本を呼んでるとだいたいサーバサイドアプリケーションの話ですね。クライアントサイドアプリケーションでいう進化的ってなんなんでしょうか。ソフトウェア開発をするのは人なので、人の話が一番大事なんですけど、ネタとして温存しようかなあ。眠くなってきました。</p>
+<p>ここではAndroidアプリケーション開発を例に挙げてみましょう。2017〜2018年頃のAndroid開発を思い出しながら、進化的ってなんなんだろうか考えてみてください。</p>
+<ul>
+<li>GUIライブラリ・フレームワーク・基盤の変化に柔軟に追従できる
+<ul>
+<li>2017年・2018年あたりのGUI開発のための選択肢は本当にたくさんありましたね。Data Binding, Kotlin Android Extension, Butterknife, anko,  …色々ありましたね。AAC(Android Architeture Components)はまだalphaで、まだソースコードの量も少なくてなるほどねえとよなよなコードを読んだ気がします。</li>
+<li>RxBindingもありましたね</li>
+<li>現在ではJetpack Composeもalphaまで来てますね。来年か再来年には本格的に潮流がやってくるんでしょう</li>
+</ul>
+</li>
+<li>API通信にまつわる技術の変化に追従できる
+<ul>
+<li>Retrofit, Swagger, Apollo GraphQL, 色々ありましたね。今でもありますね</li>
+<li>BFFな考え方も浸透してきましたよね</li>
+<li>その通信手段としてgRPCなどもやってきましたね</li>
+</ul>
+</li>
+<li>他(アプリケーションによりけりな気はしますね。DBへの保存とか、リソース読み込みとか)</li>
+</ul>
+<p>進化的アーキテクチャの第一原則の副作用として、技術的意思決定を先送りにする事ができます。これを<strong>Last Responsible Moment</strong>と呼びます。決定を下さないコストが決定を下すコストよりも大きくなるまで、重要で不可逆な決定を開いたままにする戦略です。わたし自身WPF、Flash時代からクライアントアプリケーション開発をやってきてそれなりにノウハウがあるので、正直何が台頭してきてもどのように対処すればよいかはなんとなく分かるし、寿命が長そうであればなんでもよかったし、あえてこのライブラリでやっていこうと決める必要がないな、と当時は考えていました。</p>
+<p>このLast Responsible Momentという考え方は進化的アーキテクチャにおいては複数の次元で機能するので、パフォーマンス・チューニング、最適化も後から行うことが出来ますし、ビジネスの拡大に伴ってチーム単位での設計方針の移譲も可能です。Web APIとの通信方式を変更したければ、その部分だけ変えることもできます。技術の進化に柔軟な設計であれば、既存の実装に手を加える事なく、基盤実装も手軽に差し替えられるわけです。</p>
+<p>というわけで、 <a href="https://www.klab.com/jp/blog/tech/2015/1047178565.html">https://www.klab.com/jp/blog/tech/2015/1047178565.html</a> や <a href="https://techlife.cookpad.com/entry/2020/11/17/110000">https://techlife.cookpad.com/entry/2020/11/17/110000</a> の裏話でした。もうちょっとクライアントアプリケーション設計の話を続けるつもりです。1日で全部書いてしまうと、カレンダーの後半がやばそうなんですよね。明日はContractの話を書こうかなあという気分になっています。</p>
+<p>一応、投稿前にざっと読み直してるんですけど、マジで情報商材っぽい感じの展開で嫌な文章だなあ。ごめんなさいね。皆さんは飲み会の日にブログを書く予定を入れないようにしましょう。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
