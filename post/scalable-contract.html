@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Scalable Contract という考え方</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="Scalable Contract という考え方" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 5日目の記事です。4日目の続きなので、4日目も読むと伝わるのかなと思います。ところでですが、オブジェクトデザインは平成に置いていかれた本の中も1、2を争うレベルで影響を受けているし為になる技術書なんですが、電子書籍化もされてないどころかもう出版が止まっており本当に不遇です。同著者が書いた「進化的アーキテクチャ」にエッセンスレベルで僅かに受け継がれているんですが…オブジェクトデザインも電子書籍化されて欲しいんですが…どうかオージス総研様、ご検討の程、宜しくお願い致します。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/scalable-contract.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-05T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-05T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>Scalable Contract という考え方</h1>
+  <div class="blog-post-subheader">
+    <time>05 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 5日目の記事です。<a href="/post/last-responsible-moment-for-client.html">4日目</a>の続きなので、4日目も読むと伝わるのかなと思います。ところでですが、<a href="https://www.ogis-ri.co.jp/otc/hiroba/ogisbooks/ObjectDesign.html">オブジェクトデザイン</a>は平成に置いていかれた本の中も1、2を争うレベルで影響を受けているし為になる技術書なんですが、電子書籍化もされてないどころかもう出版が止まっており本当に不遇です。同著者が書いた「進化的アーキテクチャ」にエッセンスレベルで僅かに受け継がれているんですが…オブジェクトデザインも電子書籍化されて欲しいんですが…どうかオージス総研様、ご検討の程、宜しくお願い致します。</p>
+<p>Contractというと「契約による設計」を思い浮かべるのでしょうか。KotlinのContractを思い浮かべるのでしょうか。人によるんでしょうが、本記事ではオブジェクトデザインにおける「ロール」の集合を指す事にします。もう少し実装に落とし込むとinterfaceの集合というかひとまとまりになるので、そういう理解でも良いと思います。</p>
+<p>Model-View-Controller から始まったフレームワークは POSA本やDOOS本でその責務について言及され、その後サーバサイドではMVC2だったり、クライアントサイドではMVPだったりMVVMだったりVIPERだったりFluxだったりReduxだったりMVIだったりと様々な派生パターンが生まれました。その中でも、MVPが出てきた頃にはContractというinterfaceのまとまりを設けようという流れがありました。当時は「ただのinterface programingだよね」というところでそこからあんまり話が発展しなかった(他に技術的な課題がたくさんあったので注目されていなかったんだと思う)のですが、今になってこのContractは再評価されつつあります。というのもMVP(Passive View)からVIPERの流れが自然であった事から、これまでMVCだとMVVMだのFluxだの今まで散々議論されてきましたが、<strong>進化的</strong>という目線でこれらのフレームワークを洞察した際、それら単体では重要なポイントはなく、それら各ロールの集合であるContractにスケーラビリティをもたせてはじめてそれらのフレームワークが機能するし、逆にそれがなければそもそもフレームワークとして評価のしようがないので良い設計でもなんでもない、という事が明らかになった、ということです。</p>
+<p>もう少し実装寄りの話を例にすると、ある特定のinterfaceを用意する際、それ単体の責務を考える上で一貫性をもたせる事は簡単だと思いますが、複数interfaceのコラボレーションを考えた際に、それぞれの責務の一貫性を保ち続けるというのは、指針だったり評価軸がなければ難しいと思います。Contractにおいても同様に、一貫性のある評価軸を元に漸進的に変更していく必要があります。</p>
+<p>Passive ViewからVIPERの流れは、GUIアプリケーション開発においてもはや欠かせない要素となった画面遷移を明示的にする、という点でとても自然な流れでした。Paging処理というのも、画面上でページングが必要になったら、Contractとして現れるのは自然な事だと思います。これらはユースケースを軸にスケーラビリティを確保しています。FluxもReduxもデータフローに注目しているので、データフロー・データパイプラインな考え方を軸に責務を移譲してスケーラビリティを確保する、という方針になるのかなと思います。MVVMやMVIについてはどうでしょうか。考えてもらいたいので、あえて触れないでおきます。どういった評価軸を元にスケールさせればよいのか考えてみましょう。</p>
+<p>というわけで、「Contractにスケーラビリティを」という話でした。現代のソフトウェア開発は複数の次元で漸進的な変更をしていきますから、設計パターンやソフトウェアアーキテクチャやフレームワークそのものが進化的であるかという評価軸で評価し直す必要性があると考えています。皆さんが日頃業務上で手癖のように使っている設計パターンだったりコーディングテクニックについて、「進化的」という評価軸から見つめ直すと、新たな発見があるかもしれません。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+

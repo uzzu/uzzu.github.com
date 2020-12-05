@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 05 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/architecture.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Scalable Contract という考え方</title>
+      <link>https://uzzu.co/post/scalable-contract.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 5日目の記事です。&lt;a href=&#34;https://uzzu.co/post/last-responsible-moment-for-client.html&#34;&gt;4日目&lt;/a&gt;の続きなので、4日目も読むと伝わるのかなと思います。ところでですが、&lt;a href=&#34;https://www.ogis-ri.co.jp/otc/hiroba/ogisbooks/ObjectDesign.html&#34;&gt;オブジェクトデザイン&lt;/a&gt;は平成に置いていかれた本の中も1、2を争うレベルで影響を受けているし為になる技術書なんですが、電子書籍化もされてないどころかもう出版が止まっており本当に不遇です。同著者が書いた「進化的アーキテクチャ」にエッセンスレベルで僅かに受け継がれているんですが…オブジェクトデザインも電子書籍化されて欲しいんですが…どうかオージス総研様、ご検討の程、宜しくお願い致します。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/scalable-contract.html</guid>
+      <pubDate>Sat, 05 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-125-05T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>クライアントアプリケーション開発の技術の進化とLast Responsible Moment</title>
       <link>https://uzzu.co/post/last-responsible-moment.html</link>
