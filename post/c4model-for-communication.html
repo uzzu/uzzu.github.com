@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>大規模開発での意思疎通手段とC4 Model</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="大規模開発での意思疎通手段とC4 Model" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 8日目の記事です。Mac miniが届きました。まだ普段使ってる ターミナルエミュレータ kitty をビルドしてざっと動かしてあーよかったとなった所で、他はなにもやってません。色々試したい気持ちを抑えながら、今このブログを書いています。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/c4model-for-communication.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-08T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-08T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>大規模開発での意思疎通手段とC4 Model</h1>
+  <div class="blog-post-subheader">
+    <time>08 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 8日目の記事です。Mac miniが届きました。まだ普段使ってる ターミナルエミュレータ <a href="https://github.com/kovidgoyal/kitty">kitty</a> をビルドしてざっと動かしてあーよかったとなった所で、他はなにもやってません。色々試したい気持ちを抑えながら、今このブログを書いています。</p>
+<p>同僚から C4 Model についてのリクエストを受けたのでC4 Modelの話をしようと思います。いやー助かった。持つべき同僚は同僚。</p>
+<p>みなさんはmicroservicesやっていってますか。今すぐ止めて、小さいアプリケーションを作りましょう。その方が幸せかもしれません。冗談はさておき、サーバサイドの開発でもクライアントサイドの開発でも、開発者間の意思疎通のためにしばしUMLを描く事があると思います。何を使って書いてるんでしょうか。ホワイトボードに書いたり<a href="https://astah.change-vision.com/ja/product/astah-uml.html">astah*</a>だったり<a href="https://cacoo.com/ja/">cacoo</a>だったり<a href="https://plantuml.com/ja/">PlantUML</a>だったり。近年は<a href="https://www.figma.com/">Figma</a>に並ぶオンラインなデザインツールがたくさんありますし、なんでも書けると思います。わたしは基本的にPlantUMLを使いながら、どうしてもPlantUMLでは無理となった時に「テキスト作図 + Auto Layoutは夢なんですかね…」と諦念の気持ちでFigmaで描く、という事をしています。Figmaはとっても便利なんですけどなんでもできるから逆になんかこう…なんだろうな…もやもやしますね。意思疎通が取れる事が一番大事だし最低限なので良いと思うんです。</p>
+<p>UMLを書いていると、以下のような症状になりがちです。</p>
+<ul>
+<li>素直にUMLの記法に習って関連性を示す要素や矢印を書いていった結果、一貫性を失い、図中で示したかったものがなんなのか曖昧になってしまう</li>
+<li>一貫性があったとしても、後の読者によって求めている情報量の解像度が違う為に、無駄なコミュニケーションが発生してしまう</li>
+<li>意思疎通はできたけど出来上がったソフトウェアとのギャップが何故か大きい</li>
+</ul>
+<p>それでもソフトウェア開発における図でのコミュニケーション、意思疎通は欠かせないでしょう。図がうまく描けない方への処方箋として<a href="https://www.amazon.co.jp/dp/4894716828">実践UML</a>という本があるんですが、いわゆる鈍器本なのと、図を描くという点だけ考えるとmicroservices時代には指針としてはちょっと足りないなと思うので、本当に興味のある人だけにしてください。どちらかというとソフトウェア設計を学ぶ意味でおすすめしたい本なのですが、一旦置いておきます。</p>
+<p>C4 Modelは、そういったUML界における課題に対するソフトウェアアーキテクチャ図の作図指針を示すモデルとして優れていて、課題に感じていた部分をうまく補えているんじゃないかなと考えており、実践中というステータスです。そちらについては追々ブログを書きたいなと思っています。</p>
+<p>C4 Modelについての詳細は <a href="https://c4model.com/">https://c4model.com/</a> だったり <a href="https://www.infoq.com/jp/articles/C4-architecture-model/">ソフトウェアアーキテクチャのためのC4モデル</a> を見たほうが理解が早いです。読んで欲しい。どうしても読みたくない人の為に3行で書くとだいたいこんな感じです。</p>
+<ul>
+<li>Context図 -&gt; Container図 -&gt; Component図 -&gt; Code な順で徐々に解像度の高い図を提供するアプローチを取る (Codeはoptional)</li>
+<li>これらだけでは補えない他の観点での図も必要あれば用意する(System Landscape図、Deployment図、Dynamic図)</li>
+<li>大規模なソフトウェア開発の意思疎通に活用していこうな</li>
+</ul>
+<p>加えて、考案者であるSimon Brown氏より <a href="https://structurizr.com/">Structurizr</a> というツールが提供されています。まだ深く使いこんでいないのですが、Layoutは基本的にStructurizr Web上でGUIまたは独自のDSLで作図しつつ、またそれ自体がドキュメンテーションのために必要になる目次機能だったり検索機能だったりも含んでおり、非常に高機能に見えます。他のツール用のデータフォーマット(例えばPlantUML)にexportする機能もあって、まだまだ発展途上ですがとても良さそうに思います。</p>
+<p><a href="https://github.com/structurizr">これのOSS版も提供されていて</a>、いくつかのプログラミング言語によって作図する事ができます(本家は本家で独自のDSLがあります)。これをKotlinでやっていくプロジェクトとして <a href="https://github.com/Catalysts/structurizr-extensions">structurizr-extensions</a>があるのですが、直近のKotlinの動向を思うとKotlinらしくないDSLだなあとか、自分でも勉強がてら試したい事とか実践する中でアレンジしたい事がでてきたので、 <a href="https://github.com/uzzu/structurizr-ktx">structurizr-ktx</a> というのを趣味で開発しています。こちらも進捗を残していきたい…。</p>
+<p>気づいたら0時を回っていたので今日は終わりです。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
