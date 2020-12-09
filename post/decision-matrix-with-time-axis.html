@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>意思決定マトリクスに時間軸が欲しい</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="意思決定マトリクスに時間軸が欲しい" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 10日目の記事です。「日曜月曜あいてるじゃん。完走失敗では。」という突っ込みをうけて説明をうっかり忘れていたのですが、日曜月曜はリアル都合で本当に無理なのでノーカンです。ノーカン。なので継続中です。Advent Calendarのルールやら文化はもちろん知っていますがこのAdvent Calendarにおいては日曜月曜はノーカンです。それでも、もし、もし穴が気になるようでしたら、ご参加、お待ちしております！脊髄で何書いてもよいです！別に技術的な話でなくても良いです。それもまたハワイアン。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/decision-matrix-with-time-axis.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-10T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-10T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>意思決定マトリクスに時間軸が欲しい</h1>
+  <div class="blog-post-subheader">
+    <time>10 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 10日目の記事です。「日曜月曜あいてるじゃん。完走失敗では。」という突っ込みをうけて説明をうっかり忘れていたのですが、日曜月曜はリアル都合で本当に無理なのでノーカンです。ノーカン。なので継続中です。Advent Calendarのルールやら文化はもちろん知っていますがこのAdvent Calendarにおいては日曜月曜はノーカンです。それでも、もし、もし穴が気になるようでしたら、ご参加、お待ちしております！脊髄で何書いてもよいです！別に技術的な話でなくても良いです。それもまたハワイアン。</p>
+<p>昨日に引き続き<a href="https://www.oreilly.co.jp/books/9784873118956/">Design It!</a>です。意思決定マトリクス(Decision Matrix)とは、書いて字の通り、意思決定の際に評価軸と選択肢を並べた図を用意し、視覚的に比較して意思決定を下す為ものです。ソフトウェア設計においては選択の根拠を残しておく意味で貴重なドキュメントになります。難しい言葉に聞こえますけど、フレームワークを並べて完全性がどうだとか可用性がどうだとかパフォーマンスがどうだとかとかスケーラビリティがどうだとか学習コストがどうだとか比較しますよね。そういう話です。</p>
+<p>ではこの意思決定マトリクスですが、選択肢そのものの変化だったり成長の可能性について考慮されているでしょうか。評価基準に対する選択肢のパラメータって時によって変わると思うんですよね。なまものなので。フレームワークの実装だったり思想だったりメンテナンス状況を見た感じ、1年後2年後にはこうなってるだろうな、 まあでも期待はできないので選択肢を補うツールでも作っておこうかな…というのをぼんやり考えていると思います。近年ではロードマップを示してくれる丁寧なプロジェクトもありますよね。とても役立つので、結果としてリリースが遅れてもいいから是非やってくれという気持ちでいます。話を戻すと、多くの場合は意思決定マトリクスにそういった予測が考慮されていると思うんですよね。それは意思決定の根拠をより明確にする意味でも、後のアーキテクトが当時の判断を分析するためにも、「現在」「n年後」をマトリクスに残して欲しいし、そもそも考えているはずなのでただ可視化するだけです。選択肢の列をふやして○+-を書くだけ。特別やることでのデメリットもなさそうに感じています。</p>
+<p>どうでしょうか。これは本の内容の発展した個人的な気付きなので、感想お待ちしています。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
