@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 10 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 11 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/post.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ドメインを定義づけて問題をアスペクトに分離する、とはどういう意味だったのか</title>
+      <link>https://uzzu.co/post/define-domain.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 11日目の記事です。嫌いなブログの冒頭は「TL;DR」です。既に今回のAdvent Calendarで書いたブログでも使ってしまいましたが、本当は3行まとめも嫌いなんですよね。でも実際、現場においても3行でってよく言われます。時代に求められているのだと思います。読まれる文章を目指すためにはトレンドってやつも利用する必要があって、アーキテクチャも同じ様にトレンドというものは考慮しなければなりません。トレンドに乗っかるのもまた人の営み。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/define-domain.html</guid>
+      <pubDate>Fri, 11 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1211-11T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>意思決定マトリクスに時間軸が欲しい</title>
       <link>https://uzzu.co/post/decision-matrix-with-time-axis.html</link>
@@ -179,42 +188,6 @@ https://github.com/bintray/gradle-bintray-plugin/issues/229
       <guid isPermaLink="true">https://uzzu.co/post/java-env.html</guid>
       <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
       <atom:updated>2020-211-11T18:30:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>Gradle Module Metadata便利</title>
-      <link>https://uzzu.co/post/gradle-module-metadata.html</link>
-      <description>&lt;p&gt;Gradle Module Metadataの仕組みに乗っかるとdependenciesの記述作業が減って便利。&lt;/p&gt;
-&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;Why do libraries like Google Guava struggle with POM metadata and what does Gradle Module Metadata offer them?&lt;br&gt;&lt;br&gt;Find out in this new blog post about Gradle 6 dependency management: &lt;a href=&#34;https://t.co/VLdUWK6wSE&#34;&gt;https://t.co/VLdUWK6wSE&lt;/a&gt; &lt;a href=&#34;https://t.co/nsTwLQCx8h&#34;&gt;pic.twitter.com/nsTwLQCx8h&lt;/a&gt;&lt;/p&gt;&amp;mdash; Gradle (@gradle) &lt;a href=&#34;https://twitter.com/gradle/status/1220255795394248704?ref_src=twsrc%5Etfw&#34;&gt;January 23, 2020&lt;/a&gt;&lt;/blockquote&gt; &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-&lt;p&gt;&lt;a href=&#34;https://junit.org/junit5/docs/current/release-notes/index.html#release-notes-5.6.0-overall-improvements&#34;&gt;JUnit5.6もサポートしましたね。&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Kotlin MPPで複数のNativeTarget(iosX64, linux64, etc&amp;hellip;)を対象としたライブラリなりアプリケーションを作成する中で &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; や
-&lt;code&gt;kotlinx-serialization-runtime&lt;/code&gt; の依存関係を記述していく際、複数のNativeTargetが存在するにも関わらず&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-gradle&#34; data-lang=&#34;gradle&#34;&gt;kotlin &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#75715e&#34;&gt;//
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// 略
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;//
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    sourceSets &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#75715e&#34;&gt;//
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 略
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;//
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        nativeMain &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-            dependsOn commonMain
-            dependencies &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-                implementation &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org.jetbrains.kotlinx:kotlinx-coroutines-core-native:1.3.3-native-mt&amp;#39;&lt;/span&gt;
-            &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-        iosX64Main&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dependsOn&lt;/span&gt; nativeMain
-        linux64Main&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;dependsOn&lt;/span&gt; nativeMain
-        &lt;span style=&#34;color:#75715e&#34;&gt;//
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// 略
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;//
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;というように手前で作成したSourseSetに対して依存を記述して、あとはSouceSet同士の依存を解決するだけで、iOSX64やlinux64向けの &lt;code&gt;kotlinx-coroutines-core&lt;/code&gt; の依存関係を解決してくれます。&lt;/p&gt;
-&lt;p&gt;これには4.10あたりからfeature previewが始まり6.0でデフォルト有効になったGradle Module Metadataの仕組みが利用されています。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/gradle-module-metadata.html</guid>
-      <pubDate>Wed, 05 Feb 2020 18:30:00 +0900</pubDate>
-      <atom:updated>2020-25-05T18:30:0000&#43;0900</atom:updated>
       
     </item>
   </channel>
