@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ドメインの学習・認知を加速する為のU理論</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="ドメインの学習・認知を加速する為のU理論" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 12日目の記事です。IntelliJ IDEAのARM Supportのtest buildがきましたね。いやーうちのMac miniでも早く試したい。逸る気持ちを抑えながらこのブログを書いています。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/learning-by-using-theory-u.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-12T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-12T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>ドメインの学習・認知を加速する為のU理論</h1>
+  <div class="blog-post-subheader">
+    <time>12 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 12日目の記事です。<a href="https://youtrack.jetbrains.com/issue/JBR-2526">IntelliJ IDEAのARM Supportのtest buildがきましたね。</a>いやーうちのMac miniでも早く試したい。逸る気持ちを抑えながらこのブログを書いています。</p>
+<p><a href="/post/define-domain.html">11日目</a>において、演繹的共通性についての話をしました。この演繹的共通性を導き出すというのは本当に難しい。ドメインモデリングというのは、帰納的共通性による導出でない限り、正解のない旅になる事が普通です。当然迷子になりますし、自分や社会と向き合う事になったり、哲学書に手を出したり、風呂でシャワーを流しながら「アー……ア…アー…」と声にならない声を出す日が続く事もあるでしょう。そういった辛みというのはチームで共有して、休日をしっかり休むのが重要です。哲学書は捨ててください。参考になる哲学書はなくもないですが、ただの沼なので基本的におすすめできないし、哲学書を前提にする行為自体が敷居を不当に高める事に繋がってしまうので私はおすすめしません。勝手にやってください。</p>
+<p>これはあくまで自分のケースですが、その辺の辛みを乗り越えるというかなんというか辛みを軽減したり、ソフトウェアや周辺技術に起こる変化を受け入れて自分のものにする為の技術という所でU理論が割と役に立ったので、まあ誰かのきっかけになればいいな程度で紹介をしておきます。この辺の手段というのは性に合うかみたいなのがつきものなので、各位色々試すのが良いです。加えて、この手の話というのは基本的に胡散臭い話になりますが、わたしは逆に他の人がどうしてるんだろうなーというのを知りたい所があるので、胡散臭い手段とその感想をお待ちしてます。</p>
+<p>自分はこの2冊を読めばU理論を抑えるには十分かなと思っています。あんまり深入りしないぐらい。専門家の方からしたら他になにかあるんでしょうが、自分にとってのとりこれは以下:</p>
+<ul>
+<li><a href="https://www.amazon.co.jp/dp/4569814611/">人と組織の問題を劇的に解決するU理論入門</a>
+<ul>
+<li>まずはこの本でU理論の基礎を理解する</li>
+</ul>
+</li>
+<li><a href="https://www.amazon.co.jp/dp/B077Z5L1PX/">U理論［第二版］――過去や偏見にとらわれず、本当に必要な「変化」を生み出す技術</a>
+<ul>
+<li>ざっと流しつつ「社会的病理、負のベクトルのUカーブ」を理解する</li>
+</ul>
+</li>
+</ul>
+<p>U理論自体は人や組織の問題において新しい解決策を生み出す為のプロセスを指していますが、その中で人の学びの過程についても論理立てて記載してあります。たとえばですが、他人の技術ブログを読んだり、使用しているライブラリや言語に新機能が追加された時、とりあえず試したり、「ふーんそうなんだ」と流したり、斜に構えたり、「いらないよ」と否定したり、いろんな受けとり方があると思います。U理論ではそういった受け取り方に対する「立ち位置」の定義と、定義の背景にある人間の心理について、実例を元に詳細に記載されています。加えて、各立ち位置からの転換に対するアプローチについても触れられています。アプローチについては全て適切なものかと言われると全てを実践してないので分かんない所はあるものの、まあ手段の1つとしてやってみてもいいかもなみたいな内容になっています。</p>
+<p>理論の概要はこれくらいにしておいて、自分が設計を探求する中で迷子になった時には、取り組んでいる対象に対する自分の立ち位置を把握して、立ち位置に対する適切なアクションを起こす事が性にあってた訳です。結果として飲み込みはなんもしてないときよりは早くなったし、より適切な設計だったりオブジェクト表現を導きだす際の苦悩ってところがあんまり苦悩じゃなくなってきた感じはしてます。それでもまあ元々がすぐ斜に構える性格で社会的病理の方によく陥ってしまうので、それを止める意味でもこの本の内容を思い出したり、定期的に読み直したりしています。ソフトウェア開発に留まらず(そもそもソフトウェア開発者のための本ではないですが)学びのある理論だと思います。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+

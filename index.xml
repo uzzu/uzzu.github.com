@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 11 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 12 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ドメインの学習・認知を加速する為のU理論</title>
+      <link>https://uzzu.co/post/learning-by-using-theory-u.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 12日目の記事です。&lt;a href=&#34;https://youtrack.jetbrains.com/issue/JBR-2526&#34;&gt;IntelliJ IDEAのARM Supportのtest buildがきましたね。&lt;/a&gt;いやーうちのMac miniでも早く試したい。逸る気持ちを抑えながらこのブログを書いています。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/learning-by-using-theory-u.html</guid>
+      <pubDate>Sat, 12 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1212-12T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>ドメインを定義づけて問題をアスペクトに分離する、とはどういう意味だったのか</title>
       <link>https://uzzu.co/post/define-domain.html</link>
@@ -178,16 +187,6 @@ https://github.com/bintray/gradle-bintray-plugin/issues/229
       <guid isPermaLink="true">https://uzzu.co/post/dotenv-gradle.html</guid>
       <pubDate>Thu, 13 Feb 2020 13:00:00 +0900</pubDate>
       <atom:updated>2020-213-13T13:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>JDKをシュッと切り替える</title>
-      <link>https://uzzu.co/post/java-env.html</link>
-      <description>最近よくJavaの実行環境を切り替えるので、以下の雑shell scriptで凌いでいます。
- $ javaenv /Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home $ javaenv 11 export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home $ javaenv 1.8 export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-8.jdk/Contents/Home </description>
-      <guid isPermaLink="true">https://uzzu.co/post/java-env.html</guid>
-      <pubDate>Tue, 11 Feb 2020 18:30:00 +0900</pubDate>
-      <atom:updated>2020-211-11T18:30:0000&#43;0900</atom:updated>
       
     </item>
   </channel>
