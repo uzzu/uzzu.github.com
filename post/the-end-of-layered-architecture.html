@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <meta property="og:title" content="Layered Architectureの終わり" />
-<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 15日目の記事です。今までわたしは感情がない方だったのでVTuberの配信などをみて泣いたりすると「ああ…自分にも感情があったんだ…。」と喜びを感じていたんですが、どうも年を取ると感情の制御ができなくなってくるだのみたいなというのが最近流れてきて、そういうのもあるのかとなりました。ワザップですかこれ。頑固にはなってないと思います。むしろどんどん柔らかくなっているような気がする。
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 15日目の記事です。今までわたしは感情がない方だったのでVTuberの配信などをみて泣いたりすると「ああ…自分にも感情があったんだ…。」と喜びを感じていたんですが、どうも年を取ると感情の制御ができなくなってくるみたいな話が最近流れてきて、そういうのもあるのかとなりました。ワザップですかこれ。頑固にはなってないと思います。むしろどんどん柔らかくなっているような気がする。
 この記事にいきなりやってきた人向けですが、これはある意味連載企画なので、間違えて理解しないように最初から読む事をおすすめします。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://uzzu.co/post/the-end-of-layered-architecture.html" />
@@ -57,7 +57,7 @@
     <time>15 Dec 2020</time>
   </div>
   <div class="blog-post-content">
-    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 15日目の記事です。今までわたしは感情がない方だったのでVTuberの配信などをみて泣いたりすると「ああ…自分にも感情があったんだ…。」と喜びを感じていたんですが、どうも年を取ると感情の制御ができなくなってくるだのみたいなというのが最近流れてきて、そういうのもあるのかとなりました。ワザップですかこれ。頑固にはなってないと思います。むしろどんどん柔らかくなっているような気がする。</p>
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 15日目の記事です。今までわたしは感情がない方だったのでVTuberの配信などをみて泣いたりすると「ああ…自分にも感情があったんだ…。」と喜びを感じていたんですが、どうも年を取ると感情の制御ができなくなってくるみたいな話が最近流れてきて、そういうのもあるのかとなりました。ワザップですかこれ。頑固にはなってないと思います。むしろどんどん柔らかくなっているような気がする。</p>
 <p>この記事にいきなりやってきた人向けですが、これはある意味連載企画なので、<a href="https://adventar.org/calendars/5225">間違えて理解しないように最初から読む事をおすすめします</a>。</p>
 <p>珍しくDDD用語も使います。Layered Architectureはアーキテクチャに依存して様々な形となります。<a href="https://www.amazon.co.jp/dp/B008OHVDFM/">POEAA本</a>本でのService Layerは、業務表現を閉じ込める事をしました。Onion ArchictectureやHexagonal Architectureでのレイヤーはアプリケーション上の複数のI/O Protocolに対応する為に業務表現をDomain Layerに閉じ込め、その外側のApplication LayerはAnti-Corruption Layerとして機能しました。</p>
 <p>BFFやAPIGatewayな文脈ではいわゆるMVC2でいうControllerがService Layerになりました。Fat ControllerやスマートUIパターンが再度評価されるようになってきたのはその為です。BFFやAPI GatewayやMicroservicesな文脈ではわざわざ複数のProtocolをしゃべる必要が後方互換性以外になくなってきたのも大きいです。もちろん必要であればService Layerを続けてもいいんじゃないでしょうか。適切な戦術を選択してくだい。</p>
