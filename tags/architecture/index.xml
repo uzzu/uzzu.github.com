@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 15 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/architecture.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Less is more</title>
+      <link>https://uzzu.co/post/less-is-more.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 16日目の記事です。だいたい言いたいことは言ったような気がしますが、まだ出てくるのかなあ。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/less-is-more.html</guid>
+      <pubDate>Wed, 16 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1216-16T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>Layered Architectureの終わり</title>
       <link>https://uzzu.co/post/the-end-of-layered-architecture.html</link>
