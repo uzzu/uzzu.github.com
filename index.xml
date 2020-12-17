@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 16 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 17 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    <item>
+      <title>誘導的な変更とは何か</title>
+      <link>https://uzzu.co/post/guided.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 17日目の記事です。おはようございます。ちょっと二日酔いです。あー。でもなんかネタは降ってきていていたのかもしれないです。メモを見ると「ビジョン思考、原理原則、引き出し、漸進、誘導」とのことです。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/guided.html</guid>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1217-17T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>Less is more</title>
       <link>https://uzzu.co/post/less-is-more.html</link>
@@ -174,19 +183,6 @@ Advent Calendarの前半では進化的アーキテクチャについて触れ�
       <guid isPermaLink="true">https://uzzu.co/post/kotlin-main-kts-first-impression.html</guid>
       <pubDate>Sun, 23 Aug 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-823-23T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>BintrayにGradle module metadataもアップロードする</title>
-      <link>https://uzzu.co/post/bintray-gradle-module-metadata.html</link>
-      <description>gradle-bintray-plugin は現在、 Gradle module metadata のアップロードに対応していません。
-https://github.com/bintray/gradle-bintray-plugin/issues/229
-この issue 上で workaround がいくつか議論されていますが、私は maven-publish を利用する事にしました。 BintrayUploadTask に依存していると、 Kotlin Multiplatform Library 開発において後から build target を追加する際、追加したはずの build target の artifact をアップロードしてくれない、という別の問題も抱えていたためです。
-公式の対応を待ちたいですが、 pull requestも放置気味なので、やむを得ず gradle-bintray-plugin に依存せずに maven-publish を利用するようにしました。 
-これで後から build target を追加した際も ./gradlew publish で Bintray に公開する事ができ、 Kotlin Multiplatform Library 利用者も kotlinMultiplatform artifact のみを dependencies に記述する( Kotlin Multiplatform Project の場合は commonMain の dependencies に記述する )だけで、後は Gradle が Gradle module metadata を参照しつつ、利用先のアプリケーションの build target に合わせて依存解決してくれるようになります。</description>
-      <guid isPermaLink="true">https://uzzu.co/post/bintray-gradle-module-metadata.html</guid>
-      <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-812-12T00:00:0000&#43;0900</atom:updated>
       
     </item>
   </channel>

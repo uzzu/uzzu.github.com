@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 16 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 17 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/architecture.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>誘導的な変更とは何か</title>
+      <link>https://uzzu.co/post/guided.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 17日目の記事です。おはようございます。ちょっと二日酔いです。あー。でもなんかネタは降ってきていていたのかもしれないです。メモを見ると「ビジョン思考、原理原則、引き出し、漸進、誘導」とのことです。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/guided.html</guid>
+      <pubDate>Thu, 17 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1217-17T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>Less is more</title>
       <link>https://uzzu.co/post/less-is-more.html</link>
