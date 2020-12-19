@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 18 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OOUIとQuery/Command</title>
+      <link>https://uzzu.co/post/ooui-query-and-command.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 19日目の記事です。昨日はコード書いて楽しくなってたら日付回ってましたね。最近思ったんですけど、RubyMineの気持ちになってRubyでコードを書くとRubyMineがめっちゃ便利になりませんか？ちゃんと補完効くようになるし、コードジャンプもまともになるし、いやまあまだ足りないなあって思う事もあるんですけど「あれ？Ruby怖くない？Ruby楽しいかも？」ってなりました。V8の気持ちになってJavaScriptを書いてた時を思い出しますね。VSCodeの気持ちになったRubyコーディングスタイルってあるんですかね。気になります。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/ooui-query-and-command.html</guid>
+      <pubDate>Sat, 19 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1219-19T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>システムの再利用は何アウト?</title>
       <link>https://uzzu.co/post/reuse-system.html</link>
@@ -138,46 +147,6 @@ Advent Calendarの前半では進化的アーキテクチャについて触れ�
       <guid isPermaLink="true">https://uzzu.co/post/hawaiian2020-intro.html</guid>
       <pubDate>Tue, 01 Dec 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-121-01T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>Kotlinのsealed classとdelegateを使った型遊び</title>
-      <link>https://uzzu.co/post/kotlin-sealed-classes-and-delegate.html</link>
-      <description>&lt;p&gt;Kotlinのsealed classとdelegateを使った型遊びです。&lt;/p&gt;
-&lt;p&gt;例えば以下のような関係のinterfaceがあったとします。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Model&lt;/span&gt; {
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; id: String
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; name: String
-}
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Element&lt;/span&gt; : Model
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Container&lt;/span&gt; : Element {
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createComponent&lt;/span&gt;(name: String): Component
-}
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Component&lt;/span&gt; : Element {
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; parent: Container
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;本来はComponentを生成する責務をContainerに持たせたくはない(Factoryとして分離するべき)ですが、ContainerにcreateComponentを生やさなければいけない、というケースであるとします。
-その上で、Element以下の関係性をsealed classとして表現したい!と思う事があります。
-具体的には&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-kotlin&#34; data-lang=&#34;kotlin&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;interface&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Model&lt;/span&gt; {
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; id: String
-}
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;sealed&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Element&lt;/span&gt; : Model {
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Container&lt;/span&gt; : Element() {
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;fun&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;createComponent&lt;/span&gt;(): Component = Component(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;)
-    }
-
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Component&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;internal&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;constructor&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;val&lt;/span&gt; parent: Container) : Element()
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;のようにしたい。まだイメージ段階ですので当然ですが、上記のコードはもちろんコンパイルが通りません。
-それではやっていきます。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/kotlin-sealed-classes-and-delegate.html</guid>
-      <pubDate>Mon, 05 Oct 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-105-05T00:00:0000&#43;0900</atom:updated>
       
     </item>
   </channel>

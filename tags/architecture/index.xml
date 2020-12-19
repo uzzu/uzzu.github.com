@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 17 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/architecture.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OOUIとQuery/Command</title>
+      <link>https://uzzu.co/post/ooui-query-and-command.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 19日目の記事です。昨日はコード書いて楽しくなってたら日付回ってましたね。最近思ったんですけど、RubyMineの気持ちになってRubyでコードを書くとRubyMineがめっちゃ便利になりませんか？ちゃんと補完効くようになるし、コードジャンプもまともになるし、いやまあまだ足りないなあって思う事もあるんですけど「あれ？Ruby怖くない？Ruby楽しいかも？」ってなりました。V8の気持ちになってJavaScriptを書いてた時を思い出しますね。VSCodeの気持ちになったRubyコーディングスタイルってあるんですかね。気になります。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/ooui-query-and-command.html</guid>
+      <pubDate>Sat, 19 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1219-19T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>誘導的な変更とは何か</title>
       <link>https://uzzu.co/post/guided-changes.html</link>

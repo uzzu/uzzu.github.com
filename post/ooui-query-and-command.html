@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>OOUIとQuery/Command</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="OOUIとQuery/Command" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 19日目の記事です。昨日はコード書いて楽しくなってたら日付回ってましたね。最近思ったんですけど、RubyMineの気持ちになってRubyでコードを書くとRubyMineがめっちゃ便利になりませんか？ちゃんと補完効くようになるし、コードジャンプもまともになるし、いやまあまだ足りないなあって思う事もあるんですけど「あれ？Ruby怖くない？Ruby楽しいかも？」ってなりました。V8の気持ちになってJavaScriptを書いてた時を思い出しますね。VSCodeの気持ちになったRubyコーディングスタイルってあるんですかね。気になります。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/ooui-query-and-command.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-19T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-19T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>OOUIとQuery/Command</h1>
+  <div class="blog-post-subheader">
+    <time>19 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 19日目の記事です。昨日はコード書いて楽しくなってたら日付回ってましたね。最近思ったんですけど、RubyMineの気持ちになってRubyでコードを書くとRubyMineがめっちゃ便利になりませんか？ちゃんと補完効くようになるし、コードジャンプもまともになるし、いやまあまだ足りないなあって思う事もあるんですけど「あれ？Ruby怖くない？Ruby楽しいかも？」ってなりました。V8の気持ちになってJavaScriptを書いてた時を思い出しますね。VSCodeの気持ちになったRubyコーディングスタイルってあるんですかね。気になります。</p>
+<p>OOUIついて触れられた本として<a href="https://www.amazon.co.jp/dp/B0893RK6WC">オブジェクト指向UIデザイン──使いやすいソフトウェアの原理 WEB+DB PRESS</a>って本が出ましたけど、皆さんは読みましたか。自分は正直読みづらかった…オブジェクト指向の歴史に触れる所についは「ウッそれも文脈が違うのでは…？」「な、なるほど…？そう解釈もあるのか…？」となりながら読んでましたが、その話はあんまり本質的じゃないのでおいといて、それはそれとこの本で主張したい事という意味では、アプリケーションのビジネス要求としてクリエイティビティが必要な場面でのGUIの振る舞い、インタラクションデザイン、ナビゲーションの設計という所で一定の指針は示してくれていると思います。必読なのかは本職UIデザイナーではないので分かりませんが、自分は読んだので読んでもらえると話が早いのかもしれない。いつかGUI開発の世界に戻りたいと願いながら一生ソフトウェア設計やっている身としては、<a href="https://cqrs.wordpress.com/documents/task-based-ui/">Greg YoungのTask Based UI</a>との対比という側面で読み進めてみるか〜という感じで、社内でやってた読書会だったりワークショップに参加していました。</p>
+<p>わたし個人の意見ですがまあ特にかち合うこともないんじゃないかなと思いました。というのもワークショップをやれば分かるんですが、タスクからOOUIを導きだすんですよね。「結局タスクから導出するの…？」って話があってそうなったんですが「ああ、あくまでもGUIとして適切な表現を探る為の手段としても利用できるんだな」となりました。タスクというのは我々の世界ではおおよそQuery/Commandといったメッセージに置き換えられると思います。Task Based UI自体もCQRS + Event Sourcingと密に紐付いた説明がされています。その辺を踏まえると、GUIとしてタスク指向で表現するかオブジェクト指向で表現するかという所でUIドメインに閉じた話として切り分けられるものだなと思いました。まあなのでGUI開発という文脈では開発スタイルに影響のある話ではありますが、それ以外の部分は今まで通りの働き方で考えられそうだし、チームでCommandとEventの抽出に取り掛かる際にタスクに対する共通見解をもったGUI設計者がにいると意思疎通が捗って良さそうだなあ、と思います。まあただ、この辺の見解というのはOOUIにおいてもTask Based UIにおいてもまだ未成熟な所があるとは思うので引き続き追う必要がありそうです。</p>
+<p>話はここまでですが、なんとか指向UIはEventにどう対処するのかなってのを考えてます。EventというのはCommandを実行する事による副作用、といえば伝わるのかなあ。サーバからの通知といえば伝わるのかなあ。万人に伝わる表現というのは難しいですね。本を書く人は偉い。Eventの表現についてはTask Based UIでもOOUIでもあんまり触れられていないんですよね。体験を握る重要な要素だと個人的には思ってるんですけど。その辺をもうちょっと深堀りしたいですね。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
