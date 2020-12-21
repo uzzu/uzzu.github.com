@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 19 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 22 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pure Fabrication</title>
+      <link>https://uzzu.co/post/pure-fabrication.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 22日目の記事です。残り少なくなってきました。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/pure-fabrication.html</guid>
+      <pubDate>Tue, 22 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1222-22T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>OOUIとQuery/Command</title>
       <link>https://uzzu.co/post/ooui-query-and-command.html</link>
@@ -138,15 +147,6 @@ Advent Calendarの前半では進化的アーキテクチャについて触れ�
       <guid isPermaLink="true">https://uzzu.co/post/write-a-farewell-note.html</guid>
       <pubDate>Wed, 02 Dec 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-122-02T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>ハワイアン2020 Introduction</title>
-      <link>https://uzzu.co/post/hawaiian2020-intro.html</link>
-      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 1日目の記事です。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/hawaiian2020-intro.html</guid>
-      <pubDate>Tue, 01 Dec 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-121-01T00:00:0000&#43;0900</atom:updated>
       
     </item>
   </channel>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pure Fabrication</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="Pure Fabrication" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 22日目の記事です。残り少なくなってきました。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/pure-fabrication.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-22T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-22T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>Pure Fabrication</h1>
+  <div class="blog-post-subheader">
+    <time>22 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 22日目の記事です。残り少なくなってきました。</p>
+<p>DDDでのDomain ServiceというのはGRASP(General Responsibility Assignment Software Pattern)原則で示されている9つのパターンのうちの人工品(Pure Fabrication)です。デザインパターンもほとんどが人工品です。人工品という単語だけではFabricationnになりますが、人工品の理想的な状況として、人工なわけなので高凝集性と疎結合性を満たす純粋な設計である事がのぞまれるので、Pureという修飾がついており、日本語訳でも純粋人工物としばし言われます。</p>
+<p>Application ServiceとDomain Serviceはしばし混同されますが、例えばRailsデザインパターンで語られているForm ObjectはApplication Serviceです。Domain Serviceはわかりやすい例で言うとRepositoryです。RepositoryはDomain Modelを中心に生まれた考え方ですが、Formはユーザの入力といったUser InterfaceのAnti-corruputionというようなApplicationやUIの層から生まれきたものです。ここでドメインモデリングについて考えます。</p>
+<p>本来ドメインというのはどこにでもあるものなのでビジネスだろうがUIだろうがアプリケーションだろうが同じようにモデリングに立ち向かうものです。Application層でドメインモデリングをするというのは、アプリケーションとはなんなのか、という所を洞察していく事になります。ビジネス的に価値があるかといえば、まあフレームワークに近いのでチームによっては生産性に寄与する…という所がありますが、Application Serviceは薄い事に越した事はないです。「最強のフレームワークはソースコード0byte」というプレゼンが昔あったんですが、参照先を失ってしまいました…。あれを肝に命じて生き続けています。</p>
+<p>アプリケーションについて深く洞察すると、現代のアプリケーション開発においては進化可能性について検討する必要があり、Application層でこれまで提案されてきた多くのデザインパターンは進化可能性については特に考慮がないものなので、そこに対するルールを付与した上で導入を検討するのが良いでしょう。<a href="/post/scalable-contract.html">Scalable Contract</a>も是非読んでください。この辺の混同がしばらくあり、間違えたままApplication層に本来不必要な概念を掘り下げていってしまう現象というのがソフトウェア開発にしばらくありました。今もあるかもしれません。そもそもドメイン層なんていい方してるのが多分ミスリードだったと思うのですが、それはさておき、Domain ServiceとApplication Serviceの混同は中長期的に技術的な負債を生む上にそこを発展させる事にビジネス価値がない可能性すらあるので、気をつけましょう。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
