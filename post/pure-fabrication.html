@@ -57,7 +57,6 @@
   </div>
   <div class="blog-post-content">
     <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 22日目の記事です。残り少なくなってきました。</p>
-<p>。</p>
 <p>DDDでのDomain ServiceというのはGRASP(General Responsibility Assignment Software Pattern)原則で示されている9つのパターンのうちの1つの人工品(Pure Fabrication)です。</p>
 <p>GRASPの視点で見ると、デザインパターンもほとんどが人工品です。人工品という単語だけではFabricationになりますが、人工品の理想として、高凝集性と疎結合性を満たす純粋な設計である事が期待される(エンティティや値オブジェクトからは外れるものを敢えて作ったのに責務も不明瞭なのはどう考えてもまずいですよね)ので、Pureという修飾がついており、日本語訳でも純粋人工品としばし言われます。雑学はおいといて、人工品の多くはDomain Serviceとは言い難い所があります。それは「どこから生まれたのか」に違いがあるためです。</p>
 <p>Domain ServiceとApplication Serviceはしばし混同されるので、例にあげてみます。Railsデザインパターンで語られているForm ObjectはApplication Serviceです。Domain Serviceはわかりやすい例で言うとRepositoryです。Form Objectはユーザの入力のAnti-corruputionというようなアプリケーション層から生まれきた人工品です。Repositoryはドメインモデルを中心に生まれたドメインモデルの中長期のライフサイクルを担う人工品です。PoEAAのService Layerについてはまた少し文脈が必要になるのでいったんおいておきます。</p>
