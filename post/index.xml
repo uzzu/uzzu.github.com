@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 22 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 23 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/post.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ラスト10%の罠とPain Driven</title>
+      <link>https://uzzu.co/post/pain-driven.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 23日目の記事です。半端な気持ちでペヤングをやっていった時、最初は余裕じゃんという気持ちだったのが8割9割ぐらいで一気に苦しくなるという事がありますが、現在そんな気持ちです。ペヤングをやる時はメンタルも相当大事で、無心で食らいつく事が大事だと気づいてから、多少ペヤングもできるようにはなったのですが、それでも日頃からの胃袋の訓練ってやつがなければ入らないわけで、基礎は大事という事を気付かされます。ペヤングの痛みというのは飽きなんでしょうか。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/pain-driven.html</guid>
+      <pubDate>Wed, 23 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1223-23T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>純粋人工品(Pure Fabrication)に対する誤解</title>
       <link>https://uzzu.co/post/pure-fabrication.html</link>
@@ -137,16 +146,6 @@
       <guid isPermaLink="true">https://uzzu.co/post/along-multiple-dimentions.html</guid>
       <pubDate>Thu, 03 Dec 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-123-03T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>ソフトウェア設計の際には遺書を書こう</title>
-      <link>https://uzzu.co/post/write-a-farewell-note.html</link>
-      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 2日目の記事です。ツイートアナリティクスによれば、1日目のブログへのエンゲージメントは32という事だそうです。今確認のためにもう一回開いたので33です。わたしは自分のブログを何回も読み直すので、99%は自分のアクセスでしょう。これまでご愛読頂きありがとうございました。
-Advent Calendarの前半では進化的アーキテクチャについて触れてやっていくつもりなので、その為の前提を埋めていきたいと思います。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/write-a-farewell-note.html</guid>
-      <pubDate>Wed, 02 Dec 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-122-02T00:00:0000&#43;0900</atom:updated>
       
     </item>
   </channel>
