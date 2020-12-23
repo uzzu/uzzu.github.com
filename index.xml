@@ -10,8 +10,17 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 23 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 24 Dec 2020 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    <item>
+      <title>適応度関数と職人芸</title>
+      <link>https://uzzu.co/post/fitness-function.html</link>
+      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 24日目の記事です。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/fitness-function.html</guid>
+      <pubDate>Thu, 24 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1224-24T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>ラスト10%の罠とPain Driven</title>
       <link>https://uzzu.co/post/pain-driven.html</link>
@@ -137,15 +146,6 @@
       <guid isPermaLink="true">https://uzzu.co/post/last-responsible-moment.html</guid>
       <pubDate>Fri, 04 Dec 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-124-04T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>複数の次元</title>
-      <link>https://uzzu.co/post/along-multiple-dimentions.html</link>
-      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 3日目の記事です。&lt;a href=&#34;https://uzzu.co/post/write-a-farewell-note.html&#34;&gt;2日目&lt;/a&gt; 読んだ方、今日は何日後に寿命が尽きるものを作りましたか。遺書は書きましたか。その遺書は一旦寝かせておいて、次の作業に移りましょう。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/along-multiple-dimentions.html</guid>
-      <pubDate>Thu, 03 Dec 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-123-03T00:00:0000&#43;0900</atom:updated>
       
     </item>
   </channel>
