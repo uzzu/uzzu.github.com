@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>今後のハワイアン</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="今後のハワイアン" />
+<meta property="og:description" content="この記事はハワイアンAdvent Calendar 2020 25日目の記事です。メリー・クリスマス！3日飽きるといいながら、ソフトウェア設計話だけで最終日まできました。偉い。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/hawaiian2020-outro.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2020-12-25T00:00:00+09:00" />
+<meta property="article:modified_time" content="2020-12-25T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>今後のハワイアン</h1>
+  <div class="blog-post-subheader">
+    <time>25 Dec 2020</time>
+  </div>
+  <div class="blog-post-content">
+    <p>この記事は<a href="https://adventar.org/calendars/5225">ハワイアンAdvent Calendar 2020</a> 25日目の記事です。メリー・クリスマス！3日飽きるといいながら、ソフトウェア設計話だけで最終日まできました。偉い。</p>
+<p>今後のハワイアンって何だ。そもそもハワイアンってなんなんだ…。永久に謎ですが、そもそも書こうと思ったきっかけの話をいくつか書いて終わろうかなと思います。</p>
+<p>1つ目は単純に進化的アーキテクチャという本がサーバサイドの観点で戦術について語られている為に、サーバサイドの開発に詳しくないアプリエンジニアやフロントエンドエンジニア(以降、面倒なのでクライアントエンジニアと書きます)が理解しづらい、関心を持ちづらいのではないかという所の穴埋めをしたい、進化的アーキテクチャを学ぶための手助けが必要だなと感じた事です。BFFのロジックをアプリエンジニアが実装するようなケースが増えてきていますし、なぜBFFなのかとか、サーバサイドのソフトウェア設計の潮流(例えばCQRS + Event Sourcing等)をクライアントエンジニアはどう適応すべきかとか、そもそもの考え方という所で良いきっかけを作れないかなという所がありました。</p>
+<p>2つ目はその逆で、クライアント開発はよく知らないが進化的アーキテクチャを理解したサーバサイドエンジニアが、自分たちの変更がクライアントアプリケーション開発にどのように波及するのか、今クライアントアプリケーション設計がどう変遷していっているのか、今後どう変化していくのかというのをざっと知る手助けがあると良いかなと思ったのもあります。</p>
+<p>3つ目は<a href="/post/fitness-function.html">24日目</a>にも書きましたが、ソフトウェア設計としてFitness Function Drivenにやっていく為にできることがないかを探る為に自分が普段のソフトウェア開発で意識している事・実践している事を棚卸ししたかった所があります。もうちょっと加えていうと、戦略の話だったりより戦略に近い戦術の話を中心に書きました。それらで6, 7割くらい埋められたんじゃないかなあと思います。なぜ戦略の話を中心にしたのかといえば、戦術は戦略ありきだからです。Fitness Functionを掘り下げていく点については今後も意識しながらソフトウェア開発をやっていくとして、それはそれといい加減戦略の話はだいぶお腹いっぱいというか一定実践もしたし理解も十分かなという所で、そろそろ戦術の世界だったり、ものを作る世界に戻りたいなーと思いました。</p>
+<p>他にも、自身と社会の理解のギャップだったり誤りを感じたかったのはあるんですが、流石に自身の影響力は皆無だし、脊髄で書いてる文章なので読みにくいだろうし、まあそこは一旦良しというか、まあそのうち誰かのきっかけになればってぐらいで良いです。感想は随時お待ちしています。</p>
+<p>それでは良いお年を！</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2020 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+
