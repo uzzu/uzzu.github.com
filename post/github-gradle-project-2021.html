@@ -154,7 +154,7 @@ Gradle Script上でのPGP SigningはGradle標準で <a href="https://docs.gradle
 </li>
 </ul>
 <h2 id="複数のgradle-projectのsecretsの管理">複数のGradle ProjectのSecretsの管理</h2>
-<p>GitHub Organizationを作成してそこにRepositoryを作成してしまえばSecretsを共有できるのですが、個人のorganizationではよしなにやる必要があります。
+<p>GitHub Organizationを作成してそこにRepositoryを作成してしまえばSecretsを共有できるのですが、個人のRepositoryではよしなにやる必要があります。
 そんな最中でGradle Projectが増えてくるとSecretsの管理が面倒になってきます。
 そこで、Secrets管理用のRepositoryを作成し、そのRepositoryから<a href="https://github.com/google/secrets-sync-action">google/secrets-sync-action</a>を使って各RepositoryのSecretsを同期しています。
 特に隠す必要もないんですが、実験中にうっかり秘匿値が公開されてしまったら怖いのでPrivate Repositoryでやっています。</p>
