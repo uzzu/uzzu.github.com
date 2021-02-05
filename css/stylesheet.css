@@ -1,5 +1,5 @@
 body {
-    font-family: 'Ubuntu', monospace;
+    font-family: 'Ubuntu', 'Noto Sans JP', monospace, sans-serif;
     margin: auto;
     max-width: 48rem;
 }
