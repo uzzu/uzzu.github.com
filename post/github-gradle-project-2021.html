@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GitHub上でのGradle Projectの管理状況2021</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta property="og:title" content="GitHub上でのGradle Projectの管理状況2021" />
+<meta property="og:description" content="JCenter/Bintrayが追々シャットダウンするとの事で、なかなか大変な状況です。
+わたしの作っているライブラリはというとちょうど去年Maven Centralに全部移行したところでした。
+あとは依存ライブラリの確認をしなければとかこまい所が残っています。
+せっかく整理したのに文書化してなかったので、文書化しておこうと思います。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://uzzu.co/post/github-gradle-project-2021.html" />
+<meta property="og:image" content="https://uzzu.co/images/avatar.png"/>
+<meta property="article:published_time" content="2021-02-05T00:00:00+09:00" />
+<meta property="article:modified_time" content="2021-02-05T00:00:00+09:00" />
+
+        <meta name="twitter:card" content="summary"/>
+        <meta name="twitter:site" content="@uzzu"/>
+        <meta name="twitter:image" content="https://uzzu.co/images/avatar.png"/>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu|Ubuntu+Mono" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <link rel="stylesheet" href="/css/stylesheet.css">
+        <link rel="stylesheet" href="/css/zenburn.css">
+        <script src="/js/highlight.pack.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+      <div class="container-fluid">
+        <nav class="navbar navbar-expand-md navbar-light">
+
+          
+          <span class="navbar-brand mb-0 h1"></span>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle Navigation" name="button">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-item nav-link " href="/">Home</a>
+              <a class="nav-item nav-link" href="https://github.com/uzzu" target="_blank">GitHub</a>
+              
+              <a class="nav-item nav-link " href="/about.html">About</a>
+              <a class="nav-item nav-link " href="/index.xml">RSS</a>
+            </div>
+          </div>
+        </nav>
+
+        <section id="page-title">
+          <h1><a href="/">Uzzu::Blog</a></h1>
+          <h6>Software Design, and my life.</h6>
+        </section>
+
+
+<div class="blog-post">
+  <h1>GitHub上でのGradle Projectの管理状況2021</h1>
+  <div class="blog-post-subheader">
+    <time>05 Feb 2021</time>
+  </div>
+  <div class="blog-post-content">
+    <p>JCenter/Bintrayが追々シャットダウンするとの事で、なかなか大変な状況です。
+わたしの作っているライブラリはというとちょうど去年Maven Centralに全部移行したところでした。
+あとは依存ライブラリの確認をしなければとかこまい所が残っています。
+せっかく整理したのに文書化してなかったので、文書化しておこうと思います。</p>
+<h2 id="maven-centralへのmaven-artifact-groupの登録">Maven CentralへのMaven Artifact Groupの登録</h2>
+<ul>
+<li><a href="https://central.sonatype.org/pages/ossrh-guide.html">The Central Repository</a></li>
+</ul>
+<p>Maven Central へのArtifactの登録ははなんだか難しいと思われがちですが、案内に従えばシュッと対応してもらえるので、あんまり構える必要はないです。
+強いていえば、自身のドメインを持っておき、Artifact Group名もドメインに合わせおくのが一番楽です。</p>
+<p><a href="https://issues.sonatype.org/secure/CreateIssue.jspa?issuetype=21&amp;pid=10134">New Project Ticket</a>を作成してそのまましばらく何もアクションをせずに放置していると、「このArtifact Groupの情報を参照できるページ(GitHubならGitHub Pages のURL)をコメントするか、このTicketのリンクのURLをTXTレコードに登録してください」と言われます。</p>
+<p>ドキュメント整備をやるほど気概のあるプロジェクトならまだしも、まだ作ってる最中のものの GitHub Pages を用意するというのはなかなか大変だと思います。
+なので、TXTレコードを登録する方法が手っ取早い。</p>
+<ul>
+<li>事前準備として、Artifact Group名と同じドメインを取得しておく
+<ul>
+<li>例: <code>uzzu.co</code></li>
+</ul>
+</li>
+<li>Artifact Group 名が取得したドメインのサブドメインとなるような Artifact Group を作成するよう New Project Ticket を作成する
+<ul>
+<li>例: <code>co.uzzu.hogehoge</code></li>
+</ul>
+</li>
+<li>返答を待たずして、<code>uzzu.co</code> の DNS 設定からTXTレコードとしてTicketのURLを登録する</li>
+</ul>
+<p>としておくと、 (定期的に sonartype が <code>nslookup</code> でも実行しているんでしょうけど) 10分程度でArtifact Groupの作成が承認され、Maven Central Repositoryへのアップロードの案内がコメントされます。
+煩わしいやり取りも一切ないので、これが一番手間がかからないんじゃないかなと思います。持つべきものはドメイン。</p>
+<p>OSSRHでは他人のNew Project Ticketも見れるので参考にすると良いでしょう。よければ自分のTicketも参考にしてください。 <a href="https://issues.sonatype.org/browse/OSSRH-60456">https://issues.sonatype.org/browse/OSSRH-60456</a>
+Ticket作成と、初回リリース時のArtifactのアップロード報告以外は何もしてないのが分かると思います。</p>
+<h2 id="maven-centralでのmaven-artifactの配布に必要なものの準備">Maven CentralでのMaven Artifactの配布に必要なものの準備</h2>
+<p>snapshot repositoryではなく本番のMaven CentralでArtifactを配布する際には、JavaDoc ArtifactとArtifactのPGP Signingが必要です。</p>
+<p>JavaDoc Artifactについては含まれてさえいれば空のjarファイルでも良さそうな気がしています。試してないのでわからない。
+わたしは全てKotlin Projectなので<a href="https://github.com/Kotlin/dokka">dokka</a>を使ってみてますが、特に人に見せられるようなほど内容も詰まってないし、中身のチェックはされてなさそう。</p>
+<ul>
+<li>Java Projectの場合
+<ul>
+<li><a href="https://github.com/uzzu/structurizr-ktx/blob/a198f0b9aefe662f216f6182eb7fcfa45a20a05e/subprojects/dsl/build.gradle.kts#L35-L40">こんなかんじ1</a></li>
+<li><a href="https://github.com/uzzu/structurizr-ktx/blob/a198f0b9aefe662f216f6182eb7fcfa45a20a05e/subprojects/dsl/build.gradle.kts#L67">こんなかんじ2</a></li>
+</ul>
+</li>
+<li>Kotlin Multiplatform Projectの場合
+<ul>
+<li><a href="https://github.com/uzzu/kortex/blob/648464f17bc33e215b3c0784eb7cdcec53342d3c/subprojects/core/core.build.gradle.kts#L92-L112">こんなかんじ1</a></li>
+<li><a href="https://github.com/uzzu/kortex/blob/648464f17bc33e215b3c0784eb7cdcec53342d3c/subprojects/core/core.build.gradle.kts#L149">こんなかんじ2</a></li>
+<li>微妙にJava Projectと記述が違うけど、やってる事は変わんないので大目に見てほしい</li>
+<li>dokkaやKotlin Pluginのバージョンで記述は変わるのでその辺も一応念頭においた上で参考にどうぞ</li>
+</ul>
+</li>
+</ul>
+<p>PGP Signingそのものの説明についてはインターネット上にたくさん記事があるので割愛します。
+Gradle Script上でのPGP SigningはGradle標準で <a href="https://docs.gradle.org/current/userguide/signing_plugin.html">Signing Plugin</a>があるのでこれを利用します。</p>
+<p>加えて、Gradle 5.4から(まだstatusとしては <code>@Incubating</code> ですが)  <a href="https://docs.gradle.org/current/userguide/signing_plugin.html#sec:in-memory-keys">useInMemoryPgpKeys</a> を用いる事で ascii-armored OpenPGP keys/subkeys が取り扱えるようになっているので、これを使っています。
+あとはドッグフーディングも兼ねて自作の<a href="https://github.com/uzzu/dotenv-gradle">DotEnv Gradle Plugin</a> を使って以下のように記述しています。</p>
+<ul>
+<li>Java Projectの場合
+<ul>
+<li><a href="https://github.com/uzzu/structurizr-ktx/blob/a198f0b9aefe662f216f6182eb7fcfa45a20a05e/subprojects/dsl/build.gradle.kts#L96-L108">こんなかんじ</a></li>
+</ul>
+</li>
+<li>Kotlin Multiplatform Projectの場合
+<ul>
+<li><a href="https://github.com/uzzu/kortex/blob/648464f17bc33e215b3c0784eb7cdcec53342d3c/subprojects/core/core.build.gradle.kts#L178-L190">こんなかんじ</a></li>
+</ul>
+</li>
+</ul>
+<p><code>env.HOGEHOGE</code> ってなんぞやってなった方は<a href="/post/dotenv-gradle.html">DotEnv Pluginを作ったときの記事があるので</a>そっちを読んでください。</p>
+<h2 id="maven-centralへのアップロード">Maven Centralへのアップロード</h2>
+<p><code>maven-publish</code> を使っています。mavenDeployerやその他様々Publish Pluginがありましたが、Gradle標準の <code>maven-publish</code> に戻ってきました。</p>
+<ul>
+<li>Java Projectの場合
+<ul>
+<li><a href="https://github.com/uzzu/structurizr-ktx/blob/main/subprojects/dsl/build.gradle.kts#L59-L93">こんなかんじ</a></li>
+</ul>
+</li>
+<li>Kotlin Multiplatform Projectの場合
+<ul>
+<li><a href="https://github.com/uzzu/kortex/blob/648464f17bc33e215b3c0784eb7cdcec53342d3c/subprojects/core/core.build.gradle.kts#L117-L175">こんなかんじ</a></li>
+<li>Kotlin Pluginのバージョンで記述は変わるのでその辺も一応念頭においた上で参考にどうぞ。1.4.20 からcommon artifactの <code>-metadata</code> suffixがなくなったはずなのでそれに対応する必要がありそう</li>
+</ul>
+</li>
+</ul>
+<p>ただし、実際にMaven Centralでの配布に利用するMaven Repositoryへのアップロードを行う際に <code>maven-publish</code> だけでやる場合は、<code>./gradlew publish</code> したあとにアップロード先の管理ツールの<a href="https://oss.sonatype.org/">Nexus Repository Manager</a>にいってポチポチする必要があります。この辺もサボりたい方には<a href="https://github.com/Codearte/gradle-nexus-staging-plugin">gradle-nexus-staging-plugin</a>を使うと、ポチポチ操作も自動でやってくれるのでそちらを使うと良いと思います。
+自分が使っていないのは Artifact のアップロード確認をしていた名残りな所があります。</p>
+<h2 id="maven-centralへのアップロードの半自動化">Maven Centralへのアップロードの半自動化</h2>
+<p>手元でアップロード作業の為の環境変数を持ちたくないので、必要な値はGitHub RepositoryのSecretsに突っ込んで、GitHub workflowのworkflow dispatchで手動トリガーでアップロードをしています。
+自動リリースはしてません。</p>
+<ul>
+<li><a href="https://github.com/uzzu/structurizr-ktx/blob/a198f0b9aefe662f216f6182eb7fcfa45a20a05e/.github/workflows/publish.yml">workflowはこんなかんじ</a>
+<ul>
+<li>Maven Localに先にpublishしているのはGradle Scriptの記述ミスでArtifactの一部だけアップロード成功して途中で失敗してしまうケースを事前に検知する為にやっていたもので、今となっては特に意味がない</li>
+</ul>
+</li>
+</ul>
+<h2 id="複数のgradle-projectのsecretsの管理">複数のGradle ProjectのSecretsの管理</h2>
+<p>GitHub Organizationを作成してそこにRepositoryを作成してしまえばSecretsを共有できるのですが、個人のorganizationではよしなにやる必要があります。
+そんな最中でGradle Projectが増えてくるとSecretsの管理が面倒になってきます。
+そこで、Secrets管理用のRepositoryを作成し、そのRepositoryから<a href="https://github.com/google/secrets-sync-action">google/secrets-sync-action</a>を使って各RepositoryのSecretsを同期しています。
+特に隠す必要もないんですが、実験中にうっかり秘匿値が公開されてしまったら怖いのでPrivate Repositoryでやっています。</p>
+<script type="application/javascript" src="https://gist.github.com/uzzu/83bf7a2278316ab8461b1883b36c5478.js"></script>
+
+<p>そんな感じです。参考になれば幸いです。</p>
+  </div>
+</div>
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "uzzublog" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+      <footer>
+        <hr>
+        <p>&copy; 2021 Hirokazu Uzu.</p>
+        <p>This content is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</p>
+        <p>This blog is powered by <a href="https://gohugo.io/" target="_blank">Hugo</a> using the <a href="https://github.com/arjunkrishnababu96/basics" target="_blank">Basics</a> theme.</p>
+      </footer>
+    </div> 
+
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  </body>
+</html>
+

@@ -10,15 +10,15 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 24 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags.html" rel="self" type="application/rss+xml" />
     <item>
-      <title>architecture</title>
-      <link>https://uzzu.co/tags/architecture.html</link>
+      <title>gradle</title>
+      <link>https://uzzu.co/tags/gradle.html</link>
       <description></description>
-      <guid isPermaLink="true">https://uzzu.co/tags/architecture.html</guid>
-      <pubDate>Thu, 24 Dec 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-1224-24T00:00:0000&#43;0900</atom:updated>
+      <guid isPermaLink="true">https://uzzu.co/tags/gradle.html</guid>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0900</pubDate>
+      <atom:updated>2021-25-05T00:00:0000&#43;0900</atom:updated>
       
     </item>
     <item>
@@ -26,8 +26,17 @@
       <link>https://uzzu.co/tags/poem.html</link>
       <description></description>
       <guid isPermaLink="true">https://uzzu.co/tags/poem.html</guid>
-      <pubDate>Fri, 18 Dec 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-1218-18T00:00:0000&#43;0900</atom:updated>
+      <pubDate>Fri, 25 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1225-25T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
+    <item>
+      <title>architecture</title>
+      <link>https://uzzu.co/tags/architecture.html</link>
+      <description></description>
+      <guid isPermaLink="true">https://uzzu.co/tags/architecture.html</guid>
+      <pubDate>Thu, 24 Dec 2020 00:00:00 +0900</pubDate>
+      <atom:updated>2020-1224-24T00:00:0000&#43;0900</atom:updated>
       
     </item>
     <item>
@@ -46,15 +55,6 @@
       <guid isPermaLink="true">https://uzzu.co/tags/gradle-kotlin.html</guid>
       <pubDate>Wed, 12 Aug 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-812-12T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>gradle</title>
-      <link>https://uzzu.co/tags/gradle.html</link>
-      <description></description>
-      <guid isPermaLink="true">https://uzzu.co/tags/gradle.html</guid>
-      <pubDate>Sun, 16 Feb 2020 15:00:00 +0900</pubDate>
-      <atom:updated>2020-216-16T15:00:0000&#43;0900</atom:updated>
       
     </item>
     <item>

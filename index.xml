@@ -10,8 +10,20 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 25 Dec 2020 00:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub上でのGradle Projectの管理状況2021</title>
+      <link>https://uzzu.co/post/github-gradle-project-2021.html</link>
+      <description>&lt;p&gt;JCenter/Bintrayが追々シャットダウンするとの事で、なかなか大変な状況です。
+わたしの作っているライブラリはというとちょうど去年Maven Centralに全部移行したところでした。
+あとは依存ライブラリの確認をしなければとかこまい所が残っています。
+せっかく整理したのに文書化してなかったので、文書化しておこうと思います。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/github-gradle-project-2021.html</guid>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0900</pubDate>
+      <atom:updated>2021-25-05T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>今後のハワイアン</title>
       <link>https://uzzu.co/post/hawaiian2020-outro.html</link>
@@ -137,15 +149,6 @@
       <guid isPermaLink="true">https://uzzu.co/post/c4model-for-communication.html</guid>
       <pubDate>Tue, 08 Dec 2020 00:00:00 +0900</pubDate>
       <atom:updated>2020-128-08T00:00:0000&#43;0900</atom:updated>
-      
-    </item>
-    <item>
-      <title>Scalable Contract という考え方</title>
-      <link>https://uzzu.co/post/scalable-contract.html</link>
-      <description>&lt;p&gt;この記事は&lt;a href=&#34;https://adventar.org/calendars/5225&#34;&gt;ハワイアンAdvent Calendar 2020&lt;/a&gt; 5日目の記事です。&lt;a href=&#34;https://uzzu.co/post/last-responsible-moment.html&#34;&gt;4日目&lt;/a&gt;の続きなので、4日目も読むと伝わるのかなと思います。ところでですが、&lt;a href=&#34;https://www.ogis-ri.co.jp/otc/hiroba/ogisbooks/ObjectDesign.html&#34;&gt;オブジェクトデザイン&lt;/a&gt;は平成に置いていかれた本の中も1、2を争うレベルで影響を受けているし為になる技術書なんですが、電子書籍化もされてないどころかもう出版が止まっており本当に不遇です。同著者が書いた「進化的アーキテクチャ」にエッセンスレベルで僅かに受け継がれているんですが…オブジェクトデザインも電子書籍化されて欲しいんですが…どうかオージス総研様、ご検討の程、宜しくお願い致します。&lt;/p&gt;</description>
-      <guid isPermaLink="true">https://uzzu.co/post/scalable-contract.html</guid>
-      <pubDate>Sat, 05 Dec 2020 00:00:00 +0900</pubDate>
-      <atom:updated>2020-125-05T00:00:0000&#43;0900</atom:updated>
       
     </item>
   </channel>

@@ -10,8 +10,20 @@
     </image><generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 16 Feb 2020 15:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 05 Feb 2021 00:00:00 +0900</lastBuildDate>
     <atom:link href="https://uzzu.co/tags/gradle.html" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitHub上でのGradle Projectの管理状況2021</title>
+      <link>https://uzzu.co/post/github-gradle-project-2021.html</link>
+      <description>&lt;p&gt;JCenter/Bintrayが追々シャットダウンするとの事で、なかなか大変な状況です。
+わたしの作っているライブラリはというとちょうど去年Maven Centralに全部移行したところでした。
+あとは依存ライブラリの確認をしなければとかこまい所が残っています。
+せっかく整理したのに文書化してなかったので、文書化しておこうと思います。&lt;/p&gt;</description>
+      <guid isPermaLink="true">https://uzzu.co/post/github-gradle-project-2021.html</guid>
+      <pubDate>Fri, 05 Feb 2021 00:00:00 +0900</pubDate>
+      <atom:updated>2021-25-05T00:00:0000&#43;0900</atom:updated>
+      
+    </item>
     <item>
       <title>New Gradle plugin DSLを使用するとビルドエラーになる場合のTIPS</title>
       <link>https://uzzu.co/post/new-gradle-plugin-dsl-tips.html</link>
